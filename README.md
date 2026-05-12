@@ -43,7 +43,7 @@ AstraCore is a multi-phase homelab project evolving from a distributed cluster i
 
 ---
 
-# 🚧 Phase 2 — Post-Move Upgrade (AstraCore V2)
+## 🚧 Phase 2 — Post-Move Upgrade (AstraCore V2)
 
 > Full redesign after relocation — moving to a centralised, rack-based setup
 
