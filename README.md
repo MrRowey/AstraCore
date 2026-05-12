@@ -1,60 +1,93 @@
 # 🚀 AstraCore
 
-*AstraCore is a sci‑fi inspired homelab cluster built on Proxmox and Docker, designed for scalable virtualization, containerized workloads, and infrastructure testing.*
+<p align="center">
+  docs/Icon.png
+</p>
+
+*AstraCore is a sci‑fi inspired homelab cluster built on Proxmox and Docker, designed for virtualization, automation, and distributed systems.*
 
 ---
 
 ## 🧠 Overview
-AstraCore is a personal lab environment used to explore and manage modern infrastructure, automation, and distributed systems across multiple nodes.
-
-- **Hypervisor:** Proxmox VE  
-- **Containers:** Docker (via VM hosts)  
-- **Storage:** TrueNAS Scale (NFS shared storage)  
-- **Nodes:** 10-node cluster
+AstraCore is a multi-phase homelab project evolving from a distributed cluster into a centralised, enterprise-style infrastructure.
 
 ---
 
-## ⚙️ Core Features
-- Multi-node Proxmox cluster
-- Containerized services via Docker
-- Reverse proxy and secure remote access
-- Centralised monitoring and logging
-- Self-hosted applications and automation tools
+# ⚙️ Phase 1 — Current Setup (In Development)
+
+> Active build and testing phase using distributed hardware
+
+### 🖥️ Infrastructure
+- 10-node ThinkCentre cluster (M73 / M93)
+- Proxmox across multiple low-power nodes
+- Docker workloads running in VMs
+
+### 🧩 Core Stack
+- **Virtualization:** Proxmox VE  
+- **Containers:** Docker  
+- **Storage:** TrueNAS (NFS)
+
+### 🔧 Key Features
+- Distributed compute across nodes  
+- Containerised services (media, monitoring, networking)  
+- Reverse proxy + remote access  
+- Ongoing configuration and optimisation  
+
+### 🎯 Purpose
+- Learn clustering and distributed systems  
+- Experiment with Docker workloads  
+- Build a flexible and modular lab  
+
+### 📌 Status
+🚧 Actively being built, tested, and refined  
 
 ---
 
-## 🧩 Services
-AstraCore runs a wide range of self-hosted services, including:
+# 🚧 Phase 2 — Post-Move Upgrade (AstraCore V2)
 
-- **Networking:** AdGuard, WireGuard, Traefik  
-- **Media:** Plex, Sonarr, Radarr, Overseerr  
-- **Monitoring:** Grafana, Prometheus, Uptime Kuma  
-- **Automation:** Home Assistant, Mosquitto  
-- **Security:** Authelia (SSO)  
-- **Dev Tools:** Gitea  
-- **Storage & Backup:** TrueNAS, Proxmox Backup Server  
+> Full redesign after relocation — moving to a centralised, rack-based setup
+
+### 🖥️ Planned Infrastructure
+- Dell PowerEdge R610 (primary compute host)
+- Rack-mounted TrueNAS system (12-bay storage)
+- Cisco 48-port managed switch
+- Sophos XG firewall
+
+### ⚡ Improvements
+- Centralised compute replacing multi-node cluster  
+- VLAN segmentation (servers, IoT, guest, etc.)  
+- Enterprise networking and security  
+- Improved storage with ZFS + redundancy  
+- Simplified power, cooling, and management  
+
+### 🧩 Architecture
+- Proxmox on main server  
+- Docker workloads inside VMs  
+- Shared storage via TrueNAS  
+- Traffic managed through reverse proxy  
+- Secure remote access via VPN  
+
+### 🧠 Goals
+- Increase performance and reliability  
+- Reduce complexity and power usage  
+- Build a production-style homelab  
+- Introduce structured networking and security  
+
+### 📌 Status
+📝 Planned — will begin after relocation  
 
 ---
 
-## 🌐 Architecture
-- Docker containers run inside Proxmox VMs  
-- Shared storage provided via NFS from TrueNAS  
-- Traffic routed through Traefik with optional authentication via Authelia  
-- Remote access handled via WireGuard and Cloudflare Tunnel  
+## 🔮 Project Vision
+AstraCore represents a modular compute core — evolving from a learning cluster into a stable, scalable, and high-performance homelab platform.
 
 ---
 
-## 🔮 Goals
-- Learn and experiment with modern infrastructure  
-- Build a scalable and resilient homelab platform  
-- Host reliable self-hosted services for real-world use  
+## 🛠️ Overall Status
+- 🚧 Phase 1: In Development  
+- ⏳ Phase 2: Planned  
 
 ---
 
-## 🛠️ Status
-🚧 Active development and continuous improvement  
-
----
-
-## 📡 Inspiration
-Built as a personal "compute core" — AstraCore represents a modular, expandable system inspired by sci-fi AI and distributed networks.
+## 📡 Notes
+This project is continuously evolving as new hardware, tools, and ideas are introduced.
