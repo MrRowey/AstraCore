@@ -1,1 +1,39 @@
+name: Deploy to Node
 
+on:
+  push:
+    branches: [Deploy]
+    paths:
+      - 'nodes/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Find Changed Nodes
+        id: changes
+        run: |
+          CHANGED=$(git dif --name-only HEAD~1 HEAD | grep 'nodes/' | cut -d'/' -f2 | sort -u)
+          echo "nodes=$CHANGED" >> $GITHUB_OUTPUT
+
+      - name: Deploy Changes Nodes via SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SHH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          for node in ${{ steps.changes.outputs.nodes }}; do
+            echo "Deploying $node..."
+            scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+              nodes/$node/docker-compose.yml \
+              deploy@10.0.1.10:/opt/stacks/$node/
+            
+            ssh -i ~/.ssh/deploy_key deloy@10.0.1.10 \
+              "cd /opt/stacks/$node && docker-compose pull && docker-compose up -d"
+          done
