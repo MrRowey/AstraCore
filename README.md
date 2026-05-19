@@ -1,7 +1,7 @@
 # 🚀 AstraCore
 
 <p align="center">
-  <img src="Docs/Icon.png" alt="AstraCore Icon" width="160" />
+  <img src="docs/Icon.png" alt="AstraCore Icon" width="160" />
 </p>
 
 *AstraCore is a sci‑fi inspired homelab cluster built on Proxmox and Docker, designed for virtualization, automation, and distributed systems.*
