@@ -1,0 +1,36 @@
+name: Deploy GitHub Pages (from /docs)
+
+on:
+  push:
+    branches:
+      - Deploy   # change if you use a different default branch
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # Optional: build step (remove if your site is already static in /docs)
+      # - name: Build site
+      #   run: |
+      #     echo "Add your build commands here"
+
+      - name: Upload artifact (docs folder)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
