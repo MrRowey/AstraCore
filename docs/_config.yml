@@ -4,6 +4,7 @@ description: >-
   Proxmox-based homelab cluser focused on virtualization, Docker workloads, and distributed Systems.
 
 baseurl: "/AstraCore"
+url: "https://mrrowey.github.io"
 
 github_repo: "https://github.com/MrRowey/AstraCore"
 
