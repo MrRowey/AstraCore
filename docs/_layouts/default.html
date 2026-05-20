@@ -1,18 +1,34 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>{{ page.title }}</title>
-<link rel="stylesheet" href="/assets/style.css">
-</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale-1.0">
+        <title>{{ page.title }} | {{ site.title }}</title>
+        <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    </head>
 <body>
-<nav>
-<a href="/">Home</a>
-<a href="/nodes.html">Nodes</a>
-<a href="https://github.com/MrRowey/AstraCore" target="_blank">GitHub</a>
-</nav>
-<div class="container">
-{{ content }}
-</div>
+
+    <div class="grid-overlay"></div>
+
+    <header class="navbar">
+
+        <div class="nav-container">
+            <a href="{{ '/' | relative_url}}" class="logo">AstraCore</a>
+
+            <nav>
+                <a href="{{ '/' | relative_url }}">Home</a>
+                <a href="{{ '/nodes/' | relative_url }}">Nodes</a>
+                <a href="{{ site.github_repo }}" target="_blank">Github</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        {{ content }}
+    </main>
+
+    <footer class="footer">
+        <p> {{ site.time | date: '%Y' }} AstraCore - Infrastrucure Control Pannel</p>
+    </footer>
 </body>
 </html>

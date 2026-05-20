@@ -1,6 +1,36 @@
 ---
 layout: default
 ---
-<h1>{{ page.name }}</h1>
-<p><strong>Role:</strong> {{ page.role }}</p>
-<p>{{ page.desc }}</p>
+
+<div class="node-page">
+    <div class="node-header">
+        <div>
+            <h1>{{ page.name }}</h1>
+            <p class="node-role"> {{ page.role }}</p>
+        </div>
+
+        <span class="status-badge {{ page.status | downcase }}">{{ page.status }}</span>
+    </div>
+
+    <div class="node-pannel">
+        <h2>Overview</h2>
+        <p>{{ page.description }}</p>
+
+        <div class="spec-grid">
+            <div class="spec-card">
+                <span>IP Address</span>
+                <strong>{{ page.ip }}</strong>
+            </div>
+
+            <div class="spec-card">
+                <span>CPU</span>
+                <strong>{{ page.cpu }}</strong>
+            </div>
+
+            <div class="spec-card">
+                <span>Memory</span>
+                <strong>{{ page.memory }}</strong>
+            </div>
+        </div>
+    </div>
+</div>

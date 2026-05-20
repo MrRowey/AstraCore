@@ -1,5 +1,26 @@
 title: AstraCore
+email: rowey.lab@gmail.com
+description: >-
+  Proxmox-based homelab cluser focused on virtualization, Docker workloads, and distributed Systems.
+
+baseurl: ""
+url: "https://MrRowey.github.io"
+
+github_repo: "https://github.com/MrRowey/AstraCore"
+
 markdown: kramdown
+permalink: pretty
+
+theme: null
+
 collections:
   nodes:
     output: true
+    permalink: /nodes/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "nodes"
+    values:
+      layout: node 
