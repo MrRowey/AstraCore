@@ -1,36 +1,60 @@
-name: Deploy GitHub Pages (from /docs)
+name: Deploy Jekyll Site
 
 on:
   push:
     branches:
-      - Deploy   # change if you use a different default branch
+      - Deploy
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
-      # Optional: build step (remove if your site is already static in /docs)
-      # - name: Build site
-      #   run: |
-      #     echo "Add your build commands here"
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
 
-      - name: Upload artifact (docs folder)
+      - name: Install Dependencies
+        run: |
+          cd docs
+          bundle install
+
+      - name: Build Site
+        run: |
+          cd docs
+          bundle exec jekyll build
+
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs
+          path: ./docs/_site
+              
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-      - name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
