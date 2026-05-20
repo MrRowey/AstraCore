@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AstraCore</title>
+
+  <style>
+    :root {
+      --bg: #0a0f1a;
+      --card: #121a2b;
+      --accent: #4cc9f0;
+      --text: #e6edf3;
+      --muted: #9aa7b2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #060912 0%, #0a0f1a 100%);
+      color: var(--text);
+    }
+
+    header {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .card ul {
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .card ul li {
+      margin-bottom: 6px;
+    }
+
+    section {
+      margin-top: 50px;
+    }
+
+    .phase {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: var(--card);
+      border-radius: 16px;
+    }
+
+    .phase h2 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      margin-top: 50px;
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🚀 AstraCore</h1>
+  <p class="subtitle">
+    A Proxmox-powered homelab for virtualization, Docker workloads, and distributed systems
+  </p>
+</header>
+
+<div class="container">
+
+  <!-- Overview -->
+  <section>
+    <div class="card">
+      <h3>🧠 Overview</h3>
+      <p>
+        AstraCore is a sci-fi inspired homelab cluster designed to explore modern infrastructure,
+        combining virtualization, automation, and containerised workloads into a modular platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Stack -->
+  <section>
+    <h2>⚙️ Core Stack</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Virtualization</h3>
+        <ul>
+          <li>Proxmox VE</li>
+          <li>Multi-node cluster</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Containers</h3>
+        <ul>
+          <li>Docker workloads</li>
+          <li>Service isolation</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Storage</h3>
+        <ul>
+          <li>TrueNAS (NFS)</li>
+          <li>Centralised data layer</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Networking</h3>
+        <ul>
+          <li>Reverse proxy</li>
+          <li>Remote access</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 1 -->
+  <section>
+    <div class="phase">
+      <h2>⚙️ Phase 1 — Current Build</h2>
+      <p>Active testing using distributed hardware.</p>
+      <ul>
+        <li>10-node ThinkCentre cluster (M73 / M93)</li>
+        <li>Proxmox across multiple nodes</li>
+        <li>Docker workloads within VMs</li>
+        <li>Distributed compute + service segmentation</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Phase 2 -->
+  <section>
+    <div class="phase">
+      <h2>🚧 Phase 2 — AstraCore V2</h2>
+      <p>Post-move redesign into a centralised, rack-based environment.</p>
+      <ul>
+        <li>Dell PowerEdge R610</li>
+        <li>12-bay TrueNAS storage system</li>
+        <li>Cisco managed switch</li>
+        <li>Sophos XG firewall</li>
+        <li>VLAN segmentation + enterprise networking</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Goals -->
+  <section>
+    <div class="card">
+      <h3>🎯 Project Goals</h3>
+      <ul>
+        <li>Learn clustering and distributed systems</li>
+        <li>Build production-style infrastructure</li>
+        <li>Improve performance and reliability</li>
+        <li>Create a scalable homelab platform</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Repo Button -->
+  <section style="text-align:center;">
+    <a class="btn" href="https://github.com/MrRowey/AstraCore" target="_blank">
+      View on GitHub
+    </a>
+  </section>
+
+</div>
+
+<footer>
+  AstraCore • Built by MrRowey • Homelab Infrastructure Project
+</footer>
+
+</body>
+</html>
