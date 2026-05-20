@@ -1,33 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nodes - AstraCore</title>
-<style>
-body { margin:0; font-family:Segoe UI, sans-serif; background:#060912; color:#e6edf3; }
-nav { background:#0b1320;padding:10px 20px;display:flex;gap:15px; }
-a { color:#4cc9f0;text-decoration:none; }
-.container { max-width:1100px; margin:auto; padding:20px; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px; }
-.card { background:#121a2b; padding:15px; border-radius:12px; }
-</style>
-</head>
-<body>
-<nav>
-<a href="index.html">Home</a>
-<a href="nodes.html">Nodes</a>
-</nav>
+---
+layout: default
+title: Nodes
+---
 
-<div class="container">
 <h1>Cluster Nodes</h1>
 <div class="grid">
-<a class="card" href="nodes/node1.html">Node 01 - Compute</a>
-<a class="card" href="nodes/node2.html">Node 02 - Media</a>
-<a class="card" href="nodes/node3.html">Node 03 - Monitoring</a>
-<a class="card" href="nodes/node4.html">Node 04 - Networking</a>
-<a class="card" href="nodes/node5.html">Node 05 - Backup</a>
+{% for node in site.data.nodes %}
+<div class="card">
+<h2>{{ node.name }}</h2>
+<p>{{ node.role }}</p>
+<a href="/nodes/{{ node.slug }}.html">View</a>
 </div>
+{% endfor %}
 </div>
-</body>
-</html>

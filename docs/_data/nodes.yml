@@ -1,0 +1,20 @@
+- name: Node 01
+  slug: node1
+  role: Compute
+  desc: Primary workload node running Docker VMs.
+- name: Node 02
+  slug: node2
+  role: Media
+  desc: Media services and streaming containers.
+- name: Node 03
+  slug: node3
+  role: Monitoring
+  desc: Prometheus, Grafana, logging stack.
+- name: Node 04
+  slug: node4
+  role: Networking
+  desc: Reverse proxy, routing, and VPN services.
+- name: Node 05
+  slug: node5
+  role: Backup
+  desc: Handles backups and redundancy tasks.

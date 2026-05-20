@@ -1,1 +1,0 @@
-GHPages Blog
