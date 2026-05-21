@@ -1,3 +1,4 @@
+---
 layout: default
 title: Home
 description: "AstraCore homelab: Proxmox hosts, Docker, orchestration, and resilient services."
