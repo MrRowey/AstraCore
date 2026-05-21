@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - Deploy
+    paths:
+      - "docs/**"
+      - ".github/workflows/**"
 
 permissions:
   contents: read
