@@ -1,12 +1,6 @@
 ---
-layout: node
-title: Chronicle
-id: pve-photos
-name: Chronicle
-role: Immich
-description: Server & Machine Learning
+title: PVE-photos (Chronicle)
 status: Offline
-ip: 10.0.1.14
-cpu:
-memory:
+role: Immich
+description:
 ---

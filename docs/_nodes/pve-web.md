@@ -1,12 +1,6 @@
 ---
-layout: node
-title: Nexus
-id: pve-web
-name: Nexus
+title: PVE-Web (Nexus)
+status: Offline
 role: Rewards Chart App, Postgres
 description:
-status: Offline
-ip: 10.0.1.16
-cpu:
-memory:
 ---
