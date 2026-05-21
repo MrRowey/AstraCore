@@ -4,31 +4,39 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale-1.0">
         <title>{{ page.title }} | {{ site.title }}</title>
+        <meta name="description" content="{{ page.description | default: site.description }}">
+        <meta name="keywords" content="{{ page.keywords | join: ', ' }}">
+        <meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
+        <meta property="og:description" content="{{ page.description | default: site.description }}" />
+        <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+        <meta property="og:type" content="website" />
         <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
     </head>
 <body>
 
     <div class="grid-overlay"></div>
 
-    <header class="navbar">
+    <header class="navbar" role="banner">
 
         <div class="nav-container">
             <a href="{{ '/' | relative_url}}" class="logo">AstraCore</a>
 
-            <nav>
+            <nav aria-label="Primary" role="navigation">
                 <a href="{{ '/' | relative_url }}">Home</a>
                 <a href="{{ '/nodes/' | relative_url }}">Nodes</a>
-                <a href="{{ site.github_repo }}" target="_blank">Github</a>
+                <a href="{{ '/configs/' | relative_url }}">Configs</a>
+                <a href="{{ '/scripts/' | relative_url }}">Scripts</a>
+                <a href="{{ site.github_repo }}" target="_blank" rel="noopener noreferrer">GitHub</a>
             </nav>
         </div>
     </header>
 
-    <main class="main-content">
+    <main class="main-content" role="main">
         {{ content }}
     </main>
 
-    <footer class="footer">
-        <p> {{ site.time | date: '%Y' }} AstraCore - Infrastrucure Control Pannel</p>
+    <footer class="footer" role="contentinfo">
+        <p> {{ site.time | date: '%Y' }} AstraCore - Infrastructure Control Panel • <a href="{{ site.github_repo }}">Repository</a></p>
     </footer>
 </body>
 </html>

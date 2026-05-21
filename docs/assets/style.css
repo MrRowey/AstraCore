@@ -30,6 +30,17 @@ body {
     overflow-x: hidden;
 }
 
+/* Accessible focus outlines for keyboard users */
+:where(a, button) {
+    outline: none;
+}
+
+:where(a, button):focus-visible {
+    outline: 3px solid rgba(0,229,255,0.18);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
 .grid-overlay {
     position: fixed;
     inset: 0;
@@ -94,6 +105,18 @@ padding: 4rem 2rem;
 padding: 5rem 0 4rem;
 }
 
+/* subtle hero vignette for depth */
+.hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 320px;
+    background: radial-gradient(closest-side at 20% 10%, rgba(0,229,255,0.04), transparent 40%);
+    pointer-events: none;
+}
+
 .eyebrow {
 color: var(--cyan);
 letter-spacing: 0.2em;
@@ -129,6 +152,12 @@ border-radius: 12px;
 text-decoration: none;
 transition: 0.3s ease;
 border: 1px solid var(--border);
+}
+
+/* Make focusable controls clearly visible */
+.primary-btn:focus-visible,
+.secondary-btn:focus-visible {
+    box-shadow: 0 0 0 4px rgba(0,229,255,0.06), 0 0 20px rgba(0,229,255,0.12);
 }
 
 .primary-btn {
