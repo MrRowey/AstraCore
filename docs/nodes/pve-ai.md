@@ -1,4 +1,12 @@
 ---
+title: PVE-Net (Gateway)
+status: Offline
+Role: 
+
+
+
+
+---
 layout: node
 title: Jarvis
 id: pve-ai
