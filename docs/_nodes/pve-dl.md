@@ -1,12 +1,6 @@
 ---
-layout: node
-title: Harvester
-id: pve-dl
-name: Harvester
-role: qBittorrent, Recyclarr
-description:
+title: PVE-dl (Harvester)
 status: Offline
-ip: 10.0.1.17
-cpu:
-memory:
+role: qBittorrent, Recyclarr
+description: 
 ---
