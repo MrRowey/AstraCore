@@ -1,5 +1,12 @@
+/* ---------------------------------
+   Panels (Node Panels)
+---------------------------------- */
+
 .node-panel {
-  p {
-    color: var(--muted);
-  }
+  @include glass-card;
+}
+
+.section-header p,
+.node-panel p {
+  color: var(--muted);
 }

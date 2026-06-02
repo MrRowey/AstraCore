@@ -1,3 +1,7 @@
+/* ---------------------------------
+   Mixins
+---------------------------------- */
+
 @mixin glass-card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -27,12 +31,12 @@
   border: 1px solid $border;
 }
 
-
-@mixin hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@mixin hover-lift($amount: 6px, $glow: rgba(0, 229, 255, 0.12)) {
+  transition: 0.3s ease;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: translateY(-$amount);
+    box-shadow: 0 0 30px $glow;
+    border-color: rgba(0, 229, 255, 0.4);
   }
 }

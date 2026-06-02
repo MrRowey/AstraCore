@@ -1,13 +1,18 @@
 ---
 ---
 
-@import "mixins";
 @import "variables";
-@import "base";
+@import "mixins";
+@import "global";
+@import "typography";
 @import "layout";
-@import "components";
-@import "cards";
+@import "navbar";
+@import "hero";
 @import "buttons";
+@import "cards";
 @import "panels";
+@import "badges";
+@import "grids";
 @import "utilities";
+@import "footer";
 @import "responsive";

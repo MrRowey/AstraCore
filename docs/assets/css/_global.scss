@@ -1,3 +1,8 @@
+
+/* ---------------------------------
+   Global Styles / Resets
+---------------------------------- */
+
 * {
   margin: 0;
   padding: 0;
@@ -21,12 +26,11 @@ body {
   outline: none;
 }
 
-:where(a, button):focus-visible {
-  outline: 3px solid rgba(0,229,255,0.18);
-  outline-offset: 3px;
-  border-radius: 8px;
+:where(a, button) {
+  @include focus-ring;
 }
 
+/* Grid overlay background */
 .grid-overlay {
   position: fixed;
   inset: 0;

@@ -1,0 +1,37 @@
+/* ---------------------------------
+   Navigation Bar
+---------------------------------- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(14px);
+  background: rgba(4, 8, 20, 0.8);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  color: var(--cyan);
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px var(--cyan-glow);
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.25s ease;
+
+    &:hover {
+      color: var(--cyan);
+    }
+  }
+}

@@ -1,0 +1,18 @@
+/* ---------------------------------
+   Grid Layouts
+---------------------------------- */
+
+.dashboard-grid {
+  @include grid-auto(250px);
+  margin-top: 3rem;
+}
+
+.node-grid {
+  @include grid-auto(280px);
+  margin-top: 2rem;
+}
+
+.spec-grid {
+  @include grid-auto(220px);
+  margin-top: 2rem;
+}
