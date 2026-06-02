@@ -15,7 +15,7 @@ permalink: /nodes/
   {% for node in site.nodes %}
     <a href="{{ node.url | relative_url }}" class="node-card">
       <div class="node-card-top">
-        <h2>{{ node.name }}</h2>
+        <h2>{{ node.name }}</h2><br>
         <h3>{{ node.vm }}</h3>
         <span class="status-badge {{ node.status | downcase }}">
           {{ node.status }}
