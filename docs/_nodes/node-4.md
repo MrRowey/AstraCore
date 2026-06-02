@@ -1,5 +1,6 @@
 ---
-title: PVE-Media ( Apollo )
+name: Apollo
+vm: PVE-Media
 status: Offline
 role: Plex, Sonarr, Radarr, Prowlarr, Overseerr
 description: Media automation and streaming node. Plex handles media playback, while Sonarr, Radarr, and Prowlarr automate content acquisition. Overseerr provides a user-friendly request interface.

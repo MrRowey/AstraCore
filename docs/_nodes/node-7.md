@@ -1,5 +1,6 @@
 ---
-title: PVE-Web (The Workshop)
+name: The Workshop
+vm: PVE-Web
 status: Offline
 role: Rewards App, Postgres
 description: Web application node hosting your Rewards App along with a dedicated Postgres database backend for reliable and scalable data storage.

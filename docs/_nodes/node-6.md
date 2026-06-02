@@ -1,5 +1,6 @@
 ---
-title: PVE-Monitor (The Watchtower)
+name: The Watchtower
+vm: PVE-Monitor
 status: Offline
 role: Portainer, Grafana, Prometheus, Uptime Kuma, Gitea
 description: Monitoring and DevOps node. Prometheus collects metrics, Grafana visualizes dashboards, Uptime Kuma monitors service availability, Portainer manages containers, and Gitea provides lightweight Git hosting.

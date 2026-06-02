@@ -1,5 +1,6 @@
 ---
-title: PVE-Home ( Jarvis )
+name: Jarvis
+vm: PVE-Home
 status: Offline
 role: Home Assistant OS, TP-Link Tapo Integration
 description: This node hosts Home Assistant OS for full smart home automation, including TP-Link Tapo device integration for lighting, sensors, and automation workflows.

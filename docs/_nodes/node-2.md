@@ -1,5 +1,6 @@
 ---
-title: PVE-Backup ( Memory Core ) 
+name: Memory Core
+vm: PVE-Backup
 status: Offline
 role: Proxmox Backup Server
 description: Dedicated backup node running Proxmox Backup Server to provide fast, deduplicated, and encrypted backups for all Proxmox hosts and containers.

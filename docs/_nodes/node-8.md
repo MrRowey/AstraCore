@@ -1,5 +1,6 @@
 ---
-title: PVE-DL (The Pirate Cove)
+name: The Pirate Cove
+vm: PVE-DL
 status: Offline
 role: qBittorrent, Recyclarr
 description: Download automation node running qBittorrent for torrent management and Recyclarr for automated syncing of media quality profiles with Sonarr and Radarr.

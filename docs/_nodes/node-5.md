@@ -1,5 +1,6 @@
 ---
-title: PVE-Photos (Photon Core)
+name: Photon Core
+vm: PVE-Photos
 status: Offline
 role: Immich (server + machine learning)
 description: Dedicated photo management node running Immich for high‑performance photo storage, AI-powered tagging, facial recognition, and machine learning indexing.
