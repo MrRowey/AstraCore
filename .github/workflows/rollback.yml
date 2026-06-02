@@ -4,17 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       node:
-        description: "Node to Rollback (e.g. pve-media)"
+        description: "Node to rollback (e.g. pve-media)"
         required: true
       commit:
-        description: "Commit SHA to Rollback to"
+        description: "Commit SHA to rollback to"
         required: true
+      dry_run:
+        description: "Run without deploying (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
 
 jobs:
+
   rollback:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
 
     steps:
       - name: Checkout target commit
@@ -23,6 +29,9 @@ jobs:
           ref: ${{ inputs.commit }}
           fetch-depth: 1
 
+      # -------------------------
+      # Validate commit exists
+      # -------------------------
       - name: Validate commit exists
         run: |
           if ! git cat-file -e "${{ inputs.commit }}^{commit}" 2>/dev/null; then
@@ -30,13 +39,22 @@ jobs:
             exit 1
           fi
 
+      # -------------------------
+      # Validate node exists
+      # -------------------------
       - name: Validate node exists
         run: |
           if [ ! -f "nodes/${{ inputs.node }}/docker-compose.yml" ]; then
             echo "❌ Node '${{ inputs.node }}' does not exist or has no docker-compose.yml."
+            echo "Available nodes:"
+            ls nodes/
             exit 1
           fi
+          echo "✔ Node '${{ inputs.node }}' found."
 
+      # -------------------------
+      # Prepare SSH key
+      # -------------------------
       - name: Prepare SSH key
         env:
           SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -46,14 +64,45 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           printf "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
+      # -------------------------
+      # Dry-run mode
+      # -------------------------
+      - name: Dry-run check
+        if: ${{ inputs.dry_run == 'true' }}
+        run: |
+          echo "🔍 Dry-run mode enabled."
+          echo "Would rollback '${{ inputs.node }}' to commit '${{ inputs.commit }}'."
+          echo "Would deploy docker-compose.yml to /opt/stacks/${{ inputs.node }}/"
+          exit 0
+
+      # -------------------------
+      # Deploy rolled-back version
+      # -------------------------
       - name: Deploy rolled-back version
         run: |
+          echo "📦 Copying docker-compose.yml to node..."
           scp -i ~/.ssh/deploy_key \
             nodes/${{ inputs.node }}/docker-compose.yml \
             deploy@10.0.1.10:/opt/stacks/${{ inputs.node }}/
 
+          echo "🚀 Restarting stack..."
           ssh -i ~/.ssh/deploy_key deploy@10.0.1.10 \
             "cd /opt/stacks/${{ inputs.node }} && docker compose up -d"
 
+      # -------------------------
+      # Rollback complete
+      # -------------------------
       - name: Rollback complete
-        run: echo "✔ Rolled back '${{ inputs.node }}' to commit '${{ inputs.commit }}'"
+        run: |
+          echo "✔ Successfully rolled back '${{ inputs.node }}' to commit '${{ inputs.commit }}'"
+
+      # -------------------------
+      # Optional: Discord/Slack notification
+      # -------------------------
+      # - name: Notify Discord
+      #   if: always()
+      #   run: |
+      #     curl -H "Content-Type: application/json" \
+      #       -X POST \
+      #       -d "{\"content\": \"Rollback complete for node **${{ inputs.node }}** to commit **${{ inputs.commit }}**\"}" \
+      #       ${{ secrets.DISCORD_WEBHOOK }}

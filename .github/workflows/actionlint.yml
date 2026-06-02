@@ -1,0 +1,39 @@
+name: Validate GitHub Workflows
+
+on:
+  push:
+    paths:
+      - ".github/workflows/**"
+
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "workflow-lint"
+  cancel-in-progress: true
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # -------------------------
+      # Install actionlint
+      # -------------------------
+      - name: Install actionlint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash \
+            | bash -s -- -b /usr/local/bin
+
+      # -------------------------
+      # Run actionlint
+      # -------------------------
+      - name: Lint workflows
+        run: actionlint
