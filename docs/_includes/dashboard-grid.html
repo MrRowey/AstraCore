@@ -1,0 +1,27 @@
+<section class="dashboard-grid">
+
+    {% include dashboard-card.html
+        label="Cluster Status"
+        value="Operational"
+        description="Distributed services online and synchronized."
+    %}
+
+    {% include dashboard-card.html
+        label="Hypervisors"
+        value=site.nodes | size | append: " Active Nodes"
+        description="Proxmox virtualization hosts and service nodes."
+    %}
+
+    {% include dashboard-card.html
+        label="Container Stack"
+        value="Docker + LXC"
+        description="Microservices, automation, and internal tooling."
+    %}
+
+    {% include dashboard-card.html
+        label="Quick Links"
+        value="Explore"
+        description="<a href='/nodes/'>Nodes</a> · <a href='/configs/'>Configs</a> · <a href='/scripts/'>Scripts</a> · <a href='/README.md'>Contribute</a>"
+    %}
+
+</section>
