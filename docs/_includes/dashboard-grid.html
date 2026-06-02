@@ -7,16 +7,18 @@
     %}
 
     {% assign node_count = site.nodes | size %}
+    {% assign hypervisor_value = node_count | append: " Active Nodes" %}
     {% include dashboard-card.html
         label="Hypervisors"
-        value=node_count | append: " Active Nodes"
+        value=hypervisor_value
         description="Proxmox virtualization hosts and service nodes."
     %}
 
     {% assign online_nodes = site.nodes | where: "status", "Online" | size %}
+    {% assign online_value = online_nodes | append: " Online" %}
     {% include dashboard-card.html
         label="Node Availability"
-        value=online_nodes | append: " Online"
+        value=online_value
         description="Remaining nodes in standby or offline state."
     %}
 
@@ -24,9 +26,10 @@
     {% for n in site.nodes %}
         {% assign total_roles = total_roles | plus: n.role.size %}
     {% endfor %}
+    {% assign services_value = total_roles | append: " Services" %}
     {% include dashboard-card.html
         label="Services Running"
-        value=total_roles | append: " Services"
+        value=services_value
         description="Distributed across all nodes in the cluster."
     %}
 
