@@ -1,5 +1,5 @@
 /* ----------------------------------------
-   Node Page Layout
+   Node Page Wrapper
 ---------------------------------------- */
 
 .node-page {
@@ -9,14 +9,14 @@
 }
 
 /* ----------------------------------------
-   Node Header
+   Header Block
 ---------------------------------------- */
 
-.node-header {
+.node-header-block {
   padding: $space-4;
   border-radius: 16px;
   background: rgba(255,255,255,0.03);
-  margin-bottom: $space-6;
+  margin-bottom: $space-7;
   @include glow-soft;
   @include smooth-transition;
 
@@ -25,52 +25,27 @@
   }
 }
 
-.node-header h1 {
+.node-header-block h1 {
   font-size: 2.4rem;
   margin-bottom: $space-2;
 }
 
-.node-role {
+.node-header-block .node-role {
   color: var(--cyan);
   font-size: 1rem;
-  margin-bottom: $space-3;
+  margin-top: 0.5rem;
 }
 
 /* ----------------------------------------
-   Status Badges
+   Sections
 ---------------------------------------- */
 
-.status-badge {
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.node-section {
+  margin-bottom: $space-7;
 }
 
-.status-badge.online {
-  background: rgba(50, 255, 156, 0.12);
-  color: var(--green);
-  border: 1px solid rgba(50, 255, 156, 0.3);
-}
-
-.status-badge.offline {
-  background: rgba(255, 92, 122, 0.12);
-  color: var(--red);
-  border: 1px solid rgba(255, 92, 122, 0.3);
-}
-
-/* ----------------------------------------
-   Panels
----------------------------------------- */
-
-.node-pannel {
-  padding: $space-4;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.02);
-  margin-bottom: $space-6;
-  @include glow-soft;
+.node-section:last-child {
+  margin-bottom: 0;
 }
 
 /* ----------------------------------------
@@ -88,7 +63,12 @@
   padding: $space-3;
   border-radius: 12px;
   background: rgba(255,255,255,0.03);
+  @include glow-soft;
   @include smooth-transition;
+
+  &:hover {
+    @include glow-medium;
+  }
 
   span {
     font-size: 0.85rem;
