@@ -1,0 +1,17 @@
+<div class="node-header">
+    <div>
+        <h1>{{ page.name }}</h1>
+
+        {% if page.role %}
+            <p class="node-role">
+                {% for r in page.role %}
+                    {{ r }}{% unless forloop.last %}, {% endunless %}
+                {% endfor %}
+            </p>
+        {% endif %}
+    </div>
+
+    <span class="status-badge {{ page.status | downcase }}">
+        {{ page.status }}
+    </span>
+</div>

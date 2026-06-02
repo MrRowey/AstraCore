@@ -4,62 +4,10 @@ layout: default
 
 <div class="node-page">
 
-    <div class="node-header">
-        <div>
-            <h1>{{ page.name }}</h1>
+    {% include node-header.html %}
 
-            {% if page.role %}
-                <p class="node-role">
-                    {% for r in page.role %}
-                        {{ r }}{% unless forloop.last %}, {% endunless %}
-                    {% endfor %}
-                </p>
-            {% endif %}
-        </div>
+    {% include node-overview.html %}
 
-        <span class="status-badge {{ page.status | downcase }}">
-            {{ page.status }}
-        </span>
-    </div>
-
-    <div class="node-pannel">
-        <h2>Overview</h2>
-        <p>{{ page.description }}</p>
-
-        <h2>Specifications</h2>
-        <div class="spec-grid">
-
-            {% assign icons = 
-                "ip:fa-network-wired,
-                 cpu:fa-microchip,
-                 memory:fa-memory,
-                 storage:fa-hdd" | split: "," 
-            %}
-
-            {% for item in page.device %}
-            {% assign key = item[0] %}
-            {% assign value = item[1] %}
-
-            {% assign icon = "" %}
-            {% for pair in icons %}
-                {% assign parts = pair | split: ":" %}
-                {% if parts[0] == key %}
-                    {% assign icon = parts[1] %}
-                {% endif %}
-            {% endfor %}
-
-            <div class="spec-card">
-                <span>
-                    {% if icon != "" %}
-                        <i class="fas {{ icon }}"></i>
-                    {% endif %}
-                    {{ key | capitalize }}
-                </span>
-                <strong>{{ value }}</strong>
-            </div>
-            {% endfor %}
-
-        </div>
-    </div>
+    {% include spec-grid.html %}
 
 </div>
