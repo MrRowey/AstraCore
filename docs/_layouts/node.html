@@ -1,13 +1,15 @@
----
-layout: default
----
+<div class="node-page fade-in">
 
-<div class="node-page">
+    <header class="node-header-block">
+        {% include node-header.html %}
+    </header>
 
-    {% include node-header.html %}
+    <section class="node-section">
+        {% include node-overview.html %}
+    </section>
 
-    {% include node-overview.html %}
-
-    {% include spec-grid.html %}
+    <section class="node-section">
+        {% include spec-grid.html %}
+    </section>
 
 </div>
