@@ -6,9 +6,10 @@
         description="Distributed services online and synchronized."
     %}
 
+    {% assign node_count = site.nodes | size | append: " Active Nodes" %}
     {% include dashboard-card.html
         label="Hypervisors"
-        value=site.nodes | size | append: " Active Nodes"
+        value=node_count
         description="Proxmox virtualization hosts and service nodes."
     %}
 
