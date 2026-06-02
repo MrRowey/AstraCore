@@ -64,6 +64,16 @@ jobs:
         run: |
           linkchecker docs/_site --ignore-url=^mailto:
 
+      # -------------------------
+      # NEW: Upload built site for inspection
+      # -------------------------
+      - name: Upload Jekyll build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jekyll-site-output
+          path: docs/_site
+          retention-days: 7
+
 
   # -------------------------
   # 2. Build & Deploy (only if validate succeeds)
