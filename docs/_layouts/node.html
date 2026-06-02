@@ -14,7 +14,7 @@ layout: default
                         {{ r }}{% unless forloop.last %}, {% endunless %}
                     {% endfor %}
                 </p>
-            {% endfor %}
+            {% endif %}
         </div>
 
         <span class="status-badge {{ page.status | downcase }}">
