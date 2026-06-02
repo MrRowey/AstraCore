@@ -1,0 +1,24 @@
+<a href="{{ node.url | relative_url }}" class="node-card">
+
+  <div class="node-card-top">
+    <div class="node-card-title">
+      <h2>{{ node.name }}</h2>
+      <h3>{{ node.vm }}</h3>
+    </div>
+
+    <span class="status-badge {{ node.status | downcase }}">
+      {{ node.status }}
+    </span>
+  </div>
+
+  <p class="node-role">
+    {% for r in node.role %}
+      {{ r }}{% unless forloop.last %}, {% endunless %}
+    {% endfor %}
+  </p>
+
+  <p class="node-description">
+    {{ node.description }}
+  </p>
+
+</a>
