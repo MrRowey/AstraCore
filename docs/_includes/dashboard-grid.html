@@ -3,14 +3,31 @@
     {% include dashboard-card.html
         label="Cluster Status"
         value="Operational"
-        description="Distributed services online and synchronized."
+        description="All core services responding normally."
     %}
 
-    {% assign node_count = site.nodes | size | append: " Active Nodes" %}
+    {% assign node_count = site.nodes | size %}
     {% include dashboard-card.html
         label="Hypervisors"
-        value=node_count
+        value=node_count | append: " Active Nodes"
         description="Proxmox virtualization hosts and service nodes."
+    %}
+
+    {% assign online_nodes = site.nodes | where: "status", "Online" | size %}
+    {% include dashboard-card.html
+        label="Node Availability"
+        value=online_nodes | append: " Online"
+        description="Remaining nodes in standby or offline state."
+    %}
+
+    {% assign total_roles = 0 %}
+    {% for n in site.nodes %}
+        {% assign total_roles = total_roles | plus: n.role.size %}
+    {% endfor %}
+    {% include dashboard-card.html
+        label="Services Running"
+        value=total_roles | append: " Services"
+        description="Distributed across all nodes in the cluster."
     %}
 
     {% include dashboard-card.html
