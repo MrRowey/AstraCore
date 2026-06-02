@@ -28,12 +28,13 @@ layout: default
 
         <h2>Specifications</h2>
         <div class="spec-grid">
-            {% for key, value in page.device %}
+            {% for item in page.device %}
             <div class="spec-card">
-                <span>{{ key | capitalize }}</span>
-                <strong>{{ value }}</strong>
+                <span>{{ item[0] | capitalize }}</span>
+                <strong>{{ item[1] }}</strong>
             </div>
             {% endfor %}
         </div>
     </div>
+
 </div>
