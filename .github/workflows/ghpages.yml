@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   build:
+    needs: [jekyll-validate]
     runs-on: ubuntu-latest
   
     steps:

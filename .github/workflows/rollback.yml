@@ -13,24 +13,47 @@ on:
 jobs:
   rollback:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout target commit
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.commit }}
-      
-      - name: Deploy rolled-back version
-        env: 
+          fetch-depth: 1
+
+      - name: Validate commit exists
+        run: |
+          if ! git cat-file -e "${{ inputs.commit }}^{commit}" 2>/dev/null; then
+            echo "❌ Commit '${{ inputs.commit }}' does not exist in the repository."
+            exit 1
+          fi
+
+      - name: Validate node exists
+        run: |
+          if [ ! -f "nodes/${{ inputs.node }}/docker-compose.yml" ]; then
+            echo "❌ Node '${{ inputs.node }}' does not exist or has no docker-compose.yml."
+            exit 1
+          fi
+
+      - name: Prepare SSH key
+        env:
           SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
         run: |
-          mkdir -p ~/.ssh
+          install -m 700 -d ~/.ssh
           echo "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+          printf "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
+      - name: Deploy rolled-back version
+        run: |
           scp -i ~/.ssh/deploy_key \
             nodes/${{ inputs.node }}/docker-compose.yml \
             deploy@10.0.1.10:/opt/stacks/${{ inputs.node }}/
 
           ssh -i ~/.ssh/deploy_key deploy@10.0.1.10 \
-          "cd /opt/stacks/${{ inputs.node }} && docker-compose up -d"
+            "cd /opt/stacks/${{ inputs.node }} && docker compose up -d"
 
-          echo "Rolled Back ${{ inputs.node }} to ${{ inputs.commit }}"
+      - name: Rollback complete
+        run: echo "✔ Rolled back '${{ inputs.node }}' to commit '${{ inputs.commit }}'"

@@ -1,0 +1,52 @@
+name: Validate Jekyll Docs
+
+on:
+  push:
+    paths:
+      - "docs/**"
+  pull_request:
+    paths:
+      - "docs/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+          working-directory: docs
+
+      - name: Install dependencies
+        working-directory: docs
+        run: bundle install
+
+      - name: Validate Jekyll build (front matter + Liquid)
+        working-directory: docs
+        run: bundle exec jekyll build --strict_front_matter
+
+      - name: Install HTML validator
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tidy
+
+      - name: Validate HTML output
+        run: |
+          shopt -s globstar nullglob
+          for file in docs/_site/**/*.html; do
+            echo "Checking $file"
+            tidy -qe "$file" || true
+          done
+
+      - name: Install link checker
+        run: sudo apt-get install -y linkchecker
+
+      - name: Check for broken internal links
+        run: |
+          linkchecker docs/_site --ignore-url=^mailto:
