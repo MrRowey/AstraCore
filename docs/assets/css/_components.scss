@@ -1,0 +1,64 @@
+/* ---------------------------
+   Status Badges
+---------------------------- */
+
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-badge.online {
+  @include badge-style(
+    rgba(50, 255, 156, 0.12),
+    var(--green),
+    rgba(50, 255, 156, 0.3)
+  );
+}
+
+.status-badge.offline {
+  @include badge-style(
+    rgba(255, 92, 122, 0.12),
+    var(--red),
+    rgba(255, 92, 122, 0.3)
+  );
+}
+
+
+/* ---------------------------
+   Node Text
+---------------------------- */
+
+.node-role {
+  color: var(--cyan);
+  margin-top: 0.5rem;
+}
+
+.node-description {
+  color: var(--muted);
+  margin-top: 1rem;
+  line-height: 1.7;
+}
+
+
+/* ---------------------------
+   Grids (using mixin)
+---------------------------- */
+
+.dashboard-grid {
+  @include grid-auto(250px);
+  margin-top: 3rem;
+}
+
+.node-grid {
+  @include grid-auto(280px);
+  margin-top: 2rem;
+}
+
+.spec-grid {
+  @include grid-auto(220px);
+  margin-top: 2rem;
+}

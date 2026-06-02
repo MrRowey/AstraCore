@@ -1,0 +1,27 @@
+/* Base button styles */
+.primary-btn,
+.secondary-btn {
+  @include focus-ring;
+}
+
+/* Primary button */
+.primary-btn {
+  background: rgba(0, 229, 255, 0.08);
+  color: var(--cyan);
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.15);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.2);
+  }
+}
+
+/* Secondary button */
+.secondary-btn {
+  color: var(--text);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.2);
+  }
+}

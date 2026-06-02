@@ -13,6 +13,9 @@ permalink: pretty
 
 theme: null
 
+sass:
+  style: compressed
+
 collections:
   nodes:
     output: true

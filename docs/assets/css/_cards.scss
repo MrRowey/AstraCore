@@ -1,0 +1,7 @@
+.dashboard-card,
+.node-card,
+.spec-card,
+.node-panel {
+  @include glass-card;
+  @include hover-lift;
+}
