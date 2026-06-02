@@ -3,34 +3,36 @@ layout: default
 ---
 
 <div class="node-page">
+
     <div class="node-header">
         <div>
             <h1>{{ page.name }}</h1>
-            <p class="node-role"> {{ page.role }}</p>
+
+            {% if page.role %}
+                <p class="node-role">
+                    {% for r in page.role %}
+                        {{ r }}{% unless forloop.last %}, {% endunless %}
+                    {% endfor %}
+                </p>
+            {% endfore %}
         </div>
 
-        <span class="status-badge {{ page.status | downcase }}">{{ page.status }}</span>
+        <span class="status-badge {{ page.status | downcase }}">
+            {{ page.status }}
+        </span>
     </div>
 
     <div class="node-pannel">
         <h2>Overview</h2>
         <p>{{ page.description }}</p>
 
+        <h2>Specifications</h2>
         <div class="spec-grid">
+            {% for key, value in page.device %}
             <div class="spec-card">
-                <span>IP Address</span>
-                <strong>{{ page.ip }}</strong>
+                <span>{{ key | capitalize }}</span>
+                <strong>{{ value }}</strong>
             </div>
-
-            <div class="spec-card">
-                <span>CPU</span>
-                <strong>{{ page.cpu }}</strong>
-            </div>
-
-            <div class="spec-card">
-                <span>Memory</span>
-                <strong>{{ page.memory }}</strong>
-            </div>
+            {% endfor %}
         </div>
-    </div>
 </div>
