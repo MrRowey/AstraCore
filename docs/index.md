@@ -51,7 +51,3 @@ permalink: /
         </p>
     </div>
 </section>
-
-<footer class="page-meta">
-    <p>Last updated: {{ site.time | date: "%Y-%m-%d" }}</p>
-</footer>
