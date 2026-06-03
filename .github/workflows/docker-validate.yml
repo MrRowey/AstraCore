@@ -1,116 +1,38 @@
-name: Validate Docker Compose Files
+name: Validate Docker
 
 on:
   push:
     paths:
-      - "nodes/**"
-      - "configs/**"
+      - "docker/**"
       - ".github/workflows/docker-validate.yml"
-
   pull_request:
     paths:
-      - "nodes/**"
-      - "configs/**"
+      - "docker/**"
       - ".github/workflows/docker-validate.yml"
 
 permissions:
   contents: read
 
-concurrency:
-  group: "docker-validate"
-  cancel-in-progress: true
-
 jobs:
-
-  # -------------------------
-  # 1. YAML Syntax Validation
-  # -------------------------
-  yaml-lint:
+  docker-lint:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install yamllint
+      - name: Lint Dockerfiles
         run: |
-          sudo apt-get update
-          sudo apt-get install -y yamllint
+          docker run --rm -i hadolint/hadolint < docker/Dockerfile
 
-      - name: Lint YAML files
-        run: |
-          yamllint nodes configs
-
-  # -------------------------
-  # 2. Docker Compose Validation (parallel per node)
-  # -------------------------
-  compose-validate:
+  docker-compose-validate:
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        compose_file: ${{ fromJson(needs.discover.outputs.compose_files) }}
-
-    needs: yaml-lint
+    needs: docker-lint
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Docker Compose plugin
+      - name: Validate docker-compose
+        env:
+          compose_file: docker-compose.yml
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io docker-compose-plugin
-
-      - name: Validate Compose File
-        run: |
-          echo "🔍 Validating ${{ matrix.compose_file }}..."
-          docker compose -f "${{ matrix.compose_file }}" config -q
-          echo "✅ ${{ matrix.compose_file }} is valid"
-
-  # -------------------------
-  # 3. Discover compose files dynamically
-  # -------------------------
-  discover:
-    runs-on: ubuntu-latest
-    outputs:
-      compose_files: ${{ steps.find.outputs.compose_files }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - id: find
-        run: |
-          FILES=$(find nodes -type f -name "docker-compose.yml" | jq -R -s -c 'split("\n")[:-1]')
-          echo "compose_files=$FILES" >> $GITHUB_OUTPUT
-
-  # -------------------------
-  # 4. Optional: Validate container images exist
-  # -------------------------
-  image-check:
-    runs-on: ubuntu-latest
-    needs: compose-validate
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Docker
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-
-      - name: Check referenced images
-        run: |
-          echo "🔍 Checking container images..."
-          for file in nodes/*/docker-compose.yml; do
-            echo "📄 $file"
-            IMAGES=$(grep "image:" "$file" | awk '{print $2}')
-            for img in $IMAGES; do
-              echo "  🐳 Checking image: $img"
-              if docker pull "$img" > /dev/null 2>&1; then
-                echo "    ✅ Image exists"
-              else
-                echo "    ❌ Image NOT found: $img"
-                exit 1
-              fi
-            done
-          done
+          docker compose -f "$compose_file" config
