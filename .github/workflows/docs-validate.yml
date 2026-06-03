@@ -23,9 +23,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -----------------------------
-      # Install Ruby + Bundler
-      # -----------------------------
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -37,34 +34,19 @@ jobs:
         working-directory: docs
         run: bundle install
 
-      # -----------------------------
-      # Build Jekyll site
-      # -----------------------------
       - name: Build site
         working-directory: docs
         run: bundle exec jekyll build
 
-      # -----------------------------
-      # HTML-Proofer (internal links only)
-      # -----------------------------
       - name: Validate HTML (internal links only)
         working-directory: docs
         run: bundle exec htmlproofer ./_site --disable-external
 
-      # -----------------------------
-      # Install pa11y + http-server locally
-      # -----------------------------
       - name: Install pa11y + http-server
         run: npm install pa11y http-server
 
-      # -----------------------------
-      # Start local server
-      # -----------------------------
       - name: Start local server
         run: npx http-server docs/_site --port 8080 &
-      
-      # -----------------------------
-      # Run pa11y accessibility checks
-      # -----------------------------
+
       - name: Run accessibility checks
         run: npx pa11y http://localhost:8080
