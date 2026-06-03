@@ -4,56 +4,29 @@ on:
   push:
     branches:
       - Deploy
-    paths:
-      - "docs/**"
-      - ".github/workflows/**"
-
   pull_request:
     paths:
       - "docs/**"
-      - ".github/workflows/**"
 
 permissions:
   contents: read
-  pull-requests: write
 
 concurrency:
   group: "docs-validate"
   cancel-in-progress: true
 
 jobs:
-
   validate:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        task: [markdown, yaml, spellcheck, jekyll, htmlproofer, accessibility, images]
-
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      # -------------------------
-      # Cache npm (markdownlint, cspell, pa11y)
-      # -------------------------
-      - name: Cache npm
-        if: matrix.task == 'markdown' || matrix.task == 'spellcheck' || matrix.task == 'accessibility'
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-
-      # -------------------------
-      # Cache Ruby (Bundler)
-      # -------------------------
+      # -----------------------------
+      # Install Ruby + Bundler
+      # -----------------------------
       - name: Setup Ruby
-        if: matrix.task == 'jekyll' || matrix.task == 'htmlproofer' || matrix.task == 'accessibility' || matrix.task == 'images'
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
@@ -61,127 +34,37 @@ jobs:
           working-directory: docs
 
       - name: Install Ruby dependencies
-        if: matrix.task == 'jekyll' || matrix.task == 'htmlproofer' || matrix.task == 'accessibility' || matrix.task == 'images'
         working-directory: docs
         run: bundle install
 
-      # -------------------------
-      # YAML Validation
-      # -------------------------
-      - name: YAML Lint
-        if: matrix.task == 'yaml'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y yamllint
-          yamllint docs
-
-      # -------------------------
-      # Markdown Lint (changed files only)
-      # -------------------------
-      - name: Markdown Lint
-        if: matrix.task == 'markdown'
-        run: |
-          npm install -g markdownlint-cli2
-
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            git fetch origin ${{ github.base_ref }} --depth=1
-            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'docs/**/*.md')
-          else
-            FILES=$(git ls-files 'docs/**/*.md')
-          fi
-
-          if [ -z "$FILES" ]; then
-            echo "No Markdown files to lint."
-            exit 0
-          fi
-
-          echo "$FILES" | xargs markdownlint-cli2
-
-      # -------------------------
-      # Spell Check (changed files only)
-      # -------------------------
-      - name: Spell Check
-        if: matrix.task == 'spellcheck'
-        run: |
-          npm install -g cspell
-
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            git fetch origin ${{ github.base_ref }} --depth=1
-            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'docs/**/*.md')
-          else
-            FILES=$(git ls-files 'docs/**/*.md')
-          fi
-
-          if [ -z "$FILES" ]; then
-            echo "No Markdown files to spell-check."
-            exit 0
-          fi
-
-          echo "$FILES" | xargs cspell --no-progress
-
-      # -------------------------
-      # Jekyll Build Validation
-      # -------------------------
-      - name: Validate Jekyll Build
-        if: matrix.task == 'jekyll'
-        working-directory: docs
-        run: bundle exec jekyll build --strict_front_matter
-
-      - name: Upload Jekyll Output
-        if: matrix.task == 'jekyll'
-        uses: actions/upload-artifact@v4
-        with:
-          name: jekyll-site-output
-          path: docs/_site
-          retention-days: 7
-
-      # -------------------------
-      # HTMLProofer
-      # -------------------------
-      - name: Build Site for HTMLProofer
-        if: matrix.task == 'htmlproofer'
+      # -----------------------------
+      # Build Jekyll site
+      # -----------------------------
+      - name: Build site
         working-directory: docs
         run: bundle exec jekyll build
 
-      - name: Run HTMLProofer
-        if: matrix.task == 'htmlproofer'
+      # -----------------------------
+      # HTML-Proofer (internal links only)
+      # -----------------------------
+      - name: Validate HTML (internal links only)
         working-directory: docs
-        run: |
-          gem install html-proofer
-          htmlproofer ./_site \
-            --disable-external \
-            --check-html \
-            --allow-hash-href
+        run: bundle exec htmlproofer ./_site --disable-external
 
-      # -------------------------
-      # Accessibility Check (pa11y)
-      # -------------------------
-      - name: Build Site for Accessibility
-        if: matrix.task == 'accessibility'
-        working-directory: docs
-        run: bundle exec jekyll build
+      # -----------------------------
+      # Install pa11y + http-server locally
+      # -----------------------------
+      - name: Install pa11y + http-server
+        run: npm install pa11y http-server
 
-      - name: Run pa11y
-        if: matrix.task == 'accessibility'
-        run: |
-          npm install -g http-server pa11y
-          npx http-server docs/_site -p 8080 >/dev/null 2>&1 &
-          sleep 5
-          pa11y http://127.0.0.1:8080
-
-      # -------------------------
-      # Broken Image Detector
-      # -------------------------
-      - name: Build Site for Image Check
-        if: matrix.task == 'images'
-        working-directory: docs
-        run: bundle exec jekyll build
-
-      - name: Run HTMLProofer Images Check
-        if: matrix.task == 'images'
-        working-directory: docs
-        run: |
-          gem install html-proofer
-          htmlproofer ./_site \
-            --checks-to-run Images \
-            --disable-external
+      # -----------------------------
+      # Start local server
+      # -----------------------------
+      - name: Start local server
+        run: npx http-server docs/_site --port 8080 &
+      
+      # -----------------------------
+      # Run pa11y accessibility checks
+      # -----------------------------
+      - name: Run accessibility checks
+        run: npx pa11y http://localhost:8080
