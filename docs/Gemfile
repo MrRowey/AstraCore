@@ -1,4 +1,7 @@
 source "https://rubygems.org"
 
-gem "jekyll"
-gem "webrick"
+gem "jekyll", "~> 4.3"
+gem "webrick"   # Required for Ruby 3+
+
+# HTML validation
+gem "html-proofer", "~> 5.2"
