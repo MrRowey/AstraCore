@@ -24,16 +24,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -------------------------
-      # Install actionlint
-      # -------------------------
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Install actionlint
         run: |
-          curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash \
-            | bash -s -- -b /usr/local/bin
+          ACTIONLINT_VERSION=$(curl -s https://api.github.com/repos/rhysd/actionlint/releases/latest | jq -r '.tag_name')
+          curl -sSL "https://github.com/rhysd/actionlint/releases/download/${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION#v}_linux_amd64.tar.gz" \
+            | tar -xz -C /usr/local/bin actionlint
 
-      # -------------------------
-      # Run actionlint
-      # -------------------------
-      - name: Lint workflows
+      - name: Run actionlint
         run: actionlint
