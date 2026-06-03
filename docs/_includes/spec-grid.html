@@ -10,7 +10,7 @@
              storage:fa-hdd" | split: "," 
         %}
 
-        {% for item in page.device %}
+        {% for item in node.device %}
         {% assign key = item[0] %}
         {% assign value = item[1] %}
 

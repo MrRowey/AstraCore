@@ -1,15 +1,21 @@
+---
+layout: default
+---
+
+{% assign node = site.data.nodes | where: "id", page.node_id | first %}
+
 <div class="node-page fade-in">
 
     <header class="node-header-block">
-        {% include node-header.html %}
+        {% include node-header.html node=node %}
     </header>
 
     <section class="node-section">
-        {% include node-overview.html %}
+        {% include node-overview.html node=node %}
     </section>
 
     <section class="node-section">
-        {% include spec-grid.html %}
+        {% include spec-grid.html node=node %}
     </section>
 
 </div>

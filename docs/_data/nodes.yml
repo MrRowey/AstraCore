@@ -1,0 +1,89 @@
+- id: node-1
+  name: Heimdall
+  vm: pve-net
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.10
+
+- id: node-2
+  name: Memory Core
+  vm: pve-backup
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.11
+
+- id: node-3
+  name: Jarvis
+  vm: pve-home
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.12
+
+- id: node-4
+  name: Apollo
+  vm: pve-media
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.13
+
+- id: node-5
+  name: Photon Core
+  vm: pve-photos
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.10
+
+- id: node-6
+  name: The Watchtower
+  vm: pve-monitor
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.10
+
+- id: node-7
+  name: The Workshop
+  vm: pve-web
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.10
+
+- id: node-8
+  name: The Pirate Cove
+  vm: pve-dl
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.10
+
+- id: node-9
+  name: Friday
+  vm: pve-ai
+  status: offline
+  role: Network
+  cpu: Intel Core i5-4570T
+  ram: 8Gb
+  storage: 120gb SSD
+  ip-address: 192.168.1.10
