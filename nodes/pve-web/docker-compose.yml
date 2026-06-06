@@ -1,0 +1,78 @@
+version: "3.8"
+
+services:
+  rewards-db:
+    image: postgres:15.6
+    container_name: rewards-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=rewards
+      - POSTGRES_USER=rewards
+      - POSTGRES_PASSWORD=${REWARDS_DB_PASSWORD}
+    volumes:
+      - /opt/appdata/rewards/db:/var/lib/postgresql/data
+    networks:
+      - proxy
+
+  rewards-api:
+    image: yourdockerhub/rewards-api:latest
+    container_name: rewards-api
+    restart: unless-stopped
+    depends_on:
+      - rewards-db
+    environment:
+      - DATABASE_URL=postgres://rewards:${REWARDS_DB_PASSWORD}@rewards-db:5432/rewards
+      - TZ=${TZ}
+    networks:
+      - proxy
+
+  rewards-web:
+    image: yourdockerhub/rewards-web:latest
+    container_name: rewards-web
+    restart: unless-stopped
+    depends_on:
+      - rewards-api
+    environment:
+      - API_URL=http://rewards-api:3000
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rewards.rule=Host(`rewards.astracore.me`)"
+      - "traefik.http.routers.rewards.entrypoints=websecure"
+      - "traefik.http.services.rewards.loadbalancer.server.port=80"
+      - "traefik.http.routers.rewards.middlewares=authelia@docker"
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - proxy
+
+  portainer-agent:
+    image: portainer/agent:latest
+    container_name: portainer-agent
+    restart: unless-stopped
+    ports:
+      - "9001:9001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

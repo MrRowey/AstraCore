@@ -1,33 +1,38 @@
 version: "3.8"
 
 services:
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
+  ollama:
+    image: ollama/ollama:0.3.12
+    container_name: ollama
     restart: unless-stopped
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TZ}
-      - WEBUI_PORT=8080
     ports:
-      - "8080:8080"
-      - "6881:6881"
-      - "6881:6881/udp"
+      - "11434:11434"
     volumes:
-      - /opt/appdata/qbittorrent:/config
-      - /opt/appdata/downloads:/downloads
+      - /opt/appdata/ollama:/root/.ollama
     networks:
       - proxy
 
-  recyclarr:
-    image: ghcr.io/recyclarr/recyclarr:latest
-    container_name: recyclarr
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
     restart: unless-stopped
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - TZ=${TZ}
+    ports:
+      - "8081:8080"
     volumes:
-      - /opt/appdata/recyclarr:/config
+      - /opt/appdata/open-webui:/app/backend/data
     networks:
       - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ai.rule=Host(`ai.astracore.me`)"
+      - "traefik.http.routers.ai.entrypoints=websecure"
+      - "traefik.http.services.ai.loadbalancer.server.port=8080"
+      - "traefik.http.routers.ai.middlewares=authelia@docker"
 
   node-exporter:
     image: prom/node-exporter:latest
