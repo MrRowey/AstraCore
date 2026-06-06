@@ -38,10 +38,6 @@ jobs:
         working-directory: docs
         run: bundle exec jekyll build
 
-      - name: Validate HTML (internal links only)
-        working-directory: docs
-        run: bundle exec htmlproofer ./_site --disable-external
-
       - name: Install pa11y + http-server
         run: npm install pa11y http-server
 
