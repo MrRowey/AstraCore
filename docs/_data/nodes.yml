@@ -7,6 +7,15 @@
   ram: 8Gb
   storage: 120gb SSD
   ip-address: 192.168.1.10
+  connections:
+   - node-2
+   - node-3
+   - node-4
+   - node-5
+   - node-6
+   - node-7
+   - node-8
+   - node-9
 
 - id: node-2
   name: Memory Core
@@ -17,6 +26,8 @@
   ram: 8Gb
   storage: 120gb SSD
   ip-address: 192.168.1.11
+  connections:
+   - node-1
 
 - id: node-3
   name: Jarvis
@@ -27,6 +38,8 @@
   ram: 8Gb
   storage: 120gb SSD
   ip-address: 192.168.1.12
+  connections:
+   - node-1
 
 - id: node-4
   name: Apollo
@@ -37,6 +50,9 @@
   ram: 8Gb
   storage: 120gb SSD
   ip-address: 192.168.1.13
+  connections:
+   - node-1
+   - node-8
 
 - id: node-5
   name: Photon Core
@@ -46,7 +62,10 @@
   cpu: Intel Core i5-4570T
   ram: 8Gb
   storage: 120gb SSD
-  ip-address: 192.168.1.10
+  ip-address: 192.168.1.14
+  connections:
+   - node-1
+   - node-9
 
 - id: node-6
   name: The Watchtower
@@ -56,7 +75,16 @@
   cpu: Intel Core i5-4570T
   ram: 8Gb
   storage: 120gb SSD
-  ip-address: 192.168.1.10
+  ip-address: 192.168.1.15
+  connections:
+    - node-1
+    - node-2
+    - node-3
+    - node-4
+    - node-5
+    - node-7
+    - node-8
+    - node-9
 
 - id: node-7
   name: The Workshop
@@ -66,7 +94,11 @@
   cpu: Intel Core i5-4570T
   ram: 8Gb
   storage: 120gb SSD
-  ip-address: 192.168.1.10
+  ip-address: 192.168.1.16
+  connections:
+    - node-1
+    - node-4
+    - node-9
 
 - id: node-8
   name: The Pirate Cove
@@ -76,7 +108,10 @@
   cpu: Intel Core i5-4570T
   ram: 8Gb
   storage: 120gb SSD
-  ip-address: 192.168.1.10
+  ip-address: 192.168.1.17
+  connections:
+    - node-1
+    - node-4
 
 - id: node-9
   name: Friday
@@ -86,4 +121,8 @@
   cpu: Intel Core i5-4570T
   ram: 8Gb
   storage: 120gb SSD
-  ip-address: 192.168.1.10
+  ip-address: 192.168.1.18
+  connections:
+    - node-1
+    - node-5
+    - node-7
