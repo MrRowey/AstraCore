@@ -1,7 +1,10 @@
 ---
 layout: node
-node_id: node-6
-title: The Watchtower
+id: node-6
 ---
 
-# {{ page.title }}
+{% assign node = site.data.nodes | where: "id", page.id | first %}
+
+{% include node-header.html node=node %}
+{% include node-overview.html node=node %}
+{% include spec-grid.html node=node %}

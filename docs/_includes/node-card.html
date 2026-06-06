@@ -1,7 +1,10 @@
-<a href="/AstraCore/nodes/{{ node.id }}/" class="node-card">
+<a href="{{ '/nodes/' | relative_url }}{{ node.id }}/" class="node-card">
+
   <div class="node-card-top">
-    <h2>{{ node.name }}</h2>
-    <h3>{{ node.vm }}</h3>
+    <div class="node-card-title">
+      <h2>{{ node.name }}</h2>
+      <h3>{{ node.vm }}</h3>
+    </div>
 
     <span class="status-badge {{ node.status | downcase }}">
       {{ node.status }}
@@ -10,10 +13,4 @@
 
   <p class="node-role">{{ node.role }}</p>
 
-  <p class="node-description">
-    CPU: {{ node.cpu }}<br>
-    RAM: {{ node.ram }}<br>
-    Storage: {{ node.storage }}<br>
-    IP: {{ node.ip-address }}
-  </p>
 </a>
