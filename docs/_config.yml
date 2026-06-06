@@ -26,4 +26,4 @@ defaults:
       path: ""
       type: "nodes"
     values:
-      layout: node 
+      layout: node
