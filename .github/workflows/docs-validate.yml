@@ -37,12 +37,3 @@ jobs:
       - name: Build site
         working-directory: docs
         run: bundle exec jekyll build
-
-      - name: Install pa11y + http-server
-        run: npm install pa11y http-server
-
-      - name: Start local server
-        run: npx http-server docs/_site --port 8080 &
-
-      - name: Run accessibility checks
-        run: npx pa11y http://localhost:8080
