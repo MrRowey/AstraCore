@@ -3,22 +3,27 @@ layout: node
 id: node-6
 ---
 
-
 {% assign node_id = page.id | split: "/" | last %}
-
-{% assign node = nil %}
-{% for n in site.data.nodes %}
-  {% if n.id == node_id %}
-    {% assign node = n %}
-  {% endif %}
-{% endfor %}
+{% assign node = site.data.nodes | where: "id", node_id | first %}
 
 {% if node %}
 
-  {% include node-header.html node=node %}
-  {% include node-overview.html node=node %}
-  {% include spec-grid.html node=node %}
+  {% assign node_view = node %}
+
+  {% include node-header.html node=node_view %}
+  {% include node-overview.html node=node_view %}
+  {% include spec-grid.html node=node_view %}
 
 {% else %}
-  <p>❌ Node not found: {{ node_id }}</p>
+  <div class="node-error">
+    <h2>Node not found</h2>
+    <p>❌ Could not locate node with id: <code>{{ node_id }}</code></p>
+
+    <p>Available nodes:</p>
+    <ul>
+      {% for n in site.data.nodes %}
+        <li>{{ n.id }} — {{ n.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endif %}
