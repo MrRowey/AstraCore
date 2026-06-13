@@ -4,160 +4,84 @@
   <img src="docs/Icon.png" alt="AstraCore Icon" width="160" />
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Proxmox-E57000?style=for-the-badge&logo=proxmox&logoColor=white" alt="Proxmox" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/TrueNAS-0095D5?style=for-the-badge&logo=truenas&logoColor=white" alt="TrueNAS" />
+</p>
+
 *AstraCore is a sci‑fi inspired homelab platform built on Proxmox and Docker, focused on virtualization, automation, and distributed systems.*
 
 ---
 
 ## 🧠 Overview
-AstraCore is a multi-phase homelab project designed to evolve from a distributed, low-power cluster into a centralized, enterprise-style infrastructure.
+
+AstraCore is a multi-phase homelab project designed to evolve from a distributed, low-power cluster into a centralized, enterprise-style infrastructure. 
 
 The project serves as both a learning platform and a production-style environment, enabling experimentation with modern infrastructure concepts such as virtualization, containerization, storage, and network architecture.
 
 ---
 
-# ⚙️ Phase 1 — Distributed Cluster (In Development)
+## ⚙️ Phase 1: Distributed Cluster
 
-> Active build and experimentation phase using modular, low-power hardware
+> **Status:** 🚧 *Actively being built, tested, and refined.* > *Active build and experimentation phase using modular, low-power hardware.*
 
-### 🖥️ Infrastructure
-- 10-node ThinkCentre cluster (M73 / M93)
-- Proxmox VE deployed across multiple nodes
-- Docker workloads running within virtual machines
-
-### 🧩 Core Stack
-- **Virtualization:** Proxmox VE  
-- **Containers:** Docker  
+### 🖥️ Infrastructure & Stack
+- **Hardware:** 10-node ThinkCentre cluster (M73 / M93)
+- **Virtualization:** Proxmox VE deployed across multiple nodes
+- **Containers:** Docker workloads running within virtual machines
 - **Storage:** TrueNAS (NFS)
 
-## 📦 Service List
+### 🎯 Objectives & Features
+- **Compute:** Distributed compute across multiple nodes with containerised workloads.
+- **Access:** Reverse proxy for service exposure and VPN for secure remote management.
+- **Goals:** Learn clustering concepts, build a flexible environment, and continuously optimize hardware.
 
-> Core services running within AstraCore, grouped by function
+### 📦 Hosted Services
 
-### 🌐 Networking & Security
-- **AdGuard Home** — Network-wide DNS filtering & ad blocking  
-- **Traefik** — Reverse proxy and dynamic routing  
-- **Cloudflare Tunnel** — Secure external access without port forwarding  
-- **WireGuard** — VPN for secure remote connectivity  
-- **Authelia** — Authentication & access control (SSO / 2FA)  
+*Core services running within AstraCore, categorized by function:*
 
----
-
-### 🖥️ Infrastructure & Backup
-- **Proxmox Backup Server** — VM and container backups  
-
----
-
-### 🏠 Home Automation & IoT
-- **Home Assistant OS** — Smart home platform  
-- **TP-Link Tapo Integration** — Device control and monitoring  
+| Category | Service | Description |
+| :--- | :--- | :--- |
+| **🌐 Networking & Security** | **AdGuard Home**<br>**Traefik**<br>**Cloudflare Tunnel**<br>**WireGuard**<br>**Authelia** | Network-wide DNS filtering & ad blocking<br>Reverse proxy and dynamic routing<br>Secure external access without port forwarding<br>VPN for secure remote connectivity<br>SSO / 2FA Authentication & access control |
+| **🏠 Automation & IoT** | **Home Assistant OS**<br>**TP-Link Tapo** | Smart home platform<br>Device control and monitoring integration |
+| **🎬 Media & Storage** | **Plex**<br>**Sonarr / Radarr**<br>**Prowlarr / Overseerr**<br>**Immich** | Media streaming server<br>Automated TV and Movie management<br>Indexer management & media request system<br>Self-hosted photo backup with AI/ML features |
+| **📊 Monitoring & Dev** | **Portainer**<br>**Grafana / Prometheus**<br>**Uptime Kuma**<br>**Gitea** | Container management UI<br>Metrics collection, monitoring, and visualizations<br>Service uptime monitoring<br>Self-hosted Git service |
+| **🤖 AI & Local LLM** | **Ollama**<br>**Open WebUI**<br>**pve-ai2** | Local LLM runtime<br>Web interface for AI interaction *(planned 16GB RAM upgrade)*<br>Secondary Ollama instance (dedicated AI node) |
+| **🧰 Infrastructure & Utils** | **Proxmox Backup Server**<br>**PostgreSQL**<br>**qBittorrent / Recyclarr**<br>**Rewards App** | VM and container backups<br>Database backend<br>Downloading & automated media quality management<br>Internal/custom reward system |
 
 ---
 
-### 🎬 Media & Content Automation
-- **Plex** — Media streaming server  
-- **Sonarr** — TV show management  
-- **Radarr** — Movie management  
-- **Prowlarr** — Indexer management  
-- **Overseerr** — Media request system  
+## 🚧 Phase 2: AstraCore V2 
 
----
+> **Status:** 📝 *Planned — transition will begin following relocation.* > *Full redesign transitioning to a centralized, rack-based architecture.*
 
-### 📷 Media & Storage
-- **Immich (Server + Machine Learning)** — Self-hosted photo backup with AI features  
+### 🖥️ Planned Infrastructure & Architecture
+- **Primary Compute:** Dell PowerEdge R610 running Proxmox VE
+- **Storage:** Rack-mounted TrueNAS system (12-bay storage) providing shared ZFS-based storage
+- **Networking:** Cisco 48-port managed switch & Sophos XG firewall
+- **Workloads:** Docker workloads hosted within VMs, traffic routed via reverse proxy
 
----
-
-### 📊 Monitoring, Dev & Management
-- **Portainer** — Container management UI  
-- **Grafana** — Metrics dashboards & visualisation  
-- **Prometheus** — Metrics collection & monitoring  
-- **Uptime Kuma** — Service uptime monitoring  
-- **Gitea** — Self-hosted Git service  
-
----
-
-### 🧰 Utilities & Supporting Services
-- **Rewards App** — Internal/custom reward system  
-- **PostgreSQL** — Database backend  
-- **qBittorrent** — Download client  
-- **Recyclarr** — Automated media quality management  
-
----
-
-### 🤖 AI & Local LLM
-- **Ollama** — Local LLM runtime  
-- **Open WebUI** — Web interface for AI interaction *(planned upgrade to 16GB RAM)*  
-
----
-
-### 🔮 Future Expansion
-- **pve-ai2** — Secondary Ollama instance (dedicated AI node)  
-- **Future Use / Overflow** — Reserved capacity for experimentation and scaling  
-### 🔧 Key Features
-- Distributed compute across multiple nodes
-- Containerised workloads (media, monitoring, networking)
-- Reverse proxy for service exposure
-- Remote access and management
-- Continuous optimisation and tuning
-
-### 🎯 Objectives
-- Learn clustering and distributed infrastructure concepts
-- Experiment with containerised workloads
-- Build a modular and flexible homelab environment
-
-### 📌 Status
-🚧 Actively being built, tested, and refined
-
----
-
-## 🚧 Phase 2 — AstraCore V2 (Planned Upgrade)
-
-> Full redesign following relocation — transitioning to a centralized, rack-based architecture
-
-### 🖥️ Planned Infrastructure
-- Dell PowerEdge R610 (primary compute host)
-- Rack-mounted TrueNAS system (12-bay storage)
-- Cisco 48-port managed switch
-- Sophos XG firewall
-
-### ⚡Key Improvements
-- Centralised compute replacing distributed nodes
-- VLAN segmentation (servers, IoT, guest, management)
-- Enterprise-grade networking and security
-- ZFS-based storage with redundancy
-- Simplified power, cooling, and hardware management
-
-### 🧩 Architecture
-- Proxmox deployed on primary server
-- Docker workloads hosted within VMs
-- Shared storage provided via TrueNAS
-- Reverse proxy managing traffic routing
-- Secure remote access via VPN
-
-### 🧠 Goals
-- Improve performance and system reliability
-- Reduce operational complexity and power consumption
-- Transition to a production-style homelab
-- Implement structured networking and security practices
-
-### 📌 Status
-📝 Planned — will begin after relocation  
+### ⚡ Key Improvements & Goals
+- **Consolidation:** Centralized compute replacing distributed, low-power nodes.
+- **Networking:** Enterprise-grade security and VLAN segmentation (Servers, IoT, Guest, Management).
+- **Resilience:** ZFS-based storage with high redundancy.
+- **Efficiency:** Simplified power, cooling, and hardware management.
+- **Outcome:** Transition from a learning cluster to a highly reliable, production-style homelab.
 
 ---
 
 ## 🔮 Project Vision
+
 AstraCore represents a modular compute core, built to evolve over time.
 
-The long-term goal is to create a scalable, stable, and high-performance homelab platform that mirrors real-world enterprise infrastructure while remaining flexible for experimentation and learning.
+The long-term goal is to create a scalable, stable, and high-performance homelab platform that mirrors real-world enterprise infrastructure while remaining flexible for ongoing experimentation and learning.
 
 ---
 
-## 🛠️ Overall Status
-- 🚧 Phase 1: In Development  
-- ⏳ Phase 2: Planned  
+## 📡 Notes & Overall Status
 
----
+- 🚧 **Phase 1:** In Development  
+- ⏳ **Phase 2:** Planned  
 
-## 📡 Notes
-This project is continuously evolving as new hardware, tools, and ideas are introduced.
-Expect regular changes, improvements, and experimentation throughout its development.
+*This project is continuously evolving as new hardware, tools, and ideas are introduced. Expect regular changes, improvements, and experimentation throughout its development.*
