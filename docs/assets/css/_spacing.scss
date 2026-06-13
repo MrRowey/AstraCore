@@ -1,26 +1,50 @@
-
 /* ---------------------------------
-   Spacing Scale
+   Spacing Scale (The Map)
 ---------------------------------- */
 
-$space-1: 0.25rem;   // 4px
-$space-2: 0.5rem;    // 8px
-$space-3: 0.75rem;   // 12px
-$space-4: 1rem;      // 16px
-$space-5: 1.5rem;    // 24px
-$space-6: 2rem;      // 32px
-$space-7: 3rem;      // 48px
-$space-8: 4rem;      // 64px
+// By storing this in a map, we can iterate over it automatically
+$spacing-scale: (
+  1: 0.25rem,  // 4px
+  2: 0.5rem,   // 8px
+  3: 0.75rem,  // 12px
+  4: 1rem,     // 16px
+  5: 1.5rem,   // 24px
+  6: 2rem,     // 32px
+  7: 3rem,     // 48px
+  8: 4rem      // 64px
+);
 
-/* Utility classes */
-.mt-1 { margin-top: $space-2; }
-.mt-2 { margin-top: $space-4; }
-.mt-3 { margin-top: $space-6; }
+// We can still assign them to your variables so your existing SCSS doesn't break!
+$space-1: map-get($spacing-scale, 1);
+$space-2: map-get($spacing-scale, 2);
+$space-3: map-get($spacing-scale, 3);
+$space-4: map-get($spacing-scale, 4);
+$space-5: map-get($spacing-scale, 5);
+$space-6: map-get($spacing-scale, 6);
+$space-7: map-get($spacing-scale, 7);
+$space-8: map-get($spacing-scale, 8);
 
-.mb-1 { margin-bottom: $space-2; }
-.mb-2 { margin-bottom: $space-4; }
-.mb-3 { margin-bottom: $space-6; }
+/* ---------------------------------
+   Automated Utility Classes
+---------------------------------- */
 
-.p-1 { padding: $space-2; }
-.p-2 { padding: $space-4; }
-.p-3 { padding: $space-6; }
+// This loop generates .mt-1 through .mt-8, .p-1 through .p-8, etc.
+@each $level, $size in $spacing-scale {
+  
+  // Margins
+  .m-#{$level}  { margin: $size; }
+  .mt-#{$level} { margin-top: $size; }
+  .mb-#{$level} { margin-bottom: $size; }
+  .ml-#{$level} { margin-left: $size; }
+  .mr-#{$level} { margin-right: $size; }
+
+  // Padding
+  .p-#{$level}  { padding: $size; }
+  .pt-#{$level} { padding-top: $size; }
+  .pb-#{$level} { padding-bottom: $size; }
+  .pl-#{$level} { padding-left: $size; }
+  .pr-#{$level} { padding-right: $size; }
+  
+  // Gaps (Great for flexbox/grid!)
+  .gap-#{$level} { gap: $size; }
+}

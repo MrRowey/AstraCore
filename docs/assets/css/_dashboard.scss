@@ -3,12 +3,26 @@
 ---------------------------------- */
 
 .dashboard-section {
-  margin-top: $space-8;
-}
+  // Merged your duplicate declarations. Chose $space-7 based on your second block!
+  margin-top: $space-7;
+  position: relative;
 
-/* ---------------------------------
-   Header
----------------------------------- */
+  /* Soft top fade to create depth */
+  &::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(
+      to bottom,
+      rgba(5, 8, 22, 0),
+      rgba(5, 8, 22, 0.6)
+    );
+    pointer-events: none;
+  }
+}
 
 .dashboard-header {
   margin-bottom: $space-4;
@@ -24,7 +38,7 @@
 }
 
 /* ---------------------------------
-   Grid
+   Grid Layout
 ---------------------------------- */
 
 .dashboard-grid {
@@ -34,77 +48,80 @@
 }
 
 /* ---------------------------------
-   Node Card
+   Dashboard Node Card Component
 ---------------------------------- */
 
 .dashboard-node-card {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   padding: $space-4;
   border-radius: 14px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   text-decoration: none;
   color: var(--text);
+  outline: none; // Removing default outline to replace with custom focus
 
   @include glow-soft;
   @include smooth-transition;
 
-  &:hover {
+  /* Card Background Layer */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    z-index: -1;
+  }
+
+  /* Interaction States */
+  &:hover,
+  &:focus-visible {
     transform: translateY(-4px);
     @include glow-medium;
   }
-}
 
-/* ---------------------------------
-   Card Header
----------------------------------- */
+  /* Nested Child Elements */
+  .node-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.node-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h3 {
-    margin: 0;
-    font-size: 1.1rem;
+    h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
   }
-}
 
-/* ---------------------------------
-   Meta Info
----------------------------------- */
+  .node-card-meta {
+    margin-top: $space-3;
+    font-size: 0.9rem;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
 
-.node-card-meta {
-  margin-top: $space-3;
-  font-size: 0.9rem;
-  color: var(--muted);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+  .node-card-role {
+    margin-top: $space-3;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    letter-spacing: 0.03em;
+  }
 
-/* ---------------------------------
-   Role Tag
----------------------------------- */
-
-.node-card-role {
-  margin-top: $space-3;
-  font-size: 0.85rem;
-  color: var(--cyan);
-  letter-spacing: 0.03em;
+  .node-card-services {
+    margin-top: $space-3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; // Handled both row and column gap
+  }
 }
 
 /* ---------------------------------
    Service Badges
 ---------------------------------- */
-
-.node-card-services {
-  margin-top: $space-3;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  row-gap: 8px;
-}
 
 .service-badge {
   display: inline-flex;
@@ -113,56 +130,14 @@
   line-height: 1.6;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--muted);
   letter-spacing: 0.02em;
   white-space: nowrap;
   flex: 0 0 auto;
-}
 
-.service-badge-more {
-  background: rgba(0,229,255,0.08);
-  color: var(--cyan);
-}
-
-
-.dashboard-section {
-  margin-top: $space-7;
-
-  /* subtle separation from hero */
-  position: relative;
-}
-
-/* soft top fade to create depth */
-.dashboard-section::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 0;
-  right: 0;
-  height: 40px;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(5, 8, 22, 0),
-    rgba(5, 8, 22, 0.6)
-  );
-
-  pointer-events: none;
-}
-
-.dashboard-node-card {
-  position: relative;
-  z-index: 1;
-}
-
-.dashboard-node-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  border-radius: 14px;
-  background: rgba(255,255,255,0.02);
-
-  z-index: -1;
+  &.service-badge-more {
+    background: rgba(0, 229, 255, 0.08);
+    color: var(--cyan);
+  }
 }

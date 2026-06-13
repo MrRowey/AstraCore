@@ -1,188 +1,169 @@
 /* ----------------------------------------
-   Node Page Wrapper
+   Node Page Component
 ---------------------------------------- */
 
 .node-page {
   max-width: 900px;
-  margin: auto;
+  margin: 0 auto;
   padding: $space-7 $space-4;
-}
 
-/* ----------------------------------------
-   Header Block
----------------------------------------- */
+  /* ----------------------------------------
+     Unified Hero/Header Block
+  ---------------------------------------- */
 
-.node-header-block {
-  padding: $space-4;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.03);
-  margin-bottom: $space-7;
-  @include glow-soft;
-  @include smooth-transition;
+  .node-hero {
+    padding: $space-5;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: $space-7;
 
-  &:hover {
-    @include glow-medium;
-  }
-}
+    @include glow-soft;
+    // Reminder: If you updated this mixin to specific properties, 
+    // it performs much better than 'all'!
+    @include smooth-transition; 
 
-.node-header-block h1 {
-  font-size: 2.4rem;
-  margin-bottom: $space-2;
-}
+    &:hover {
+      @include glow-medium;
+    }
 
-.node-header-block .node-role {
-  color: var(--cyan);
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
+    .node-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap; // Mobile overlap safety
+      gap: $space-3;
 
-/* ----------------------------------------
-   Sections
----------------------------------------- */
+      h1 {
+        font-size: 2.4rem;
+        margin: 0;
+      }
+    }
 
-.node-section {
-  margin-bottom: $space-7;
-}
+    .node-role {
+      color: var(--cyan);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
 
-.node-section:last-child {
-  margin-bottom: 0;
-}
+    /* Meta Info Row (VM / IP / ROLE) */
+    .node-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $space-4;
+      margin-top: $space-3;
+      font-size: 0.95rem;
+      color: var(--muted);
 
-/* ----------------------------------------
-   Spec Grid
----------------------------------------- */
-
-.spec-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: $space-4;
-  margin-top: $space-3;
-}
-
-.spec-card {
-  padding: $space-3;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.03);
-  @include glow-soft;
-  @include smooth-transition;
-
-  &:hover {
-    @include glow-medium;
+      div {
+        padding: 6px 10px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.02);
+      }
+    }
   }
 
-  span {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
+  /* ----------------------------------------
+     Sections
+  ---------------------------------------- */
+
+  .node-section {
+    margin-bottom: $space-7;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
-  strong {
-    display: block;
-    margin-top: $space-2;
-    font-size: 1.1rem;
-    color: var(--text);
+  /* ----------------------------------------
+     Spec Grid
+  ---------------------------------------- */
+
+  .spec-grid {
+    // Replaced manual grid declaration with your mixin!
+    @include grid-auto(220px, $space-4);
+    margin-top: $space-3;
   }
-}
 
-/* ----------------------------------------
-   Hero Node Header
----------------------------------------- */
+  .spec-card {
+    padding: $space-3;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    
+    @include glow-soft;
+    @include smooth-transition;
 
-.node-hero {
-  padding: $space-5;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.03);
-  margin-bottom: $space-7;
+    &:hover {
+      @include glow-medium;
+    }
 
-  @include glow-soft;
-  @include smooth-transition;
+    span {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
 
-  &:hover {
-    @include glow-medium;
+    strong {
+      display: block;
+      margin-top: $space-2;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
   }
-}
 
-.node-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* ----------------------------------------
+     Service Badges
+  ---------------------------------------- */
 
-  h1 {
-    font-size: 2.4rem;
-    margin: 0;
+  .service-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-top: $space-3;
   }
-}
 
-/* ----------------------------------------
-   META INFO ROW (VM / IP / ROLE)
----------------------------------------- */
-
-.node-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-4;
-  margin-top: $space-3;
-  font-size: 0.95rem;
-  color: var(--muted);
-
-  div {
+  .service-badge {
     padding: 6px 10px;
     border-radius: 8px;
-    background: rgba(255,255,255,0.02);
-  }
-}
-
-/* ----------------------------------------
-   Service Badges
----------------------------------------- */
-
-.service-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-2;
-  margin-top: $space-3;
-}
-
-.service-badge {
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(0, 255, 255, 0.08);
-  color: var(--cyan);
-  font-size: 0.85rem;
-  letter-spacing: 0.03em;
-
-  @include smooth-transition;
-
-  &:hover {
-    background: rgba(0, 255, 255, 0.15);
-  }
-}
-
-/* ----------------------------------------
-   Connection Cards
----------------------------------------- */
-
-.connection-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-3;
-  margin-top: $space-3;
-}
-
-.connection-card {
-  padding: $space-2 $space-3;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.03);
-  text-decoration: none;
-  color: var(--text);
-
-  @include glow-soft;
-  @include smooth-transition;
-
-  &:hover {
-    transform: translateY(-2px);
-    @include glow-medium;
+    background: rgba(0, 255, 255, 0.08);
     color: var(--cyan);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+
+    @include smooth-transition;
+
+    &:hover {
+      background: rgba(0, 255, 255, 0.15);
+    }
+  }
+
+  /* ----------------------------------------
+     Connection Cards
+  ---------------------------------------- */
+
+  .connection-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-3;
+    margin-top: $space-3;
+  }
+
+  .connection-card {
+    padding: $space-2 $space-3;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    text-decoration: none;
+    color: var(--text);
+    outline: none; // Added for focus replacement
+
+    @include glow-soft;
+    @include smooth-transition;
+
+    &:hover,
+    &:focus-visible { // Added for keyboard accessibility
+      transform: translateY(-2px);
+      @include glow-medium;
+      color: var(--cyan);
+    }
   }
 }

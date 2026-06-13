@@ -1,20 +1,41 @@
-
 /* ---------------------------------
-   Shadows & Glows
+   Global Design Tokens (Put this in your root/variables file)
 ---------------------------------- */
 
-$shadow-soft: 0 0 12px rgba(0, 229, 255, 0.08);
-$shadow-medium: 0 0 20px rgba(0, 229, 255, 0.15);
-$shadow-strong: 0 0 30px rgba(0, 229, 255, 0.25);
+:root {
+  // Base cyan color to make theming incredibly easy later
+  --glow-color: 0, 229, 255; 
 
-@mixin glow-soft {
-  box-shadow: $shadow-soft;
+  // Layered shadows for a much more realistic, diffused light effect
+  --glow-soft: 
+    0 0 4px rgba(var(--glow-color), 0.05),
+    0 0 12px rgba(var(--glow-color), 0.08);
+
+  --glow-medium: 
+    0 0 8px rgba(var(--glow-color), 0.1),
+    0 0 20px rgba(var(--glow-color), 0.15);
+
+  --glow-strong: 
+    0 0 10px rgba(var(--glow-color), 0.15),
+    0 0 30px rgba(var(--glow-color), 0.25),
+    0 0 45px rgba(var(--glow-color), 0.1); // Extra wide spread for strong glows
 }
 
-@mixin glow-medium {
-  box-shadow: $shadow-medium;
+/* ---------------------------------
+   Mixins (Optional, but improved!)
+---------------------------------- */
+
+// If you keep the mixins, you can now easily pass an optional 
+// custom color override if a specific node needs to glow red or green!
+
+@mixin glow-soft($custom-glow: var(--glow-soft)) {
+  box-shadow: $custom-glow;
 }
 
-@mixin glow-strong {
-  box-shadow: $shadow-strong;
+@mixin glow-medium($custom-glow: var(--glow-medium)) {
+  box-shadow: $custom-glow;
+}
+
+@mixin glow-strong($custom-glow: var(--glow-strong)) {
+  box-shadow: $custom-glow;
 }

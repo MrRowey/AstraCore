@@ -2,26 +2,33 @@
    Mixins
 ---------------------------------- */
 
-@mixin glass-card {
+@mixin glass-card($padding: 1.5rem) {
+  // Recommend swapping $padding default to your equivalent $space variable
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: $padding;
+  
+  // Cross-browser glass effect
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  transition: 0.3s ease;
+  
+  // Explicit transition for background/borders if they change on hover
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-@mixin grid-auto($min: 250px) {
+// Added $gap parameter for ultimate flexibility
+@mixin grid-auto($min: 250px, $gap: 1.5rem) {
   display: grid;
-  gap: 1.5rem;
+  gap: $gap; // Recommend swapping default to a $space variable
   grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
 }
 
 @mixin focus-ring {
   &:focus-visible {
-    outline: 3px solid rgba(0,229,255,0.18);
+    outline: 3px solid rgba(0, 229, 255, 0.18);
     outline-offset: 3px;
-    border-radius: 8px;
+    // Removed border-radius so the outline perfectly hugs whatever shape it is applied to!
   }
 }
 
@@ -32,9 +39,11 @@
 }
 
 @mixin hover-lift($amount: 6px, $glow: rgba(0, 229, 255, 0.12)) {
-  transition: 0.3s ease;
+  // Explicit transitions for silky smooth performance
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible { // Added focus-visible so keyboard users get the lift effect!
     transform: translateY(-$amount);
     box-shadow: 0 0 30px $glow;
     border-color: rgba(0, 229, 255, 0.4);

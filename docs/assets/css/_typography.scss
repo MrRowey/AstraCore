@@ -1,42 +1,48 @@
 /* ---------------------------------
-   Typography System
+   Typography System (Design Tokens)
 ---------------------------------- */
 
-/* Base font family */
-body {
-  font-family: Inter, Arial, sans-serif;
-}
+// We removed the body selector since it lives in your Global Resets!
 
-/* Eyebrow / section label */
-.eyebrow {
-  font-size: 0.9rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
+/* ---------------------------------
+   Display & Headings
+---------------------------------- */
 
-/* Hero heading */
-.hero h1 {
+@mixin text-display-large {
   font-size: clamp(3rem, 7vw, 5rem);
   line-height: 1.05;
-  text-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
+  // Kept your awesome cyan shadow, though you could swap this 
+  // to your var(--glow-strong) if you adopted the CSS variables!
+  text-shadow: 0 0 30px rgba(0, 229, 255, 0.15); 
 }
 
-/* Hero supporting text */
-.hero-text {
+/* ---------------------------------
+   Body Text
+---------------------------------- */
+
+@mixin text-body-lead {
   font-size: 1.15rem;
   line-height: 1.8;
   color: var(--muted);
 }
 
-/* Card labels */
-.card-label {
+/* ---------------------------------
+   Labels & Badges
+---------------------------------- */
+
+@mixin text-label-tracking {
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@mixin text-card-label {
   font-size: 0.85rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
-/* Status badges */
-.status-badge {
+@mixin text-badge {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   font-weight: 700;

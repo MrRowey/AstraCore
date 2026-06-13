@@ -2,23 +2,47 @@
    Cards (Dashboard, Node, Spec)
 ---------------------------------- */
 
+// 1. Grouped selectors with nested states
 .dashboard-card,
 .node-card,
 .spec-card,
 .node-panel {
   @include glass-card;
+
+  // Added focus-visible for keyboard navigation
+  &:hover,
+  &:focus-visible {
+    @include hover-lift(6px, rgba(0, 229, 255, 0.12));
+    
+    // If these are links, outline none is okay ONLY IF 
+    // the hover-lift is visually distinct enough to act as the focus indicator
+    outline: none; 
+  }
 }
 
+// Specific Card Modifiers & Children
 .node-card {
   text-decoration: none;
   color: inherit;
+  display: block; // Ensures the <a> tag behaves like a block-level container
 }
 
-.dashboard-card:hover,
-.node-card:hover,
-.spec-card:hover,
-.node-panel:hover {
-  @include hover-lift(6px, rgba(0, 229, 255, 0.12));
+// 2. Grouped heading resets
+.dashboard-card,
+.node-card {
+  h2 {
+    margin: 0.8rem 0;
+  }
+}
+
+// 3. Flex container safety
+.node-card-top,
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; // Prevents overlapping on tiny mobile screens
 }
 
 .card-label {
@@ -28,27 +52,16 @@
   letter-spacing: 0.15em;
 }
 
-.dashboard-card h2,
-.node-card h2 {
-  margin: 0.8rem 0;
-}
-
-.node-card-top,
-.node-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
 .node-description {
   color: var(--muted);
   margin-top: 1rem;
   line-height: 1.7;
 }
 
-.spec-card span {
-  display: block;
-  color: var(--muted);
-  margin-bottom: 0.6rem;
+.spec-card {
+  span {
+    display: block;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
 }

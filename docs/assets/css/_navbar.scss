@@ -6,32 +6,60 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(14px);
   background: rgba(4, 8, 20, 0.8);
   border-bottom: 1px solid var(--border);
-}
 
-.logo {
-  color: var(--cyan);
-  text-decoration: none;
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-shadow: 0 0 12px var(--cyan-glow);
-}
+  /* Cross-browser glass effect */
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 
-nav {
-  display: flex;
-  gap: 1.5rem;
-
-  a {
-    color: var(--text);
+  /* ---------------------------------
+     Logo Component
+  ---------------------------------- */
+  
+  .logo {
+    color: var(--cyan);
     text-decoration: none;
-    transition: 0.25s ease;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px var(--cyan-glow);
+    outline: none;
 
-    &:hover {
-      color: var(--cyan);
+    // Added focus state for accessibility
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  /* ---------------------------------
+     Nav Links
+  ---------------------------------- */
+
+  nav {
+    display: flex;
+    // Reminder: Consider mapping this to your spacing scale! (e.g., gap: $space-5;)
+    gap: 1.5rem; 
+
+    a {
+      color: var(--text);
+      text-decoration: none;
+      outline: none;
+      
+      // Explicit performance transition
+      transition: color 0.25s ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--cyan);
+      }
+
+      // If you want a focus ring around the links instead of just a color change, 
+      // you can swap the focus-visible above for this:
+      // &:focus-visible {
+      //   @include focus-ring;
+      // }
     }
   }
 }

@@ -1,12 +1,24 @@
 /* ---------------------------------
-   Panels (Node Panels)
+   Panels & Headers Typography
 ---------------------------------- */
 
+// Assuming the base @include glass-card for .node-panel 
+// is handled in your shared Cards component!
+
 .node-panel {
-  @include glass-card;
+  // Any layout specifics for the panel go here
+  
+  p {
+    color: var(--muted);
+    // You could also add specific line-heights or margins here 
+    // without affecting global paragraphs
+  }
 }
 
-.section-header p,
-.node-panel p {
-  color: var(--muted);
+.section-header {
+  // Header layout logic would go here
+  
+  p {
+    color: var(--muted);
+  }
 }

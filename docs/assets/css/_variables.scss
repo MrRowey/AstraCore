@@ -3,18 +3,46 @@
 ---------------------------------- */
 
 :root {
-  --bg-primary: #050816;
-  --bg-secondary: #0b1120;
-
-  --panel: rgba(12, 18, 38, 0.85);
-  --border: rgba(0, 255, 255, 0.15);
-
-  --cyan: #00e5ff;
-  --cyan-glow: rgba(0, 229, 255, 0.35);
-
+  /* ---------------------------------
+     Core Colors (Hex & RGB for Alpha Layers)
+  ---------------------------------- */
+  
+  --cyan-hex: #00e5ff;
+  --cyan-rgb: 0, 229, 255; // Used to dynamically generate rgba()
+  
+  --green: #32ff9c;
+  --red: #ff5c7a;
+  
   --text: #d7e7ff;
   --muted: #7f91b0;
 
-  --green: #32ff9c;
-  --red: #ff5c7a;
+  /* ---------------------------------
+     Backgrounds & Surfaces
+  ---------------------------------- */
+  
+  --bg-primary: #050816;
+  --bg-secondary: #0b1120;
+  --panel: rgba(12, 18, 38, 0.85);
+  
+  /* Constructing colors dynamically using the RGB token */
+  --border: rgba(var(--cyan-rgb), 0.15);
+  --cyan-glow: rgba(var(--cyan-rgb), 0.35);
+
+  /* ---------------------------------
+     Glow & Shadow Scale
+  ---------------------------------- */
+  
+  /* Layered shadows for realistic neon light diffusion */
+  --glow-soft: 
+    0 0 4px rgba(var(--cyan-rgb), 0.05),
+    0 0 12px rgba(var(--cyan-rgb), 0.08);
+
+  --glow-medium: 
+    0 0 8px rgba(var(--cyan-rgb), 0.1),
+    0 0 20px rgba(var(--cyan-rgb), 0.15);
+
+  --glow-strong: 
+    0 0 10px rgba(var(--cyan-rgb), 0.15),
+    0 0 30px rgba(var(--cyan-rgb), 0.25),
+    0 0 45px rgba(var(--cyan-rgb), 0.1);
 }

@@ -2,21 +2,26 @@
    Layout Containers
 ---------------------------------- */
 
-.main-content {
+// It is highly recommended to merge this with your previously defined 
+// .main-content rule to avoid conflicting padding!
+.main-content,
+.nav-container {
   max-width: 1200px;
-  margin: auto;
-  padding: 4rem 2rem;
+  margin: 0 auto; // 0 auto is generally more predictable than just 'auto'
+}
+
+.main-content {
+  // Replaced 4rem 2rem with assumed equivalent variables
+  padding: $space-8 $space-5; 
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  // Replaced 1rem 2rem with assumed equivalent variables
+  padding: $space-4 $space-5; 
 }
-
 
 /* ---------------------------------
    404 Error Page (AstraCore UI)
@@ -26,58 +31,56 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  min-height: 70vh;
+  min-height: 70dvh; // Upgraded to dynamic viewport units
   padding: $space-6 $space-4;
-}
 
-.error-card {
-  text-align: center;
-  max-width: 600px;
+  /* Encapsulated Component Elements */
+  
+  .error-card {
+    text-align: center;
+    max-width: 600px;
+    padding: $space-6;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
 
-  padding: $space-6;
-  border-radius: 16px;
+    @include glow-soft;
 
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+    h1 {
+      font-size: 2rem;
+      margin-bottom: $space-3;
+    }
+  }
 
-  @include glow-soft;
-}
-
-.error-code {
-  font-size: 6rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-
-  color: var(--cyan);
-  text-shadow: 0 0 30px rgba(0,229,255,0.2);
-  margin-bottom: $space-4;
-}
-
-.error-card h1 {
-  font-size: 2rem;
-  margin-bottom: $space-3;
-}
-
-.error-text {
-  color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: $space-5;
-}
-
-.error-actions {
-  display: flex;
-  gap: $space-3;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: $space-5;
-}
-
-.error-meta {
-  font-size: 0.85rem;
-  color: var(--muted);
-
-  code {
+  .error-code {
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     color: var(--cyan);
+    text-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+    margin-bottom: $space-4;
+  }
+
+  .error-text {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: $space-5;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: $space-3;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: $space-5;
+  }
+
+  .error-meta {
+    font-size: 0.85rem;
+    color: var(--muted);
+
+    code {
+      color: var(--cyan);
+    }
   }
 }

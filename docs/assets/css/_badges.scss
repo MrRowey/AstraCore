@@ -2,11 +2,26 @@
    Status Badges
 ---------------------------------- */
 
+// Defining the missing mixin for context
+@mixin badge-style($bg-color, $text-color, $border-color: transparent) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: 1px solid $border-color;
+}
+
 .status-badge {
+  // Layout fixes
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  
+  // Typography & Spacing
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
+  line-height: 1; // Prevents vertical offset issues
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

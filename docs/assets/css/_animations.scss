@@ -2,14 +2,20 @@
    Animations & Transitions
 ---------------------------------- */
 
-@mixin smooth-transition($time: 0.3s) {
-  transition: all $time ease;
+// 1. Made the property configurable, defaulting to common safe properties
+@mixin smooth-transition($properties: (color, background-color, border-color, opacity, transform), $time: 0.3s, $ease: ease) {
+  // We use interpolation #{} so it outputs correctly whether it's one property or a list
+  transition-property: #{$properties};
+  transition-duration: $time;
+  transition-timing-function: $ease;
 }
 
+// 2. Added :focus-visible for keyboard accessibility
 @mixin hover-pop($scale: 1.03) {
   transition: transform 0.25s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     transform: scale($scale);
   }
 }
@@ -20,5 +26,24 @@
 }
 
 .fade-in {
-  animation: fade-in 0.6s ease forwards;
+  // Using ease-out is generally smoother for elements "entering" the screen
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+// 3. Respect user OS preferences for reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    // Only fade in, remove the vertical movement
+    animation: simple-fade-in 0.6s ease forwards;
+  }
+  
+  @keyframes simple-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  // Remove the hover pop completely for reduced motion users
+  * {
+    @include hover-pop(1); 
+  }
 }

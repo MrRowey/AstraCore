@@ -3,9 +3,12 @@
 ---------------------------------- */
 
 .hero {
-  padding: $space-8 0 $space-7;
   position: relative;
+  // Merged padding and margin logic
+  padding: $space-8 0;
+  margin-bottom: $space-7;
 
+  /* Top radial glow */
   &::before {
     content: "";
     position: absolute;
@@ -15,118 +18,98 @@
     height: 320px;
     background: radial-gradient(
       closest-side at 20% 10%,
-      rgba(0,229,255,0.04),
+      rgba(0, 229, 255, 0.04),
       transparent 40%
     );
     pointer-events: none;
   }
-}
 
-/* ---------------------------------
-   Eyebrow
----------------------------------- */
-
-.eyebrow {
-  color: var(--cyan);
-  letter-spacing: 0.2em;
-  margin-bottom: $space-3;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-}
-
-/* ---------------------------------
-   Title
----------------------------------- */
-
-.hero h1 {
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 1.05;
-  margin-bottom: $space-4;
-  text-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
-}
-
-/* ---------------------------------
-   Text
----------------------------------- */
-
-.hero-text {
-  max-width: 720px;
-  color: var(--muted);
-  font-size: 1.1rem;
-  line-height: 1.8;
-}
-
-/* ---------------------------------
-   Buttons
----------------------------------- */
-
-.hero-buttons {
-  margin-top: $space-5;
-  display: flex;
-  gap: $space-3;
-  flex-wrap: wrap;
-}
-
-/* ---------------------------------
-   Stats (IMPROVED)
----------------------------------- */
-
-.hero-stats {
-  display: flex;
-  gap: $space-4;
-  margin-top: $space-6;
-  flex-wrap: wrap;
-}
-
-.stat {
-  padding: $space-3 $space-4;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.03);
-  text-align: center;
-  min-width: 120px;
-
-  @include glow-soft;
-  @include smooth-transition;
-
-  &:hover {
-    @include glow-medium;
+  /* Visual separation line at the bottom */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(0, 229, 255, 0.25),
+      transparent
+    );
   }
 
-  span {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
+  /* ---------------------------------
+     Nested Component Elements
+  ---------------------------------- */
+
+  .eyebrow {
+    color: var(--cyan);
+    letter-spacing: 0.2em;
+    margin-bottom: $space-3;
+    font-size: 0.85rem;
     text-transform: uppercase;
   }
 
-  strong {
-    font-size: 1.4rem;
-    color: var(--text);
+  h1 {
+    // Fluid typography setup
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.05;
+    margin-bottom: $space-4;
+    text-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
   }
 
-}
+  .hero-text {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
 
+  .hero-buttons {
+    margin-top: $space-5;
+    display: flex;
+    gap: $space-3;
+    flex-wrap: wrap;
+  }
 
-.hero {
-  position: relative;
-  padding-bottom: $space-8;
-  margin-bottom: $space-7;
-}
+  /* ---------------------------------
+     Hero Stats
+  ---------------------------------- */
 
-/* visual separation line */
-.hero::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  .hero-stats {
+    display: flex;
+    gap: $space-4;
+    margin-top: $space-6;
+    flex-wrap: wrap;
+  }
 
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(0, 229, 255, 0.25),
-    transparent
-  );
+  .stat {
+    padding: $space-3 $space-4;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    text-align: center;
+    min-width: 120px;
+
+    @include glow-soft;
+    @include smooth-transition;
+
+    &:hover {
+      @include glow-medium;
+    }
+
+    span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    strong {
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+  }
 }

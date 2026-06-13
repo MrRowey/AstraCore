@@ -1,7 +1,16 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.3"
-gem "webrick"   # Required for Ruby 3+
+# Replace this with the version of Ruby installed on your machine
+# You can check your version by running `ruby -v` in your terminal
+ruby "3.2.2"
 
-# HTML validation
-gem "html-proofer", "~> 5.2"
+gem "jekyll", "~> 4.3"
+
+# Windows time zone support
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Gems used only for local development and testing
+group :development, :test do
+  gem "webrick"                # Required for `jekyll serve` on Ruby 3+
+  gem "html-proofer", "~> 5.2" # HTML validation
+end

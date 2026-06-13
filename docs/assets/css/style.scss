@@ -1,27 +1,51 @@
 ---
+# Jekyll requires empty frontmatter to process SCSS
 ---
 
-@import "variables";
-@import "spacing";
-@import "mixins";
+/* ---------------------------------
+   1. Configuration & Tools 
+   (Variables, Maps, and Mixins - No CSS output)
+---------------------------------- */
+@import "variables";   // CSS custom properties & SCSS vars
+@import "spacing";     // Spacing scale maps
+@import "typography";  // Typography mixins
+@import "shadows";     // Glow mixins (if you didn't merge into variables)
+@import "mixins";      // Base mixins (glass-card, grid-auto)
 
-@import "global";
-@import "typography";
-@import "shadows";
-@import "animations";
-@import "layout";
-@import "navbar";
-@import "hero";
+/* ---------------------------------
+   2. Base & Resets 
+   (Element-level styles)
+---------------------------------- */
+@import "global";      // CSS resets, body font, background grid
+@import "animations";  // Keyframes
+
+/* ---------------------------------
+   3. Components 
+   (Reusable UI elements)
+---------------------------------- */
 @import "buttons";
-@import "cards";
-@import "panels";
 @import "badges";
-@import "grids";
-@import "utilities";
-@import "footer";
-@import "responsive";
-@import "network-map";
-@import "node";
-@import "dashboard";
+@import "cards";
+@import "panels";      // (If you didn't merge this into cards)
 
-// User's Edge browser tabs metadata...
+/* ---------------------------------
+   4. Layout & Structural Blocks
+---------------------------------- */
+@import "layout";      // Main content wrappers
+@import "grids";
+@import "navbar";
+@import "footer";
+
+/* ---------------------------------
+   5. Page-Specific Sections
+---------------------------------- */
+@import "hero";
+@import "dashboard";
+@import "node";
+@import "network-map";
+
+/* ---------------------------------
+   6. Utilities
+   (Must be last to safely override other classes)
+---------------------------------- */
+@import "utilities";
