@@ -1,26 +1,34 @@
-{% assign icons = 
-  "cpu:fa-microchip,ram:fa-memory,storage:fa-hdd" | split: "," 
-%}
+{% comment %}
+=============================================================================
+AstraCore Core Component: Generic Telemetry Key-Value Matrix Renderer
+Stripped of nested string-splitting loops to maximize Jekyll build performance.
+=============================================================================
+{% endcomment %}
 
-{% for item in include.data %}
-  {% assign key = item[0] %}
-  {% assign value = item[1] %}
+{% if include.data %}
+  {% for item in include.data %}
+    {% assign key = item[0] %}
+    {% assign value = item[1] %}
 
-  {% assign icon = "" %}
-  {% for pair in icons %}
-    {% assign parts = pair | split: ":" %}
-    {% if parts[0] == key %}
-      {% assign icon = parts[1] %}
+    {% if value != "" and value != nil %}
+
+      {% case key %}
+        {% when 'cpu' %}     {% assign icon = 'fa-microchip' %} {% assign label = 'CPU' %}
+        {% when 'ram' %}     {% assign icon = 'fa-memory' %}    {% assign label = 'RAM' %}
+        {% when 'storage' %} {% assign icon = 'fa-hdd' %}       {% assign label = 'STORAGE' %}
+        {% else %}           {% assign icon = 'fa-square' %}    {% assign label = key | capitalize %}
+      {% endcase %}
+
+      <div class="spec-card" role="group" aria-label="{{ label }}: {{ value }}">
+        <span>
+          {% if icon and icon != "" %}
+            <i class="fas {{ icon }} fa-fw text-cyan"></i>
+          {% endif %}
+          {{ label }}
+        </span>
+        <strong>{{ value }}</strong>
+      </div>
+
     {% endif %}
   {% endfor %}
-
-  <div class="spec-card">
-    <span>
-      {% if icon != "" %}
-        <i class="fas {{ icon }}"></i>
-      {% endif %}
-      {{ key | capitalize }}
-    </span>
-    <strong>{{ value }}</strong>
-  </div>
-{% endfor %}
+{% endif %}

@@ -1,12 +1,30 @@
-{% for item in include.data %}
-  {% assign key = item[0] %}
-  {% assign value = item[1] %}
+{% comment %}
+=============================================================================
+AstraCore Core Component: Network Telemetry Matrix Renderer
+Enforces uppercase key layouts and standardizes text-string indicators.
+=============================================================================
+{% endcomment %}
 
-  <div class="spec-card">
-    <span>
-      <i class="fas fa-network-wired"></i>
-      {{ key | upcase }}
-    </span>
-    <strong>{{ value }}</strong>
-  </div>
-{% endfor %}
+{% if include.data %}
+  {% for item in include.data %}
+    {% assign key = item[0] %}
+    {% assign value = item[1] %}
+
+    {% if value != "" and value != nil %}
+
+      {% assign display_value = value %}
+      {% if key == "vlan" and value == 0 or value == "0" %}
+        {% assign display_value = "Untagged" %}
+      {% endif %}
+
+      <div class="spec-card" role="group" aria-label="Network Metric {{ key | upcase }}: {{ display_value }}">
+        <span>
+          <i class="fas fa-network-wired fa-fw text-cyan"></i>
+          {{ key | upcase }}
+        </span>
+        <strong>{{ display_value }}</strong>
+      </div>
+
+    {% endif %}
+  {% endfor %}
+{% endif %}

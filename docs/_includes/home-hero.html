@@ -1,30 +1,44 @@
-<section class="hero" aria-labelledby="home-hero">
+{% comment %}
+=============================================================================
+AstraCore Core Component: Dynamic Landing Infrastructure Telemetry Hero
+Calculates real-time active service matrices natively out of configuration files.
+=============================================================================
+{% endcomment %}
 
-    <div class="hero-content">
+<section class="hero" aria-labelledby="home-hero">
+    <div class="hero-content main-content flex flex-column">
 
         <p class="eyebrow">PROXMOX • CONTAINERS • DISTRIBUTED SYSTEMS</p>
 
-        <h1 id="home-hero">AstraCore Infrastructure Cluster</h1>
+        <h1 id="home-hero">{{ site.title | default: "AstraCore Infrastructure Cluster" }}</h1>
 
-        <p class="hero-text">
+        <p class="hero-text text-muted mb-4">
             A consolidated homelab platform for virtualization, container workloads,
             orchestration, and resilient services.
         </p>
 
-        <!-- DYNAMIC STATS -->
         {% assign total_services = 0 %}
         {% assign online_nodes = 0 %}
 
-        {% for node in site.data.nodes %}
-            {% assign total_services = total_services | plus: node.services.size %}
-            {% if node.status == "online" %}
-                {% assign online_nodes = online_nodes | plus: 1 %}
-            {% endif %}
-        {% endfor %}
+        {% if site.data.nodes and site.data.nodes.size > 0 %}
+            {% for node in site.data.nodes %}
+                
+                {% if node.services %}
+                    {% assign total_services = total_services | plus: node.services.size %}
+                {% endif %}
 
-        {% assign total_nodes = site.data.nodes | size %}
+                {% assign normalized_status = node.status | downcase | strip %}
+                {% if normalized_status == "online" %}
+                    {% assign online_nodes = online_nodes | plus: 1 %}
+                {% endif %}
 
-        <div class="hero-stats">
+            {% endfor %}
+            {% assign total_nodes = site.data.nodes | size %}
+        {% else %}
+            {% assign total_nodes = 0 %}
+        {% endif %}
+
+        <div class="hero-stats mb-5" role="region" aria-label="Cluster Vitals Telemetry">
 
             <div class="stat">
                 <span>Nodes</span>
@@ -38,21 +52,30 @@
 
             <div class="stat">
                 <span>Status</span>
-                {% if online_nodes == 0 %}
-                    <strong>Build Phase</strong>
+                {% if total_nodes == 0 %}
+                    <strong class="text-muted">Unmapped</strong>
+                {% elsif online_nodes == 0 %}
+                    <strong style="color: var(--cyan);">Build Phase</strong>
                 {% elsif online_nodes == total_nodes %}
-                    <strong>Active</strong>
+                    <strong style="color: var(--green);">Active</strong>
                 {% else %}
-                    <strong>{{ online_nodes }}/{{ total_nodes }} Online</strong>
+                    <strong style="color: var(--red);">{{ online_nodes }}/{{ total_nodes }} Online</strong>
                 {% endif %}
             </div>
 
         </div>
 
-        <div class="hero-buttons" role="navigation">
-            <a href="{{ site.github_repo }}" class="secondary-btn" target="_blank">GitHub</a>
+        <div class="hero-buttons flex gap-3 flex-wrap" role="navigation" aria-label="Hero Actions">
+            {% if site.github_repo %}
+                <a href="{{ site.github_repo }}" 
+                   class="secondary-btn" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Access External AstraCore Source Repository (Opens in a new tab)">
+                   GitHub Codebase
+                </a>
+            {% endif %}
         </div>
 
     </div>
-
 </section>

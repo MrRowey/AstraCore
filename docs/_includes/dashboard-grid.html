@@ -1,49 +1,88 @@
-<section class="dashboard-section">
+{% comment %}
+=============================================================================
+AstraCore Core Component: Global Cluster Management Dashboard
+Sorts system records alphabetically and truncates overflowing container badges.
+=============================================================================
+{% endcomment %}
 
-    <div class="dashboard-header">
-        <h2>Infrastructure Overview</h2>
-        <p>Live view of all AstraCore nodes</p>
+{% assign sorted_nodes = site.data.nodes | sort: "name" %}
+
+<section class="dashboard-section main-content mt-5" aria-labelledby="cluster-overview-title">
+
+    <div class="dashboard-header mb-4">
+        <h2 id="cluster-overview-title">Infrastructure Overview</h2>
+        <p class="text-muted m-0">Live deployment matrix view of all active AstraCore nodes</p>
     </div>
 
     <div class="dashboard-grid">
 
-        {% for node in site.data.nodes %}
+        {% if sorted_nodes and sorted_nodes.size > 0 %}
+            {% for node in sorted_nodes %}
+                
+                {% if node.name and node.id %}
+                
+                    {% capture node_console_url %}/nodes/{{ node.id }}/{% endcapture %}
 
-            <a class="dashboard-node-card" href="{{ '/nodes/' | append: node.id | append: '/' | relative_url }}">
+                    <a class="node-card flex flex-column" 
+                       href="{{ node_console_url | relative_url }}"
+                       aria-label="Access system console for {{ node.name }}, current status is {{ node.status | upcase }}.">
 
-                <div class="node-card-top">
-                    <h3>{{ node.name }}</h3>
+                        <div class="node-card-top flex justify-between align-start w-100 mb-2">
+                            <h3 class="m-0">{{ node.name }}</h3>
 
-                    <span class="status-pill {{ node.status | downcase }}">
-                        {{ node.status | capitalize }}
-                    </span>
-                </div>
+                            <span class="status-badge {{ node.status | downcase }}">
+                                <span class="status-indicator"></span>
+                                {{ node.status | upcase }}
+                            </span>
+                        </div>
 
-                <div class="node-card-meta">
-                    <div>🖥 {{ node.network.vm }}</div>
-                    <div>🌐 {{ node.network.ip }}</div>
-                </div>
+                        <div class="node-meta mb-2">
+                            {% if node.network.vm %}
+                                <div class="meta-item"><span class="icon">🖥</span> <code>{{ node.network.vm }}</code></div>
+                            {% endif %}
+                            {% if node.network.ip %}
+                                <div class="meta-item"><span class="icon">🌐</span> <code>{{ node.network.ip }}</code></div>
+                            {% endif %}
+                        </div>
 
-                <div class="node-card-role">
-                    {{ node.role | join: ", " }}
-                </div>
-
-                {% if node.services %}
-                    <div class="node-card-services">
-                        {% assign shown_services = node.services | slice: 0, 3 %}
-                        {% for svc in shown_services %}
-                            <span class="service-badge">{{ svc }}</span>
-                        {% endfor %}
-                        {% assign remaining = node.services.size | minus: 3 %}
-                        {% if remaining > 0 %}
-                            <span class="service-badge service-badge-more">+{{ remaining }}</span>
+                        {% if node.role and node.role.size > 0 %}
+                            <div class="node-role text-muted mb-3">
+                                {{ node.role | join: " // " }}
+                            </div>
                         {% endif %}
-                    </div>
+
+                        {% if node.services and node.services.size > 0 %}
+                            <div class="service-grid mt-auto pt-2">
+                                {% assign shown_services = node.services | slice: 0, 3 %}
+                                {% for svc in shown_services %}
+                                    <span class="service-badge">
+                                        <span class="badge-dot"></span>
+                                        {{ svc }}
+                                    </span>
+                                {% endfor %}
+                                
+                                {% assign remaining = node.services.size | minus: 3 %}
+                                {% if remaining > 0 %}
+                                    <span class="service-badge text-cyan" style="background: rgba(0, 229, 255, 0.15); font-weight: 700;">
+                                        +{{ remaining }} MORE
+                                    </span>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                    </a>
+                
                 {% endif %}
+            {% endfor %}
+        {% else %}
+            
+            <div class="node-panel p-5 text-center w-100">
+                <p class="text-muted m-0">
+                    <em>⚠️ Cluster telemetry empty. Confirm data records match <code>_data/nodes.yml</code> specifications.</em>
+                </p>
+            </div>
 
-            </a>
-
-        {% endfor %}
+        {% endif %}
 
     </div>
 

@@ -1,88 +1,60 @@
-<div class="node-panel">
-    <div class="spec-grid">
+{% comment %}
+=============================================================================
+AstraCore Systems Spec Grid Renderer
+Stripped of nested loops to minimize compile-time overhead.
+=============================================================================
+{% endcomment %}
 
-        {% assign icons = 
-            "cpu:fa-microchip,
-             ram:fa-memory,
-             storage:fa-hdd,
-             ip:fa-network-wired,
-             vlan:fa-diagram-project,
-             vm:fa-server,
-             mac:fa-ethernet" | split: "," 
-        %}
+{% if node.specs %}
+    {% for spec in node.specs %}
+        {% assign key = spec[0] %}
+        {% assign value = spec[1] %}
 
-        {% assign upcase_keys = "cpu,ram,ip,vm,vlan,mac" | split: "," %}
+        {% case key %}
+            {% when 'cpu' %}     {% assign icon = 'fa-microchip' %}       {% assign label = 'CPU' %}
+            {% when 'ram' %}     {% assign icon = 'fa-memory' %}          {% assign label = 'RAM' %}
+            {% when 'storage' %} {% assign icon = 'fa-hdd' %}             {% assign label = 'STORAGE' %}
+            {% else %}           {% assign icon = 'fa-square' %}          {% assign label = key | capitalize %}
+        {% endcase %}
 
-        <!-- HARDWARE SPECS -->
-        {% if node.specs %}
-            {% for spec in node.specs %}
+        <div class="spec-card">
+            <span>
+                <i class="fas {{ icon }} fa-fw text-cyan"></i>
+                {{ label }}
+            </span>
+            <strong>{{ value }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
 
-                {% assign key = spec[0] %}
-                {% assign value = spec[1] %}
+{% if node.network %}
+    {% for net in node.network %}
+        {% assign key = net[0] %}
+        {% assign value = net[1] %}
 
-                {% assign icon = "" %}
-                {% for pair in icons %}
-                    {% assign parts = pair | split: ":" %}
-                    {% if parts[0] == key %}
-                        {% assign icon = parts[1] %}
-                    {% endif %}
-                {% endfor %}
+        {% if value != "" and value != nil %}
+            
+            {% case key %}
+                {% when 'ip' %}   {% assign icon = 'fa-network-wired' %}   {% assign label = 'IP ADDRESS' %}
+                {% when 'vlan' %} {% assign icon = 'fa-diagram-project' %} {% assign label = 'VLAN TAG' %}
+                {% when 'vm' %}   {% assign icon = 'fa-server' %}          {% assign label = 'HYPERVISOR VM' %}
+                {% when 'mac' %}  {% assign icon = 'fa-ethernet' %}        {% assign label = 'MAC ADDRESS' %}
+                {% else %}        {% assign icon = 'fa-network-wired' %}   {% assign label = key | upcase %}
+            {% endcase %}
 
-                {% assign label = key | capitalize %}
-                {% if upcase_keys contains key %}
-                    {% assign label = key | upcase %}
-                {% endif %}
+            {% assign display_value = value %}
+            {% if key == "vlan" and value == 0 or value == "0" %}
+                {% assign display_value = "Untagged" %}
+            {% endif %}
 
-                <div class="spec-card">
-                    <span>
-                        {% if icon != "" %}
-                            <i class="fas {{ icon }}"></i>
-                        {% endif %}
-                        {{ label }}
-                    </span>
-                    <strong>{{ value }}</strong>
-                </div>
-
-            {% endfor %}
+            <div class="spec-card">
+                <span>
+                    <i class="fas {{ icon }} fa-fw text-cyan"></i>
+                    {{ label }}
+                </span>
+                <strong>{{ display_value }}</strong>
+            </div>
+            
         {% endif %}
-
-        <!-- NETWORK SPECS -->
-        {% if node.network %}
-            {% for net in node.network %}
-
-                {% assign key = net[0] %}
-                {% assign value = net[1] %}
-
-                <!-- skip empty values (e.g. unset MAC) -->
-                {% if value != "" and value != nil %}
-
-                    {% assign icon = "fa-network-wired" %}
-                    {% for pair in icons %}
-                        {% assign parts = pair | split: ":" %}
-                        {% if parts[0] == key %}
-                            {% assign icon = parts[1] %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {% assign label = key | upcase %}
-                    {% assign display_value = value %}
-
-                    {% if key == "vlan" and value == 0 %}
-                        {% assign display_value = "Untagged" %}
-                    {% endif %}
-
-                    <div class="spec-card">
-                        <span>
-                            <i class="fas {{ icon }}"></i>
-                            {{ label }}
-                        </span>
-                        <strong>{{ display_value }}</strong>
-                    </div>
-
-                {% endif %}
-
-            {% endfor %}
-        {% endif %}
-
-    </div>
-</div>
+    {% endfor %}
+{% endif %}

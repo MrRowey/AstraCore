@@ -1,28 +1,31 @@
-/* ----------------------------------------
-   Node Page Component
----------------------------------------- */
+/* -----------------------------------------------------------------------------
+   AstraCore Component: Node Detailed Console Page
+   (_node.scss)
+----------------------------------------------------------------------------- */
 
 .node-page {
-  max-width: 900px;
+  max-width: 1200px; // Standardized alignment track to match layout wrappers
   margin: 0 auto;
   padding: $space-7 $space-4;
 
-  /* ----------------------------------------
-     Unified Hero/Header Block
-  ---------------------------------------- */
+  /* ---------------------------------
+     Dynamic System Console Header
+  ---------------------------------- */
 
   .node-hero {
     padding: $space-5;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(var(--cyan-rgb), 0.02);
+    border: 1px solid rgba(var(--cyan-rgb), 0.05);
     margin-bottom: $space-7;
-
     @include glow-soft;
-    // Reminder: If you updated this mixin to specific properties, 
-    // it performs much better than 'all'!
-    @include smooth-transition; 
+    
+    // Explicit transition parameters to optimize rendering tracks
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
+      background: rgba(var(--cyan-rgb), 0.04);
+      border-color: rgba(var(--cyan-rgb), 0.15);
       @include glow-medium;
     }
 
@@ -30,41 +33,53 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap; // Mobile overlap safety
+      flex-wrap: wrap;
       gap: $space-3;
 
       h1 {
         font-size: 2.4rem;
         margin: 0;
+        letter-spacing: -0.02em;
       }
     }
 
     .node-role {
       color: var(--cyan);
       font-size: 1rem;
-      margin-top: 0.5rem;
+      margin-top: $space-2;
     }
 
-    /* Meta Info Row (VM / IP / ROLE) */
+    /* Meta Info Strip (VM / IP / ROLES) */
     .node-meta {
       display: flex;
       flex-wrap: wrap;
       gap: $space-4;
-      margin-top: $space-3;
+      margin-top: $space-4;
       font-size: 0.95rem;
       color: var(--muted);
 
-      div {
-        padding: 6px 10px;
-        border-radius: 8px;
+      .meta-item {
+        display: inline-flex;
+        align-items: center;
+        gap: $space-2;
+        padding: 6px 14px;
         background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 8px;
+        font-size: 0.9rem;
+
+        code {
+          font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+          color: var(--text);
+          font-weight: 600;
+        }
       }
     }
   }
 
-  /* ----------------------------------------
-     Sections
-  ---------------------------------------- */
+  /* ---------------------------------
+     Structural Sections
+  ---------------------------------- */
 
   .node-section {
     margin-bottom: $space-7;
@@ -74,46 +89,18 @@
     }
   }
 
-  /* ----------------------------------------
-     Spec Grid
-  ---------------------------------------- */
+  /* ---------------------------------
+     Hardware Specifications Grid
+  ---------------------------------- */
 
   .spec-grid {
-    // Replaced manual grid declaration with your mixin!
     @include grid-auto(220px, $space-4);
     margin-top: $space-3;
   }
 
-  .spec-card {
-    padding: $space-3;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    
-    @include glow-soft;
-    @include smooth-transition;
-
-    &:hover {
-      @include glow-medium;
-    }
-
-    span {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    strong {
-      display: block;
-      margin-top: $space-2;
-      font-size: 1.1rem;
-      color: var(--text);
-    }
-  }
-
-  /* ----------------------------------------
-     Service Badges
-  ---------------------------------------- */
+  /* ---------------------------------
+     Microservices Workloads & Badges
+  ---------------------------------- */
 
   .service-grid {
     display: flex;
@@ -123,23 +110,36 @@
   }
 
   .service-badge {
-    padding: 6px 10px;
+    position: relative;
+    padding: 6px 12px 6px 24px;
     border-radius: 8px;
-    background: rgba(0, 255, 255, 0.08);
+    background: rgba(var(--cyan-rgb), 0.08);
+    border: 1px solid rgba(var(--cyan-rgb), 0.12);
     color: var(--cyan);
     font-size: 0.85rem;
     letter-spacing: 0.03em;
+    transition: background 0.22s ease, border-color 0.22s ease;
 
-    @include smooth-transition;
+    .badge-dot {
+      position: absolute;
+      left: 10px;
+      top: calc(50% - 3px);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+    }
 
     &:hover {
-      background: rgba(0, 255, 255, 0.15);
+      background: rgba(var(--cyan-rgb), 0.15);
+      border-color: rgba(var(--cyan-rgb), 0.3);
     }
   }
 
-  /* ----------------------------------------
-     Connection Cards
-  ---------------------------------------- */
+  /* ---------------------------------
+     Network Topology Link Vectors
+  ---------------------------------- */
 
   .connection-grid {
     display: flex;
@@ -152,52 +152,73 @@
     padding: $space-2 $space-3;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     text-decoration: none;
     color: var(--text);
-    outline: none; // Added for focus replacement
-
+    outline: none;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     @include glow-soft;
-    @include smooth-transition;
 
     &:hover,
-    &:focus-visible { // Added for keyboard accessibility
+    &:focus-visible {
       transform: translateY(-2px);
-      @include glow-medium;
+      border-color: rgba(var(--cyan-rgb), 0.25);
       color: var(--cyan);
+      @include glow-medium;
     }
   }
-}
 
-/* ----------------------------------------
-   Node Console UI Polish Additions
----------------------------------------- */
+  /* ---------------------------------
+     Status Tracking Alert Monitors
+  ---------------------------------- */
 
-.node-hero {
-  .node-meta {
+  .node-status-alert {
     display: flex;
-    flex-wrap: wrap;
-    gap: $space-4;
-    
-    .meta-item {
-      display: inline-flex;
-      align-items: center;
-      gap: $space-2;
-      padding: 6px 14px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 8px;
-      font-size: 0.9rem;
+    align-items: flex-start;
+    gap: $space-3;
+    padding: $space-3 $space-4;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--border);
 
-      code {
-        font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-        color: var(--text);
-        font-weight: 600;
-      }
+    .alert-icon {
+      font-size: 1.1rem;
+      line-height: 1;
     }
+
+    code {
+      font-family: monospace;
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      color: var(--text);
+    }
+
+    &.alert-offline {
+      border-left-color: var(--red);
+      background: rgba(255, 92, 122, 0.05);
+      code { color: var(--red); }
+    }
+
+    &.alert-planned,
+    &.alert-building {
+      border-left-color: var(--cyan);
+      background: rgba(var(--cyan-rgb), 0.05);
+      code { color: var(--cyan); }
+    }
+  }
+
+  .node-overview-text {
+    line-height: 1.7;
   }
 }
 
-/* Pulsing Node Status Indicators */
+/* ---------------------------------
+   5. Dynamic Global Pulse Animators
+---------------------------------- */
+
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -210,41 +231,25 @@
     display: inline-block;
   }
 
-  &.online {
-    .status-indicator {
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      animation: pulse-glow 2s infinite ease-in-out;
-    }
+  &.online .status-indicator {
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse-glow 2s infinite ease-in-out;
   }
 
-  &.offline {
-    .status-indicator {
-      background: var(--red);
-      box-shadow: 0 0 8px var(--red);
-    }
+  &.offline .status-indicator {
+    background: var(--red);
+    box-shadow: 0 0 8px var(--red);
   }
 }
 
-/* Active Service Badge Dot */
-.service-badge {
-  position: relative;
-  padding-left: 24px;
-
-  .badge-dot {
-    position: absolute;
-    left: 10px;
-    top: calc(50% - 3px);
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 6px var(--cyan);
-  }
-}
-
-/* Animation Loops */
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.6; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scale(0.95); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.05); 
+  }
 }

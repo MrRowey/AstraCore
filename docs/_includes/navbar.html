@@ -1,10 +1,39 @@
+{% comment %}
+=============================================================================
+AstraCore Core Component: Sticky Global Navigation Terminal Header
+Processes current view path data structures to apply explicit active states.
+=============================================================================
+{% endcomment %}
+
 <header class="navbar" role="banner">
     <div class="nav-container">
-        <a href="{{ '/' | relative_url }}" class="logo">AstraCore</a>
+        
+        <a href="{{ '/' | relative_url }}" class="logo" aria-label="AstraCore Terminal Home">
+            AstraCore
+        </a>
 
-        <nav aria-label="Primary" role="navigation">
-            <a href="{{ '/' | relative_url }}">Home</a>
-            <a href="{{ site.github_repo }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <nav aria-label="Primary System Navigation" role="navigation">
+            
+            {% assign home_active = false %}
+            {% if page.url == "/" or page.url == "/index.html" %}
+                {% assign home_active = true %}
+            {% endif %}
+
+            <a href="{{ '/' | relative_url }}" 
+               class="{% if home_active %}active{% endif %}"
+               {% if home_active %}aria-current="page"{% endif %}>
+               Cluster Overview
+            </a>
+
+            {% if site.github_repo %}
+                <a href="{{ site.github_repo }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Access External AstraCore Source Repositories (Opens in a new tab)">
+                   Source Core
+                </a>
+            {% endif %}
+
         </nav>
     </div>
 </header>

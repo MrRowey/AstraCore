@@ -1,67 +1,94 @@
+/* -----------------------------------------------------------------------------
+   AstraCore Component: Cards Matrix & Panels System
+   (_cards.scss)
+----------------------------------------------------------------------------- */
+
 /* ---------------------------------
-   Cards (Dashboard, Node, Spec)
+   1. Standardized Unified Layout Containers
 ---------------------------------- */
 
-// 1. Grouped selectors with nested states
 .dashboard-card,
 .node-card,
 .spec-card,
 .node-panel {
-  @include glass-card;
+  @include glass-card; // Feeds core glass properties & layout transitions
+  outline: none;       // Focus ring safety rule
 
-  // Added focus-visible for keyboard navigation
+  // Interactive focus tracking states grouped cleanly
   &:hover,
   &:focus-visible {
-    @include hover-lift(6px, rgba(0, 229, 255, 0.12));
-    
-    // If these are links, outline none is okay ONLY IF 
-    // the hover-lift is visually distinct enough to act as the focus indicator
-    outline: none; 
+    // Standardized to use your default design token lifting constraints
+    @include hover-lift(6px, rgba(var(--cyan-rgb), 0.12));
   }
 }
 
-// Specific Card Modifiers & Children
+/* ---------------------------------
+   2. Block Link Structural Anchors
+---------------------------------- */
+
 .node-card {
   text-decoration: none;
   color: inherit;
-  display: block; // Ensures the <a> tag behaves like a block-level container
-}
-
-// 2. Grouped heading resets
-.dashboard-card,
-.node-card {
-  h2 {
-    margin: 0.8rem 0;
-  }
-}
-
-// 3. Flex container safety
-.node-card-top,
-.node-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap; // Prevents overlapping on tiny mobile screens
+  flex-direction: column;
 }
 
-.card-label {
+/* ---------------------------------
+   3. Card Inner Typography & Architecture
+---------------------------------- */
+
+// Unified Heading, Value, and Layout Label Elements
+.card-label,
+dt {
   color: var(--cyan);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
 }
 
-.node-description {
+// Global typography reset mapping to your metric definition values
+.text-display-value,
+dd.text-display-value {
+  font-size: 2.2rem;
+  line-height: 1.1;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 15px rgba(var(--cyan-rgb), 0.15);
+}
+
+// Description Context Containers
+.node-description,
+.node-overview-text {
   color: var(--muted);
-  margin-top: 1rem;
   line-height: 1.7;
 }
 
+/* ---------------------------------
+   4. Component Variant Specific Overrides
+---------------------------------- */
+
+// Special Hardware Specification Card Data Structures
 .spec-card {
-  span {
+  span,
+  dt {
     display: block;
     color: var(--muted);
-    margin-bottom: 0.6rem;
+    margin-bottom: $space-2; // Replaced hardcoded 0.6rem with geometric variable
   }
+  
+  strong,
+  dd {
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+}
+
+// Layout Row Security Fallbacks (Used outside utility grids if necessary)
+.node-card-top,
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-4; // Replaced hardcoded 1rem with scale variable
+  flex-wrap: wrap; // Enforces elegant overflow breakdown columns on mobile viewports
 }

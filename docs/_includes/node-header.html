@@ -1,17 +1,25 @@
-<div class="node-header">
-    <div>
-        <h1>{{ node.name }}</h1>
+{% comment %}
+=============================================================================
+AstraCore Core Component: Node Header Block
+Designed for modular directory inclusions and component isolation.
+=============================================================================
+{% endcomment %}
 
-        {% if node.role %}
-            <p class="node-role">
-                {% for r in node.role %}
-                    {{ r }}{% unless forloop.last %}, {% endunless %}
-                {% endfor %}
+<div class="node-header-component flex justify-between align-center gap-4 w-100">
+    
+    <div class="flex flex-column gap-1">
+        <h1 class="m-0">{{ node.name }}</h1>
+
+        {% if node.role and node.role.size > 0 %}
+            <p class="node-role m-0 text-muted">
+                {{ node.role | join: " // " }}
             </p>
         {% endif %}
     </div>
 
     <span class="status-badge {{ node.status | downcase }}">
-        {{ node.status | capitalize }}
+        <span class="status-indicator"></span>
+        {{ node.status | upcase }}
     </span>
+
 </div>

@@ -1,6 +1,7 @@
-/* ---------------------------------
-   Navigation Bar
----------------------------------- */
+/* -----------------------------------------------------------------------------
+   AstraCore Component: Sticky System Navigation Console Header
+   (_navbar.scss)
+----------------------------------------------------------------------------- */
 
 .navbar {
   position: sticky;
@@ -9,7 +10,7 @@
   background: rgba(4, 8, 20, 0.8);
   border-bottom: 1px solid var(--border);
 
-  /* Cross-browser glass effect */
+  /* Cross-browser glassmorphism treatment */
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 
@@ -27,39 +28,69 @@
     text-shadow: 0 0 12px var(--cyan-glow);
     outline: none;
 
-    // Added focus state for accessibility
     &:focus-visible {
       @include focus-ring;
     }
   }
 
   /* ---------------------------------
-     Nav Links
+     Nav Cluster & Interactive Tracks
   ---------------------------------- */
 
   nav {
     display: flex;
-    // Reminder: Consider mapping this to your spacing scale! (e.g., gap: $space-5;)
-    gap: 1.5rem; 
+    gap: $space-5; // Integrated geometric 24px spacing token fallback scale
 
     a {
+      position: relative;
       color: var(--text);
       text-decoration: none;
       outline: none;
+      font-weight: 500;
       
-      // Explicit performance transition
-      transition: color 0.25s ease;
+      // Explicit hardware-optimized tracking transition
+      transition: color 0.25s ease, text-shadow 0.25s ease;
 
       &:hover,
       &:focus-visible {
         color: var(--cyan);
+        
+        &::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
       }
 
-      // If you want a focus ring around the links instead of just a color change, 
-      // you can swap the focus-visible above for this:
-      // &:focus-visible {
-      //   @include focus-ring;
-      // }
+      &:focus-visible {
+        @include focus-ring; // Upgraded link visibility tracking safety ring
+      }
+
+      /* Animated Terminal Slide-Lines */
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--cyan);
+        box-shadow: 0 0 8px var(--cyan-glow);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Liquid Engine Active State Highlights */
+      &.active {
+        color: var(--cyan);
+        text-shadow: 0 0 8px var(--cyan-glow);
+        font-weight: 600;
+
+        &::after {
+          transform: scaleX(1);
+          background: var(--cyan);
+        }
+      }
     }
   }
 }

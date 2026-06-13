@@ -1,12 +1,23 @@
-<div class="node-panel">
-    {% if node.status == "offline" or node.status == "planned" or node.status == "building" %}
-        <p class="node-status-note">🚧 This node is not yet active.</p>
-    {% endif %}
- 
-    {% if node.description %}
-        <p>{{ node.description }}</p>
-    {% else %}
-        <p>No description available.</p>
-    {% endif %}
-</div>
- 
+{% comment %}
+=============================================================================
+AstraCore Systems Node Overview Block
+=============================================================================
+{% endcomment %}
+
+{% if node.status == "offline" or node.status == "planned" or node.status == "building" %}
+    <div class="node-status-alert alert-{{ node.status | downcase }} mb-3">
+        <span class="alert-icon">
+            {% if node.status == "offline" %}🚨{% else %}🚧{% endif %}
+        </span>
+        <div class="alert-content">
+            <strong>System Notice:</strong> 
+            This node instance is currently flagged as <code>{{ node.status | upcase }}</code> and may not route active system workflows.
+        </div>
+    </div>
+{% endif %}
+
+{% if node.description and node.description != "" %}
+    <p class="node-overview-text">{{ node.description }}</p>
+{% else %}
+    <p class="node-overview-text text-muted"><em>No operational description or system manifests have been registered for this instance identifier.</em></p>
+{% endif %}

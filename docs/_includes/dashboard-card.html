@@ -1,5 +1,26 @@
-<div class="dashboard-card">
-    <span class="card-label">{{ label }}</span>
-    <h2>{{ value }}</h2>
-    <p>{{ description }}</p>
+{% comment %}
+=============================================================================
+AstraCore Core Component: Shared Metric Dashboard Card
+Handles high-level infrastructure aggregates with semantic text shielding.
+=============================================================================
+{% endcomment %}
+
+<div class="dashboard-card flex flex-column p-4" 
+     role="status" 
+     aria-label="Metric Update: {{ label | default: 'System Parameter' }} currently reads {{ value }}">
+    
+    <dt class="card-label mb-1">
+        {{ label | default: "System Metric" }}
+    </dt>
+    
+    <dd class="m-0 text-display-value font-weight-700">
+        {{ value | default: "0.00" }}
+    </dd>
+    
+    {% if description and description != "" %}
+        <dd class="m-0 text-muted mt-2 font-size-sm">
+            {{ description }}
+        </dd>
+    {% endif %}
+
 </div>
