@@ -6,32 +6,60 @@
         {% assign icons = 
             "ip:fa-network-wired,
              cpu:fa-microchip,
-             memory:fa-memory,
+             ram:fa-memory,
              storage:fa-hdd" | split: "," 
         %}
 
-        {% for item in node.device %}
-        {% assign key = item[0] %}
-        {% assign value = item[1] %}
+        <!-- HARDWARE SPECS -->
+        {% for spec in node.specs %}
+            {% assign key = spec[0] %}
+            {% assign value = spec[1] %}
 
-        {% assign icon = "" %}
-        {% for pair in icons %}
-            {% assign parts = pair | split: ":" %}
-            {% if parts[0] == key %}
-                {% assign icon = parts[1] %}
-            {% endif %}
-        {% endfor %}
-
-        <div class="spec-card">
-            <span>
-                {% if icon != "" %}
-                    <i class="fas {{ icon }}"></i>
+            {% assign icon = "" %}
+            {% for pair in icons %}
+                {% assign parts = pair | split: ":" %}
+                {% if parts[0] == key %}
+                    {% assign icon = parts[1] %}
                 {% endif %}
-                {{ key | capitalize }}
-            </span>
-            <strong>{{ value }}</strong>
-        </div>
+            {% endfor %}
+
+            <div class="spec-card">
+                <span>
+                    {% if icon != "" %}
+                        <i class="fas {{ icon }}"></i>
+                    {% endif %}
+                    {{ key | capitalize }}
+                </span>
+                <strong>{{ value }}</strong>
+            </div>
         {% endfor %}
+
+        <!-- NETWORK SPECS -->
+        {% if node.network %}
+            {% for net in node.network %}
+
+                {% assign key = net[0] %}
+                {% assign value = net[1] %}
+
+                {% assign icon = "" %}
+                {% if key == "ip" %}
+                    {% assign icon = "fa-network-wired" %}
+                {% elsif key == "vlan" %}
+                    {% assign icon = "fa-diagram-project" %}
+                {% endif %}
+
+                <div class="spec-card">
+                    <span>
+                        {% if icon != "" %}
+                            <i class="fas {{ icon }}"></i>
+                        {% endif %}
+                        {{ key | upcase }}
+                    </span>
+                    <strong>{{ value }}</strong>
+                </div>
+
+            {% endfor %}
+        {% endif %}
 
     </div>
 </div>

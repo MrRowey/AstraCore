@@ -1,4 +1,9 @@
 <div class="node-pannel">
     <h2>Overview</h2>
-    <p>{{ node.description }}</p>
+
+    {% if node.description %}
+        <p>{{ node.description }}</p>
+    {% else %}
+        <p>No description available for this node.</p>
+    {% endif %}
 </div>

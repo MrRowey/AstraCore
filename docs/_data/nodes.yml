@@ -2,11 +2,17 @@
   name: Heimdall
   vm: pve-net
   status: offline
-  role: Network
-  cpu: Intel Core i5-4570T
-  ram: 8Gb
-  storage: 120gb SSD
-  ip-address: 192.168.1.10
+  role:
+    - Network
+  
+  specs:
+    cpu: Intel Core i5-4570T
+    ram: 8Gb
+    storage: 120gb SSD
+  
+  network:
+    ip-address: 192.168.1.10
+  
   connections:
    - node-2
    - node-3
