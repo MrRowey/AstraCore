@@ -4,35 +4,41 @@
     <div class="spec-grid">
 
         {% assign icons = 
-            "ip:fa-network-wired,
-             cpu:fa-microchip,
+            "cpu:fa-microchip,
              ram:fa-memory,
-             storage:fa-hdd" | split: "," 
+             storage:fa-hdd,
+             ip:fa-network-wired,
+             vlan:fa-diagram-project,
+             vm:fa-server" | split: "," 
         %}
 
         <!-- HARDWARE SPECS -->
-        {% for spec in node.specs %}
-            {% assign key = spec[0] %}
-            {% assign value = spec[1] %}
+        {% if node.specs %}
+            {% for spec in node.specs %}
 
-            {% assign icon = "" %}
-            {% for pair in icons %}
-                {% assign parts = pair | split: ":" %}
-                {% if parts[0] == key %}
-                    {% assign icon = parts[1] %}
-                {% endif %}
-            {% endfor %}
+                {% assign key = spec[0] %}
+                {% assign value = spec[1] %}
 
-            <div class="spec-card">
-                <span>
-                    {% if icon != "" %}
-                        <i class="fas {{ icon }}"></i>
+                {% assign icon = "" %}
+                {% for pair in icons %}
+                    {% assign parts = pair | split: ":" %}
+                    {% if parts[0] == key %}
+                        {% assign icon = parts[1] %}
                     {% endif %}
-                    {{ key | capitalize }}
-                </span>
-                <strong>{{ value }}</strong>
-            </div>
-        {% endfor %}
+                {% endfor %}
+
+                <div class="spec-card">
+                    <span>
+                        {% if icon != "" %}
+                            <i class="fas {{ icon }}"></i>
+                        {% endif %}
+                        {{ key | capitalize }}
+                    </span>
+                    <strong>{{ value }}</strong>
+                </div>
+
+            {% endfor %}
+        {% endif %}
 
         <!-- NETWORK SPECS -->
         {% if node.network %}
@@ -41,18 +47,9 @@
                 {% assign key = net[0] %}
                 {% assign value = net[1] %}
 
-                {% assign icon = "" %}
-                {% if key == "ip" %}
-                    {% assign icon = "fa-network-wired" %}
-                {% elsif key == "vlan" %}
-                    {% assign icon = "fa-diagram-project" %}
-                {% endif %}
-
                 <div class="spec-card">
                     <span>
-                        {% if icon != "" %}
-                            <i class="fas {{ icon }}"></i>
-                        {% endif %}
+                        <i class="fas fa-network-wired"></i>
                         {{ key | upcase }}
                     </span>
                     <strong>{{ value }}</strong>

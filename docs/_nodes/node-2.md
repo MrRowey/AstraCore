@@ -3,8 +3,21 @@ layout: node
 id: node-2
 ---
 
-{% assign node = site.data.nodes | where: "id", page.id | first %}
+{% assign node_id = page.id | split: "/" | last %}
 
-{% include node-header.html node=node %}
-{% include node-overview.html node=node %}
-{% include spec-grid.html node=node %}
+{% assign node = nil %}
+{% for n in site.data.nodes %}
+  {% if n.id == node_id %}
+    {% assign node = n %}
+  {% endif %}
+{% endfor %}
+
+{% if node %}
+
+  {% include node-header.html node=node %}
+  {% include node-overview.html node=node %}
+  {% include spec-grid.html node=node %}
+
+{% else %}
+  <p>❌ Node not found: {{ node_id }}</p>
+{% endif %}
