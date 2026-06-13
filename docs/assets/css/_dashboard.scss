@@ -92,6 +92,32 @@
   letter-spacing: 0.03em;
 }
 
+/* ---------------------------------
+   Service Badges
+---------------------------------- */
+
+.node-card-services {
+  margin-top: $space-3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.service-badge {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.service-badge-more {
+  background: rgba(0,229,255,0.08);
+  color: var(--cyan);
+}
+
 
 .dashboard-section {
   margin-top: $space-7;

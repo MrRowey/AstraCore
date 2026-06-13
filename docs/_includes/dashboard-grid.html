@@ -15,7 +15,7 @@
                     <h3>{{ node.name }}</h3>
 
                     <span class="status-pill {{ node.status | downcase }}">
-                        {{ node.status }}
+                        {{ node.status | capitalize }}
                     </span>
                 </div>
 
@@ -27,6 +27,19 @@
                 <div class="node-card-role">
                     {{ node.role | join: ", " }}
                 </div>
+
+                {% if node.services %}
+                    <div class="node-card-services">
+                        {% assign shown_services = node.services | slice: 0, 3 %}
+                        {% for svc in shown_services %}
+                            <span class="service-badge">{{ svc }}</span>
+                        {% endfor %}
+                        {% assign remaining = node.services.size | minus: 3 %}
+                        {% if remaining > 0 %}
+                            <span class="service-badge service-badge-more">+{{ remaining }}</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
 
             </a>
 
