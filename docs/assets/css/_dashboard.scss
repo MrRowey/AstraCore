@@ -1,9 +1,17 @@
+/* ---------------------------------
+   Dashboard Section
+---------------------------------- */
+
 .dashboard-section {
-  margin-top: 40px;
+  margin-top: $space-8;
 }
 
+/* ---------------------------------
+   Header
+---------------------------------- */
+
 .dashboard-header {
-  margin-bottom: 20px;
+  margin-bottom: $space-4;
 
   h2 {
     margin: 0;
@@ -11,15 +19,23 @@
 
   p {
     color: var(--muted);
-    margin-top: 5px;
+    margin-top: $space-2;
   }
 }
+
+/* ---------------------------------
+   Grid
+---------------------------------- */
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: $space-4;
 }
+
+/* ---------------------------------
+   Node Card
+---------------------------------- */
 
 .dashboard-node-card {
   padding: $space-4;
@@ -32,10 +48,14 @@
   @include smooth-transition;
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     @include glow-medium;
   }
 }
+
+/* ---------------------------------
+   Card Header
+---------------------------------- */
 
 .node-card-top {
   display: flex;
@@ -44,8 +64,13 @@
 
   h3 {
     margin: 0;
+    font-size: 1.1rem;
   }
 }
+
+/* ---------------------------------
+   Meta Info
+---------------------------------- */
 
 .node-card-meta {
   margin-top: $space-3;
@@ -53,11 +78,16 @@
   color: var(--muted);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
+
+/* ---------------------------------
+   Role Tag
+---------------------------------- */
 
 .node-card-role {
   margin-top: $space-3;
   font-size: 0.85rem;
   color: var(--cyan);
+  letter-spacing: 0.03em;
 }

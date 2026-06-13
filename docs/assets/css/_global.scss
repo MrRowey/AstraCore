@@ -1,4 +1,3 @@
-
 /* ---------------------------------
    Global Styles / Resets
 ---------------------------------- */
@@ -21,16 +20,22 @@ body {
   overflow-x: hidden;
 }
 
-/* Accessible focus outlines */
+/* ---------------------------------
+   Focus & Accessibility
+---------------------------------- */
+
 :where(a, button) {
   outline: none;
 }
 
-:where(a, button) {
+:where(a, button):focus-visible {
   @include focus-ring;
 }
 
-/* Grid overlay background */
+/* ---------------------------------
+   Background Grid
+---------------------------------- */
+
 .grid-overlay {
   position: fixed;
   inset: 0;
@@ -40,4 +45,59 @@ body {
   background-size: 40px 40px;
   pointer-events: none;
   z-index: -1;
+}
+
+/* ---------------------------------
+   Layout System (CORE FIX)
+---------------------------------- */
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $space-6 $space-4;
+}
+
+/* Consistent vertical rhythm */
+section {
+  margin-bottom: $space-8;
+}
+
+/* ---------------------------------
+   Typography
+---------------------------------- */
+
+h1, h2, h3 {
+  line-height: 1.2;
+  color: var(--text);
+}
+
+p {
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------------------------------
+   Layout Cleanup (IMPORTANT)
+---------------------------------- */
+
+/* Keep full width for layout wrappers ONLY */
+.home-page,
+.dashboard-section {
+  width: 100%;
+}
+
+/* Hero should control its own spacing */
+.hero {
+  width: 100%;
+  margin-bottom: $space-8;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Dashboard spacing consistency */
+.dashboard-grid {
+  margin-top: $space-5;
 }

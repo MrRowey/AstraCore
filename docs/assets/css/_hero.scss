@@ -3,7 +3,7 @@
 ---------------------------------- */
 
 .hero {
-  padding: 5rem 0 4rem;
+  padding: $space-8 0 $space-7;
   position: relative;
 
   &::before {
@@ -22,39 +22,59 @@
   }
 }
 
+/* ---------------------------------
+   Eyebrow
+---------------------------------- */
+
 .eyebrow {
   color: var(--cyan);
   letter-spacing: 0.2em;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  margin-bottom: $space-3;
+  font-size: 0.85rem;
+  text-transform: uppercase;
 }
 
+/* ---------------------------------
+   Title
+---------------------------------- */
+
 .hero h1 {
-  font-size: clamp(3rem, 7vw, 5rem);
+  font-size: clamp(2.8rem, 6vw, 5rem);
   line-height: 1.05;
-  margin-bottom: 1.5rem;
+  margin-bottom: $space-4;
   text-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
 }
 
+/* ---------------------------------
+   Text
+---------------------------------- */
+
 .hero-text {
-  max-width: 700px;
+  max-width: 720px;
   color: var(--muted);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.8;
 }
 
+/* ---------------------------------
+   Buttons
+---------------------------------- */
+
 .hero-buttons {
-  margin-top: 2rem;
+  margin-top: $space-5;
   display: flex;
-  gap: 1rem;
+  gap: $space-3;
   flex-wrap: wrap;
 }
 
+/* ---------------------------------
+   Stats (IMPROVED)
+---------------------------------- */
 
 .hero-stats {
   display: flex;
   gap: $space-4;
-  margin-top: $space-5;
+  margin-top: $space-6;
   flex-wrap: wrap;
 }
 
@@ -65,13 +85,23 @@
   text-align: center;
   min-width: 120px;
 
+  @include glow-soft;
+  @include smooth-transition;
+
+  &:hover {
+    @include glow-medium;
+  }
+
   span {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   strong {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    color: var(--text);
   }
 }
