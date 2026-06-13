@@ -1,4 +1,4 @@
-<div class="node-pannel">
+<div class="node-panel">
     <div class="spec-grid">
 
         {% assign icons = 
@@ -7,8 +7,11 @@
              storage:fa-hdd,
              ip:fa-network-wired,
              vlan:fa-diagram-project,
-             vm:fa-server" | split: "," 
+             vm:fa-server,
+             mac:fa-ethernet" | split: "," 
         %}
+
+        {% assign upcase_keys = "cpu,ram,ip,vm,vlan,mac" | split: "," %}
 
         <!-- HARDWARE SPECS -->
         {% if node.specs %}
@@ -25,12 +28,17 @@
                     {% endif %}
                 {% endfor %}
 
+                {% assign label = key | capitalize %}
+                {% if upcase_keys contains key %}
+                    {% assign label = key | upcase %}
+                {% endif %}
+
                 <div class="spec-card">
                     <span>
                         {% if icon != "" %}
                             <i class="fas {{ icon }}"></i>
                         {% endif %}
-                        {{ key | capitalize }}
+                        {{ label }}
                     </span>
                     <strong>{{ value }}</strong>
                 </div>
@@ -45,13 +53,33 @@
                 {% assign key = net[0] %}
                 {% assign value = net[1] %}
 
-                <div class="spec-card">
-                    <span>
-                        <i class="fas fa-network-wired"></i>
-                        {{ key | upcase }}
-                    </span>
-                    <strong>{{ value }}</strong>
-                </div>
+                <!-- skip empty values (e.g. unset MAC) -->
+                {% if value != "" and value != nil %}
+
+                    {% assign icon = "fa-network-wired" %}
+                    {% for pair in icons %}
+                        {% assign parts = pair | split: ":" %}
+                        {% if parts[0] == key %}
+                            {% assign icon = parts[1] %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% assign label = key | upcase %}
+                    {% assign display_value = value %}
+
+                    {% if key == "vlan" and value == 0 %}
+                        {% assign display_value = "Untagged" %}
+                    {% endif %}
+
+                    <div class="spec-card">
+                        <span>
+                            <i class="fas {{ icon }}"></i>
+                            {{ label }}
+                        </span>
+                        <strong>{{ display_value }}</strong>
+                    </div>
+
+                {% endif %}
 
             {% endfor %}
         {% endif %}

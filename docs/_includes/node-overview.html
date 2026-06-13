@@ -1,7 +1,12 @@
-<div class="node-pannel">
+<div class="node-panel">
+    {% if node.status == "offline" or node.status == "planned" or node.status == "building" %}
+        <p class="node-status-note">🚧 This node is not yet active.</p>
+    {% endif %}
+ 
     {% if node.description %}
         <p>{{ node.description }}</p>
     {% else %}
         <p>No description available.</p>
     {% endif %}
 </div>
+ 
