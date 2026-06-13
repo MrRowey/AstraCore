@@ -38,6 +38,8 @@
 ---------------------------------- */
 
 .dashboard-node-card {
+  display: flex;
+  flex-direction: column;
   padding: $space-4;
   border-radius: 14px;
   background: rgba(255,255,255,0.03);
@@ -100,17 +102,22 @@
   margin-top: $space-3;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
+  row-gap: 8px;
 }
 
 .service-badge {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.7rem;
-  padding: 3px 8px;
+  line-height: 1.6;
+  padding: 4px 10px;
   border-radius: 999px;
   background: rgba(255,255,255,0.05);
   color: var(--muted);
   letter-spacing: 0.02em;
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .service-badge-more {
