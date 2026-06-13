@@ -167,3 +167,84 @@
     }
   }
 }
+
+/* ----------------------------------------
+   Node Console UI Polish Additions
+---------------------------------------- */
+
+.node-hero {
+  .node-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-4;
+    
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: $space-2;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      font-size: 0.9rem;
+
+      code {
+        font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        color: var(--text);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+/* Pulsing Node Status Indicators */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  &.online {
+    .status-indicator {
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+  }
+
+  &.offline {
+    .status-indicator {
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+    }
+  }
+}
+
+/* Active Service Badge Dot */
+.service-badge {
+  position: relative;
+  padding-left: 24px;
+
+  .badge-dot {
+    position: absolute;
+    left: 10px;
+    top: calc(50% - 3px);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 6px var(--cyan);
+  }
+}
+
+/* Animation Loops */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
