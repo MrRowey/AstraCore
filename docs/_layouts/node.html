@@ -18,4 +18,11 @@ layout: default
         {% include spec-grid.html node=node %}
     </section>
 
+<p>DATA SIZE: {{ site.data.nodes | size }}</p>
+
+<pre>{{ site.data.nodes | jsonify }}</pre>
+
+<p>PAGE ID: {{ page.id }}</p>
+
+
 </div>
