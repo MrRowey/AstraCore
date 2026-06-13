@@ -1,0 +1,33 @@
+---
+layout: default
+title: 404 - Not Found
+permalink: /404.html
+---
+
+<section class="error-page">
+
+  <div class="error-card">
+
+    <div class="error-code">
+      404
+    </div>
+
+    <h1>Node Not Found</h1>
+
+    <p class="error-text">
+      The requested route does not exist in the AstraCore network layer.
+      It may have been moved, renamed, or never deployed.
+    </p>
+
+    <div class="error-actions">
+      <a href="{{ '/' | relative_url }}" class="primary-btn">Return Home</a>
+      <a href="{{ '/nodes/' | relative_url }}" class="secondary-btn">View Nodes</a>
+    </div>
+
+    <div class="error-meta">
+      Requested path: <code>{{ page.url }}</code>
+    </div>
+
+  </div>
+
+</section>
