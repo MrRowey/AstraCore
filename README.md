@@ -46,9 +46,9 @@ The project serves as both a learning platform and a production-style environmen
 | **🌐 Networking & Security** | **AdGuard Home**<br>**Traefik**<br>**Cloudflare Tunnel**<br>**WireGuard**<br>**Authelia** | Network-wide DNS filtering & ad blocking<br>Reverse proxy and dynamic routing<br>Secure external access without port forwarding<br>VPN for secure remote connectivity<br>SSO / 2FA Authentication & access control |
 | **🏠 Automation & IoT** | **Home Assistant OS**<br>**TP-Link Tapo** | Smart home platform<br>Device control and monitoring integration |
 | **🎬 Media & Storage** | **Plex**<br>**Sonarr / Radarr**<br>**Prowlarr / Overseerr**<br>**Immich** | Media streaming server<br>Automated TV and Movie management<br>Indexer management & media request system<br>Self-hosted photo backup with AI/ML features |
-| **📊 Monitoring & Dev** | **Portainer**<br>**Grafana / Prometheus**<br>**Uptime Kuma**<br>**Gitea** | Container management UI<br>Metrics collection, monitoring, and visualizations<br>Service uptime monitoring<br>Self-hosted Git service |
+| **📊 Monitoring & Dev** | **Portainer**<br>**Grafana / Prometheus**<br>**Loki / Promtail**<br>**Uptime Kuma**<br>**Diun**<br>**Gitea**<br>**NetBox** | Container management UI<br>Metrics collection, monitoring, and visualizations<br>Centralized log aggregation<br>Service uptime monitoring<br>Docker image update notifications<br>Self-hosted Git service<br>Network source of truth & IPAM |
 | **🤖 AI & Local LLM** | **Ollama**<br>**Open WebUI**<br>**pve-ai2** | Local LLM runtime<br>Web interface for AI interaction *(planned 16GB RAM upgrade)*<br>Secondary Ollama instance (dedicated AI node) |
-| **🧰 Infrastructure & Utils** | **Proxmox Backup Server**<br>**PostgreSQL**<br>**qBittorrent / Recyclarr**<br>**Rewards App** | VM and container backups<br>Database backend<br>Downloading & automated media quality management<br>Internal/custom reward system |
+| **🧰 Infrastructure & Utils** | **Proxmox Backup Server**<br>**PostgreSQL**<br>**qBittorrent / Recyclarr**<br>**Homepage**<br>**Rewards App** | VM and container backups<br>Database backend<br>Downloading & automated media quality management<br>Unified family dashboard & service portal<br>Internal/custom reward system |
 
 ---
 
