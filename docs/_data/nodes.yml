@@ -4,7 +4,7 @@
   description: Heimdall (pve-net – 192.168.1.10) is the core networking and security node of the AstraCore homelab, handling DNS filtering, reverse proxying, secure remote access, VPN connectivity, and single sign-on services through tools like AdGuard, Traefik, Cloudflare Tunnel, WireGuard, and Authelia.
 
   role:
-    - Network
+    - Networking & Security
 
   specs:
     cpu: Intel Core i5-4570T
@@ -41,7 +41,7 @@
   description: Memory Core (pve-backup – 192.168.1.11) is the dedicated backup node in the AstraCore homelab, providing centralized data protection and recovery through Proxmox Backup Server (PBS) to ensure reliable snapshotting and restoration of virtual machines and critical services.
 
   role:
-    - Network
+    - Backups
 
   specs:
     cpu: Intel Core i5-4570T
@@ -66,9 +66,8 @@
   status: offline
   description: Jarvis (pve-home – 192.168.1.12) is the AstraCore smart home automation node, running Home Assistant OS to manage and automate household devices, with integrations such as TP-Link Tapo for smart device control, monitoring, and home environment orchestration.
 
-
   role:
-    - Network
+    - Smart Home
 
   specs:
     cpu: Intel Core i5-4570T
@@ -94,9 +93,8 @@
   status: offline
   description: Apollo (pve-media – 192.168.1.13) is the AstraCore media server node, responsible for managing and delivering entertainment services through Plex, with automated media acquisition and library management powered by Sonarr, Radarr, Prowlarr, and Overseerr for a fully self-organising media experience.
 
-
   role:
-    - Network
+    - Media Server
 
   specs:
     cpu: Intel Core i5-4570T
@@ -126,9 +124,8 @@
   status: offline
   description: Photon Core (pve-photos – 192.168.1.14) is the AstraCore photo storage and management node, running Immich to provide self-hosted photo backup, organisation, and AI-powered features such as automated tagging and intelligent search through machine learning.
 
-
   role:
-    - Network
+    - Photos
 
   specs:
     cpu: Intel Core i5-4570T
@@ -155,9 +152,8 @@
   status: offline
   description: The Watchtower (pve-monitor – 192.168.1.15) is the AstraCore monitoring and infrastructure visibility node, providing system observability, container management, uptime tracking, logging, and documentation through tools such as Prometheus, Grafana, Loki, Uptime Kuma, Portainer, Gitea, NetBox, and Diun.
 
-
   role:
-    - Network
+    - Monitoring & Docs
 
   specs:
     cpu: Intel Core i5-4570T
@@ -196,9 +192,8 @@
   status: offline
   description: The Workshop (pve-web – 192.168.1.16) is the AstraCore web applications node, hosting internal services such as the Rewards App and Homepage dashboard, supported by PostgreSQL for data persistence and application back-end storage.
 
-
   role:
-    - Network
+    - Web Apps
 
   specs:
     cpu: Intel Core i5-4570T
@@ -227,9 +222,8 @@
   status: offline
   description: The Pirate Cove (pve-dl – 192.168.1.17) is the AstraCore download automation node, handling torrent-based downloads and media quality management through qBittorrent and Recyclarr to ensure automated, structured, and consistent media ingestion into the homelab ecosystem.
 
-
   role:
-    - Network
+    - Downloads
 
   specs:
     cpu: Intel Core i5-4570T
@@ -256,9 +250,8 @@
   status: offline
   description: Friday (pve-ai – 192.168.1.18) is the AstraCore AI services node, providing local LLM capabilities and conversational interfaces through Ollama and Open WebUI, enabling private, self-hosted AI workloads and interactive model access within the homelab.
 
-
   role:
-    - Network
+    - AI Service
 
   specs:
     cpu: Intel Core i5-4570T
