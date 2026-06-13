@@ -1,200 +1,226 @@
+# =============================================================================
+# AstraCore Master Data Registry: Unified Infrastructure Telemetry Map
+# Merges physical node allocations with logical service dependency states
+# =============================================================================
+
 nodes:
-  - id: pve-net
-    name: Heimdall
-    role: Network
+  - id: "node-1"
+    name: "Heimdall"
+    role: "Network & Security"
+    network:
+      vm: "pve-net"
     services:
-      - adguard
-      - traefik
-      - cloudflare_tunnel
-      - wireguard
-      - authelia
+      - "adguard"
+      - "traefik"
+      - "cloudflare_tunnel"
+      - "wireguard"
+      - "authelia"
 
-  - id: pve-backup
-    name: Memory Core
-    role: Proxmox Backup Server
+  - id: "node-2"
+    name: "Memory Core"
+    role: "Proxmox Backup Server"
+    network:
+      vm: "pve-backup"
     services:
-      - proxmox_backup
+      - "proxmox_backup"
 
-  - id: pve-home
-    name: Jarvis
-    role: Home Automation
+  - id: "node-3"
+    name: "Jarvis"
+    role: "Home Automation"
+    network:
+      vm: "pve-home"
     services:
-      - home_assistant
-      - tapo
-      - alexa
-      - govee
+      - "home_assistant"
+      - "tapo"
+      - "alexa"
+      - "govee"
 
-  - id: pve-media
-    name: Apollo
-    role: Media Streaming
+  - id: "node-4"
+    name: "Apollo"
+    role: "Media Streaming"
+    network:
+      vm: "pve-media"
     services:
-      - plex
-      - sonarr
-      - radarr
-      - prowlarr
-      - overseerr
+      - "plex"
+      - "sonarr"
+      - "radarr"
+      - "prowlarr"
+      - "overseerr"
 
-  - id: pve-photos
-    name: Photon Core
-    role: Photo Management
+  - id: "node-5"
+    name: "Photon Core"
+    role: "Photo Management"
+    network:
+      vm: "pve-photos"
     services:
-      - immich
+      - "immich"
 
-  - id: pve-monitor
-    name: The Watchtower
-    role: Monitoring and DevOps
+  - id: "node-6"
+    name: "The Watchtower"
+    role: "Monitoring and DevOps"
+    network:
+      vm: "pve-monitor"
     services:
-      - portainer
-      - grafana
-      - prometheus
-      - uptime_kuma
-      - gitea
+      - "portainer"
+      - "grafana"
+      - "prometheus"
+      - "uptime_kuma"
+      - "gitea"
 
-  - id: pve-web
-    name: The Workshop
-    role: Web Applications
+  - id: "node-7"
+    name: "The Workshop"
+    role: "Web Applications"
+    network:
+      vm: "pve-web"
     services:
-      - rewards_app
-      - childrens_library
-      - postgres
+      - "rewards_app"
+      - "childrens_library"
+      - "postgres"
 
-  - id: pve-dl
-    name: The Pirate Cove
-    role: Automated Downloading
+  - id: "node-8"
+    name: "The Pirate Cove"
+    role: "Automated Downloading"
+    network:
+      vm: "pve-dl"
     services:
-      - qbittorrent
-      - recyclarr
+      - "qbittorrent"
+      - "recyclarr"
 
-  - id: pve-ai
-    name: Friday
-    role: Local AI Model
+  - id: "node-9"
+    name: "Friday"
+    role: "Local AI Model"
+    network:
+      vm: "pve-ai"
     services:
-      - ollama
-      - open_webui
+      - "ollama"
+      - "open_webui"
 
+# =============================================================================
+# Logical Service Registry & Cross-Node Microservice Dependency Trees
+# =============================================================================
 services:
   adguard:
-    label: AdGuard Home
+    label: "AdGuard Home"
     depends_on: []
 
   traefik:
-    label: Traefik
+    label: "Traefik"
     depends_on: []
 
   cloudflare_tunnel:
-    label: Cloudflare Tunnel
+    label: "Cloudflare Tunnel"
     depends_on:
-      - traefik
+      - "traefik"
 
   wireguard:
-    label: WireGuard
+    label: "WireGuard"
     depends_on: []
 
   authelia:
-    label: Authelia
+    label: "Authelia"
     depends_on:
-      - traefik
+      - "traefik"
 
   proxmox_backup:
-    label: Proxmox Backup Server
+    label: "Proxmox Backup Server"
     depends_on: []
 
   home_assistant:
-    label: Home Assistant OS
+    label: "Home Assistant OS"
     depends_on: []
 
   tapo:
-    label: TP-Link Tapo Integration
+    label: "TP-Link Tapo Integration"
     depends_on:
-      - home_assistant
+      - "home_assistant"
 
   alexa:
-    label: Amazon Alexa Integration
+    label: "Amazon Alexa Integration"
     depends_on:
-      - home_assistant
+      - "home_assistant"
 
   govee:
-    label: Govee Integration
+    label: "Govee Integration"
     depends_on:
-      - home_assistant
+      - "home_assistant"
 
   plex:
-    label: Plex
+    label: "Plex"
     depends_on: []
 
   sonarr:
-    label: Sonarr
+    label: "Sonarr"
     depends_on:
-      - prowlarr
+      - "prowlarr"
 
   radarr:
-    label: Radarr
+    label: "Radarr"
     depends_on:
-      - prowlarr
+      - "prowlarr"
 
   prowlarr:
-    label: Prowlarr
+    label: "Prowlarr"
     depends_on: []
 
   overseerr:
-    label: Overseerr
+    label: "Overseerr"
     depends_on:
-      - plex
+      - "plex"
 
   immich:
-    label: Immich
+    label: "Immich"
     depends_on: []
 
   portainer:
-    label: Portainer
+    label: "Portainer"
     depends_on: []
 
   grafana:
-    label: Grafana
+    label: "Grafana"
     depends_on:
-      - prometheus
+      - "prometheus"
 
   prometheus:
-    label: Prometheus
+    label: "Prometheus"
     depends_on: []
 
   uptime_kuma:
-    label: Uptime Kuma
+    label: "Uptime Kuma"
     depends_on: []
 
   gitea:
-    label: Gitea
+    label: "Gitea"
     depends_on: []
 
   rewards_app:
-    label: Rewards App
+    label: "Rewards App"
     depends_on:
-      - postgres
+      - "postgres"
 
   childrens_library:
-    label: Childrens Library
+    label: "Childrens Library"
     depends_on:
-      - postgres
+      - "postgres"
 
   postgres:
-    label: Postgres
+    label: "Postgres"
     depends_on: []
 
   qbittorrent:
-    label: qBittorrent
+    label: "qBittorrent"
     depends_on: []
 
   recyclarr:
-    label: Recyclarr
+    label: "Recyclarr"
     depends_on:
-      - sonarr
-      - radarr
+      - "sonarr"
+      - "radarr"
 
   ollama:
-    label: Ollama
+    label: "Ollama"
     depends_on: []
 
   open_webui:
-    label: Open WebUI
+    label: "Open WebUI"
     depends_on:
-      - ollama
+      - "ollama"

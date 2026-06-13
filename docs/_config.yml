@@ -1,29 +1,61 @@
-title: AstraCore
-email: rowey.lab@gmail.com
-description: >-
-  Proxmox-based homelab cluster focused on virtualization, Docker workloads, and distributed systems.
+# =============================================================================
+# AstraCore Master Cluster Engine Configuration
+# Global Configuration Flags & Collection Telemetry Routing
+# =============================================================================
 
+# 1. Global Core Meta Data Attributes
+title: "AstraCore"
+email: "rowey.lab@gmail.com"
+description: >-
+  Proxmox-based homelab cluster focused on virtualization, Docker workloads, 
+  and resilient distributed systems management.
+
+# Global metadata keywords array hooks directly to your SEO header blocks
+keywords:
+  - "proxmox"
+  - "homelab"
+  - "kubernetes"
+  - "docker"
+  - "hypervisor"
+  - "cluster telemetry"
+
+# 2. Production Environment Endpoint Routing Controls
+# Keep baseurl empty unless deploying your site into a specific subdirectory
 baseurl: ""
 url: "https://astracore.me"
 
+# External System Repositories Endpoint Context Hook
 github_repo: "https://github.com/MrRowey/AstraCore"
 
+# 3. Compilation Render Core Engines
 markdown: kramdown
 permalink: pretty
 
+# Explicitly signals custom handcrafted layout pipeline sheets over precompiled gem engines
 theme: null
 
 sass:
   style: compressed
+  line_comments: false # Keeps compiled main.css output completely clear of bloated tracking paths
 
+# 4. Multi-Instance Custom Content Collections Registry
 collections:
   nodes:
     output: true
-    permalink: /nodes/:name/
+    # Upgraded :name token straight to :slug tracking configurations.
+    # This locks your generated browser URLs to match your unique lowercase file handles perfectly!
+    permalink: /nodes/:slug/
 
+# 5. Global Metadata Default Fallback Cascade Mapping Blocks
 defaults:
   - scope:
       path: ""
       type: "nodes"
     values:
-      layout: node
+      layout: "node"
+      author: "MrRowey"
+      robots: "noindex, nofollow" # Highly recommended for raw internal private infrastructure dashboards!
+
+# Explicit system plugin tracking directives block array
+plugins:
+  - jekyll-sass-converter

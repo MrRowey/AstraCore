@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 # Replace this with the version of Ruby installed on your machine
 # You can check your version by running `ruby -v` in your terminal
-ruby "3.2.2"
+ruby "3.2.11"
 
 gem "jekyll", "~> 4.3"
 

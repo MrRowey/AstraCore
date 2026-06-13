@@ -1,11 +1,18 @@
 ---
 layout: default
 title: Home
-description: "AstraCore homelab: Proxmox hosts, Docker, orchestration, and resilient services."
-keywords: [proxmox, docker, homelab, infrastructure, pve]
+description: "AstraCore homelab cluster management: Proxmox virtualization, automated Docker workloads, and resilient distributed services."
+keywords: [proxmox, docker, homelab, infrastructure, pve, cluster telemetry]
 permalink: /
 ---
 
-{% include home-hero.html %}
+{% comment %}
+=============================================================================
+AstraCore Systems Architecture: Master Root Landing Hub
+Coordinates core modular inclusion components onto a unified index stream.
+=============================================================================
+{% endcomment %}
 
-{% include dashboard-grid.html %}
+{% include hero.html %}
+
+{% include dashboard.html %}

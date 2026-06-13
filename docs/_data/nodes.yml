@@ -1,274 +1,236 @@
-- id: node-1
-  name: Heimdall
-  status: offline
-  description: Heimdall (pve-net – 192.168.1.10) is the core networking and security node of the AstraCore homelab, handling DNS filtering, reverse proxying, secure remote access, VPN connectivity, and single sign-on services through tools like AdGuard, Traefik, Cloudflare Tunnel, WireGuard, and Authelia.
+# =============================================================================
+# AstraCore Data Registry: Cluster Hardware Nodes Configuration Map
+# Managed by: MrRowey
+# System State: Development Phase Block (All nodes flagged OFFLINE for mapping)
+# =============================================================================
 
+- id: "node-1"
+  name: "Heimdall"
+  status: "offline"
+  description: >-
+    Heimdall (pve-net – 192.168.1.10) is the core networking and security node of the AstraCore homelab, handling DNS filtering, reverse proxying, secure remote access, VPN connectivity, and single sign-on services through tools like AdGuard, Traefik, Cloudflare Tunnel, WireGuard, and Authelia.
   role:
-    - Networking & Security
-
+    - "Networking & Security"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-net
+    vm: "pve-net"
     mac: ""
-    ip: 192.168.1.10
+    ip: "192.168.1.10"
     vlan: 0
-
   services:
-    - AdGuard Home
-    - Traefik
-    - Cloudflare Tunnel
-    - WireGuard
-    - Authelia
-
+    - "AdGuard Home"
+    - "Traefik"
+    - "Cloudflare Tunnel"
+    - "WireGuard"
+    - "Authelia"
   connections:
-    - node-2
-    - node-3
-    - node-4
-    - node-5
-    - node-6
-    - node-7
-    - node-8
-    - node-9
+    - "node-2"
+    - "node-3"
+    - "node-4"
+    - "node-5"
+    - "node-6"
+    - "node-7"
+    - "node-8"
+    - "node-9"
 
-
-- id: node-2
-  name: Memory Core
-  status: offline
-  description: Memory Core (pve-backup – 192.168.1.11) is the dedicated backup node in the AstraCore homelab, providing centralized data protection and recovery through Proxmox Backup Server (PBS) to ensure reliable snapshotting and restoration of virtual machines and critical services.
-
+- id: "node-2"
+  name: "Memory Core"
+  status: "offline"
+  description: >-
+    Memory Core (pve-backup – 192.168.1.11) is the dedicated backup node in the AstraCore homelab, providing centralized data protection and recovery through Proxmox Backup Server (PBS) to ensure reliable snapshotting and restoration of virtual machines and critical services.
   role:
-    - Backups
-
+    - "Backups"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-backup
+    vm: "pve-backup"
     mac: ""
-    ip: 192.168.1.11
+    ip: "192.168.1.11"
     vlan: 0
-
   services:
-    - Proxmox Backup Server
-
+    - "Proxmox Backup Server"
   connections:
-    - node-1
+    - "node-1"
 
-
-- id: node-3
-  name: Jarvis
-  status: offline
-  description: Jarvis (pve-home – 192.168.1.12) is the AstraCore smart home automation node, running Home Assistant OS to manage and automate household devices, with integrations such as TP-Link Tapo for smart device control, monitoring, and home environment orchestration.
-
+- id: "node-3"
+  name: "Jarvis"
+  status: "offline"
+  description: >-
+    Jarvis (pve-home – 192.168.1.12) is the AstraCore smart home automation node, running Home Assistant OS to manage and automate household devices, with integrations such as TP-Link Tapo for smart device control, monitoring, and home environment orchestration.
   role:
-    - Smart Home
-
+    - "Smart Home"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-home
+    vm: "pve-home"
     mac: ""
-    ip: 192.168.1.12
+    ip: "192.168.1.12"
     vlan: 0
-
   services:
-    - Home Assistant OS
-    - TP-Link Tapo
-
+    - "Home Assistant OS"
+    - "TP-Link Tapo"
   connections:
-    - node-1
+    - "node-1"
 
-
-- id: node-4
-  name: Apollo
-  status: offline
-  description: Apollo (pve-media – 192.168.1.13) is the AstraCore media server node, responsible for managing and delivering entertainment services through Plex, with automated media acquisition and library management powered by Sonarr, Radarr, Prowlarr, and Overseerr for a fully self-organising media experience.
-
+- id: "node-4"
+  name: "Apollo"
+  status: "offline"
+  description: >-
+    Apollo (pve-media – 192.168.1.13) is the AstraCore media server node, responsible for managing and delivering entertainment services through Plex, with automated media acquisition and library management powered by Sonarr, Radarr, Prowlarr, and Overseerr for a fully self-organising media experience.
   role:
-    - Media Server
-
+    - "Media Server"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-media
+    vm: "pve-media"
     mac: ""
-    ip: 192.168.1.13
+    ip: "192.168.1.13"
     vlan: 0
-
   services:
-    - Plex
-    - Sonarr
-    - Radarr
-    - Prowlarr
-    - Overseerr
-
+    - "Plex"
+    - "Sonarr"
+    - "Radarr"
+    - "Prowlarr"
+    - "Overseerr"
   connections:
-    - node-1
-    - node-8
+    - "node-1"
+    - "node-8"
 
-
-- id: node-5
-  name: Photon Core
-  status: offline
-  description: Photon Core (pve-photos – 192.168.1.14) is the AstraCore photo storage and management node, running Immich to provide self-hosted photo backup, organisation, and AI-powered features such as automated tagging and intelligent search through machine learning.
-
+- id: "node-5"
+  name: "Photon Core"
+  status: "offline"
+  description: >-
+    Photon Core (pve-photos – 192.168.1.14) is the AstraCore photo storage and management node, running Immich to provide self-hosted photo backup, organisation, and AI-powered features such as automated tagging and intelligent search through machine learning.
   role:
-    - Photos
-
+    - "Photos"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-photos
+    vm: "pve-photos"
     mac: ""
-    ip: 192.168.1.14
+    ip: "192.168.1.14"
     vlan: 0
-
   services:
-    - Immich Server
-    - Immich ML
-
+    - "Immich Server"
+    - "Immich ML"
   connections:
-    - node-1
-    - node-9
+    - "node-1"
+    - "node-9"
 
-
-- id: node-6
-  name: The Watchtower
-  status: offline
-  description: The Watchtower (pve-monitor – 192.168.1.15) is the AstraCore monitoring and infrastructure visibility node, providing system observability, container management, uptime tracking, logging, and documentation through tools such as Prometheus, Grafana, Loki, Uptime Kuma, Portainer, Gitea, NetBox, and Diun.
-
+- id: "node-6"
+  name: "The Watchtower"
+  status: "offline"
+  description: >-
+    The Watchtower (pve-monitor – 192.168.1.15) is the AstraCore monitoring and infrastructure visibility node, providing system observability, container management, uptime tracking, logging, and documentation through tools such as Prometheus, Grafana, Loki, Uptime Kuma, Portainer, Gitea, NetBox, and Diun.
   role:
-    - Monitoring & Docs
-
+    - "Monitoring & Docs"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-monitor
+    vm: "pve-monitor"
     mac: ""
-    ip: 192.168.1.15
+    ip: "192.168.1.15"
     vlan: 0
-
   services:
-    - Portainer
-    - Prometheus
-    - Grafana
-    - Uptime Kuma
-    - Gitea
-    - NetBox
-    - Loki
-    - Diun
-
+    - "Portainer"
+    - "Prometheus"
+    - "Grafana"
+    - "Uptime Kuma"
+    - "Gitea"
+    - "NetBox"
+    - "Loki"
+    - "Diun"
   connections:
-    - node-1
-    - node-2
-    - node-3
-    - node-4
-    - node-5
-    - node-7
-    - node-8
-    - node-9
+    - "node-1"
+    - "node-2"
+    - "node-3"
+    - "node-4"
+    - "node-5"
+    - "node-7"
+    - "node-8"
+    - "node-9"
 
-
-- id: node-7
-  name: The Workshop
-  status: offline
-  description: The Workshop (pve-web – 192.168.1.16) is the AstraCore web applications node, hosting internal services such as the Rewards App and Homepage dashboard, supported by PostgreSQL for data persistence and application back-end storage.
-
+- id: "node-7"
+  name: "The Workshop"
+  status: "offline"
+  description: >-
+    The Workshop (pve-web – 192.168.1.16) is the AstraCore web applications node, hosting internal services such as the Rewards App and Homepage dashboard, supported by PostgreSQL for data persistence and application back-end storage.
   role:
-    - Web Apps
-
+    - "Web Apps"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-web
+    vm: "pve-web"
     mac: ""
-    ip: 192.168.1.16
+    ip: "192.168.1.16"
     vlan: 0
-
   services:
-    - Rewards App
-    - PostgreSQL
-    - Dashboard
-
+    - "Rewards App"
+    - "PostgreSQL"
+    - "Dashboard"
   connections:
-    - node-1
-    - node-4
-    - node-9
+    - "node-1"
+    - "node-4"
+    - "node-9"
 
-
-- id: node-8
-  name: The Pirate Cove
-  status: offline
-  description: The Pirate Cove (pve-dl – 192.168.1.17) is the AstraCore download automation node, handling torrent-based downloads and media quality management through qBittorrent and Recyclarr to ensure automated, structured, and consistent media ingestion into the homelab ecosystem.
-
+- id: "node-8"
+  name: "The Pirate Cove"
+  status: "offline"
+  description: >-
+    The Pirate Cove (pve-dl – 192.168.1.17) is the AstraCore download automation node, handling torrent-based downloads and media quality management through qBittorrent and Recyclarr to ensure automated, structured, and consistent media ingestion into the homelab ecosystem.
   role:
-    - Downloads
-
+    - "Downloads"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-dl
+    vm: "pve-dl"
     mac: ""
-    ip: 192.168.1.17
+    ip: "192.168.1.17"
     vlan: 0
-
   services:
-    - qBittorrent
-    - Recyclarr
-
+    - "qBittorrent"
+    - "Recyclarr"
   connections:
-    - node-1
-    - node-4
+    - "node-1"
+    - "node-4"
 
-
-- id: node-9
-  name: Friday
-  status: offline
-  description: Friday (pve-ai – 192.168.1.18) is the AstraCore AI services node, providing local LLM capabilities and conversational interfaces through Ollama and Open WebUI, enabling private, self-hosted AI workloads and interactive model access within the homelab.
-
+- id: "node-9"
+  name: "Friday"
+  status: "offline"
+  description: >-
+    Friday (pve-ai – 192.168.1.18) is the AstraCore AI services node, providing local LLM capabilities and conversational interfaces through Ollama and Open WebUI, enabling private, self-hosted AI workloads and interactive model access within the homelab.
   role:
-    - AI Service
-
+    - "AI Service"
   specs:
-    cpu: Intel Core i5-4570T
-    ram: 8GB
-    storage: 120GB SSD
-
+    cpu: "Intel Core i5-4570T"
+    ram: "8 GB"
+    storage: "120 GB SSD"
   network:
-    vm: pve-ai
+    vm: "pve-ai"
     mac: ""
-    ip: 192.168.1.18
+    ip: "192.168.1.18"
     vlan: 0
-
   services:
-    - Ollama
-    - Open WebUI
-
+    - "Ollama"
+    - "Open WebUI"
   connections:
-    - node-1
-    - node-5
-    - node-7
+    - "node-1"
+    - "node-5"
+    - "node-7"
