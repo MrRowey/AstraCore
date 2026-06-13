@@ -49,3 +49,29 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
+
+
+.hero-stats {
+  display: flex;
+  gap: $space-4;
+  margin-top: $space-5;
+  flex-wrap: wrap;
+}
+
+.stat {
+  padding: $space-3 $space-4;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  text-align: center;
+  min-width: 120px;
+
+  span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  strong {
+    font-size: 1.3rem;
+  }
+}

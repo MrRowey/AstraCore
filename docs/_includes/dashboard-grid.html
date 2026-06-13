@@ -1,48 +1,37 @@
-<section class="dashboard-grid">
+<section class="dashboard-section">
 
-    {% include dashboard-card.html
-        label="Cluster Status"
-        value="Operational"
-        description="All core services responding normally."
-    %}
+    <div class="dashboard-header">
+        <h2>Infrastructure Overview</h2>
+        <p>Live view of all AstraCore nodes</p>
+    </div>
 
-    {% assign node_count = site.nodes | size %}
-    {% assign hypervisor_value = node_count | append: " Active Nodes" %}
-    {% include dashboard-card.html
-        label="Hypervisors"
-        value=hypervisor_value
-        description="Proxmox virtualization hosts and service nodes."
-    %}
+    <div class="dashboard-grid">
 
-    {% assign online_nodes = site.nodes | where: "status", "Online" | size %}
-    {% assign online_value = online_nodes | append: " Online" %}
-    {% include dashboard-card.html
-        label="Node Availability"
-        value=online_value
-        description="Remaining nodes in standby or offline state."
-    %}
+        {% for node in site.data.nodes %}
 
-    {% assign total_roles = 0 %}
-    {% for n in site.nodes %}
-        {% assign total_roles = total_roles | plus: n.role.size %}
-    {% endfor %}
-    {% assign services_value = total_roles | append: " Services" %}
-    {% include dashboard-card.html
-        label="Services Running"
-        value=services_value
-        description="Distributed across all nodes in the cluster."
-    %}
+            <a class="dashboard-node-card" href="{{ '/nodes/' | append: node.id | append: '/' | relative_url }}">
 
-    {% include dashboard-card.html
-        label="Container Stack"
-        value="Docker + LXC"
-        description="Microservices, automation, and internal tooling."
-    %}
+                <div class="node-card-top">
+                    <h3>{{ node.name }}</h3>
 
-    {% include dashboard-card.html
-        label="Quick Links"
-        value="Explore"
-        description="<a href='/nodes/'>Nodes</a> · <a href='/configs/'>Configs</a> · <a href='/scripts/'>Scripts</a> · <a href='/README.md'>Contribute</a>"
-    %}
+                    <span class="status-pill {{ node.status | downcase }}">
+                        {{ node.status }}
+                    </span>
+                </div>
+
+                <div class="node-card-meta">
+                    <div>🖥 {{ node.network.vm }}</div>
+                    <div>🌐 {{ node.network.ip }}</div>
+                </div>
+
+                <div class="node-card-role">
+                    {{ node.role | join: ", " }}
+                </div>
+
+            </a>
+
+        {% endfor %}
+
+    </div>
 
 </section>

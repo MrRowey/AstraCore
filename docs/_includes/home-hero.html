@@ -1,5 +1,7 @@
 <section class="hero" aria-labelledby="home-hero">
+
     <div class="hero-content">
+
         <p class="eyebrow">PROXMOX • CONTAINERS • DISTRIBUTED SYSTEMS</p>
 
         <h1 id="home-hero">AstraCore Infrastructure Cluster</h1>
@@ -9,12 +11,31 @@
             orchestration, and resilient services.
         </p>
 
-        <div class="hero-buttons" role="navigation" aria-label="Hero quick actions">
-            <a href="{{ '/nodes/' | relative_url }}" class="primary-btn">View Nodes</a>
-            <a href="{{ '/configs/' | relative_url }}" class="secondary-btn">Configs</a>
-            <a href="{{ site.github_repo }}" class="secondary-btn" target="_blank" rel="noopener noreferrer">
-                GitHub Repository
-            </a>
+        <!-- NEW STATS -->
+        <div class="hero-stats">
+
+            <div class="stat">
+                <span>Nodes</span>
+                <strong>{{ site.data.nodes | size }}</strong>
+            </div>
+
+            <div class="stat">
+                <span>Systems</span>
+                <strong>9</strong>
+            </div>
+
+            <div class="stat">
+                <span>Status</span>
+                <strong>Active</strong>
+            </div>
+
         </div>
+
+        <div class="hero-buttons" role="navigation">
+            <a href="{{ '/nodes/' | relative_url }}" class="primary-btn">View Nodes</a>
+            <a href="{{ site.github_repo }}" class="secondary-btn" target="_blank">GitHub</a>
+        </div>
+
     </div>
+
 </section>
