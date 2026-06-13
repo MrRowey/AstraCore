@@ -104,4 +104,29 @@
     font-size: 1.4rem;
     color: var(--text);
   }
+
+}
+
+
+.hero {
+  position: relative;
+  padding-bottom: $space-8;
+  margin-bottom: $space-7;
+}
+
+/* visual separation line */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 229, 255, 0.25),
+    transparent
+  );
 }
