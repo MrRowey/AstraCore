@@ -1,0 +1,12 @@
+{% for item in include.data %}
+  {% assign key = item[0] %}
+  {% assign value = item[1] %}
+
+  <div class="spec-card">
+    <span>
+      <i class="fas fa-network-wired"></i>
+      {{ key | upcase }}
+    </span>
+    <strong>{{ value }}</strong>
+  </div>
+{% endfor %}
