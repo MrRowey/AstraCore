@@ -13,6 +13,6 @@ Coordinates core modular inclusion components onto a unified index stream.
 =============================================================================
 {% endcomment %}
 
-{% include hero.html %}
+{% include home-hero.html %}
 
-{% include dashboard.html %}
+{% include dashboard-grid.html %}
