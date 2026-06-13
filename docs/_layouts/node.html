@@ -13,31 +13,76 @@ layout: default
 
 <div class="node-page fade-in">
 
-    {% if node %}
+{% if node %}
 
-        <header class="node-header-block">
-            {% include node-header.html node=node %}
-        </header>
+<!-- HERO CARD -->
+<section class="node-hero">
 
-        <section class="node-section">
-            {% include node-overview.html node=node %}
-        </section>
+    <div class="node-title-row">
+        <h1>{{ node.name }}</h1>
 
-        <section class="node-section">
-            {% include spec-grid.html node=node %}
-        </section>
+        <span class="status-badge {{ node.status | downcase }}">
+            {{ node.status }}
+        </span>
+    </div>
 
-    {% else %}
-        <p>❌ Node not found: {{ node_id }}</p>
-    {% endif %}
+    <div class="node-meta">
+        <div>🖥 {{ node.network.vm }}</div>
+        <div>🌐 {{ node.network.ip }}</div>
+        <div>🏷 {{ node.role | join: ", " }}</div>
+    </div>
 
-    <!-- DEBUG (keep for now) -->
-    <hr>
+</section>
 
-    <p>DATA SIZE: {{ site.data.nodes | size }}</p>
+<!-- OVERVIEW -->
+<section class="node-section">
+    <h2>Overview</h2>
+    {% include node-overview.html node=node %}
+</section>
 
-    <pre>{{ site.data.nodes | jsonify }}</pre>
+<!-- SERVICES -->
+{% if node.services %}
+<section class="node-section">
+    <h2>Services</h2>
 
-    <p>PAGE ID: {{ page.id }}</p>
+    <div class="service-grid">
+        {% for s in node.services %}
+            <span class="service-badge">{{ s }}</span>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
-</div>
+<!-- SPECIFICATIONS -->
+<section class="node-section">
+    <h2>Specifications</h2>
+    {% include spec-grid.html node=node %}
+</section>
+
+<!-- CONNECTIONS -->
+{% if node.connections %}
+<section class="node-section">
+    <h2>Connected Nodes</h2>
+
+    <div class="connection-grid">
+        {% for c in node.connections %}
+            <a class="connection-card" href="/nodes/{{ c }}/">
+                🔗 {{ c }}
+            </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- DEBUG (REMOVE LATER)
+<hr>
+
+<p>DATA SIZE: {{ site.data.nodes | size }}</p>
+<pre>{{ site.data.nodes | jsonify }}</pre>
+<p>NODE ID: {{ node_id }}</p>
+
+{% else %}
+    <p>❌ Node not found: {{ node_id }}</p>
+{% endif %}
+
+</div>-->

@@ -84,3 +84,105 @@
     color: var(--text);
   }
 }
+
+/* ----------------------------------------
+   Hero Node Header
+---------------------------------------- */
+
+.node-hero {
+  padding: $space-5;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  margin-bottom: $space-7;
+
+  @include glow-soft;
+  @include smooth-transition;
+
+  &:hover {
+    @include glow-medium;
+  }
+}
+
+.node-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-size: 2.4rem;
+    margin: 0;
+  }
+}
+
+/* ----------------------------------------
+   META INFO ROW (VM / IP / ROLE)
+---------------------------------------- */
+
+.node-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-4;
+  margin-top: $space-3;
+  font-size: 0.95rem;
+  color: var(--muted);
+
+  div {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+  }
+}
+
+/* ----------------------------------------
+   Service Badges
+---------------------------------------- */
+
+.service-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: $space-3;
+}
+
+.service-badge {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--cyan);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+
+  @include smooth-transition;
+
+  &:hover {
+    background: rgba(0, 255, 255, 0.15);
+  }
+}
+
+/* ----------------------------------------
+   Connection Cards
+---------------------------------------- */
+
+.connection-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+  margin-top: $space-3;
+}
+
+.connection-card {
+  padding: $space-2 $space-3;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  text-decoration: none;
+  color: var(--text);
+
+  @include glow-soft;
+  @include smooth-transition;
+
+  &:hover {
+    transform: translateY(-2px);
+    @include glow-medium;
+    color: var(--cyan);
+  }
+}

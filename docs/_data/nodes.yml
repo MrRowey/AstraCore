@@ -17,6 +17,13 @@
     ip: 192.168.1.10
     vlan: 0
 
+  services:
+    - AdGuard Home
+    - Traefik
+    - Cloudflare Tunnel
+    - WireGuard
+    - Authelia
+
   connections:
     - node-2
     - node-3
@@ -33,7 +40,6 @@
   status: offline
   description: Memory Core (pve-backup – 192.168.1.11) is the dedicated backup node in the AstraCore homelab, providing centralized data protection and recovery through Proxmox Backup Server (PBS) to ensure reliable snapshotting and restoration of virtual machines and critical services.
 
-
   role:
     - Network
 
@@ -47,6 +53,9 @@
     mac: ""
     ip: 192.168.1.11
     vlan: 0
+
+  services:
+    - Proxmox Backup Server
 
   connections:
     - node-1
@@ -72,6 +81,10 @@
     ip: 192.168.1.12
     vlan: 0
 
+  services:
+    - Home Assistant OS
+    - TP-Link Tapo
+
   connections:
     - node-1
 
@@ -95,6 +108,13 @@
     mac: ""
     ip: 192.168.1.13
     vlan: 0
+
+  services:
+    - Plex
+    - Sonarr
+    - Radarr
+    - Prowlarr
+    - Overseerr
 
   connections:
     - node-1
@@ -121,6 +141,10 @@
     ip: 192.168.1.14
     vlan: 0
 
+  services:
+    - Immich Server
+    - Immich ML
+
   connections:
     - node-1
     - node-9
@@ -145,6 +169,16 @@
     mac: ""
     ip: 192.168.1.15
     vlan: 0
+
+  services:
+    - Portainer
+    - Prometheus
+    - Grafana
+    - Uptime Kuma
+    - Gitea
+    - NetBox
+    - Loki
+    - Diun
 
   connections:
     - node-1
@@ -177,6 +211,11 @@
     ip: 192.168.1.16
     vlan: 0
 
+  services:
+    - Rewards App
+    - PostgreSQL
+    - Dashboard
+
   connections:
     - node-1
     - node-4
@@ -203,6 +242,10 @@
     ip: 192.168.1.17
     vlan: 0
 
+  services:
+    - qBittorrent
+    - Recyclarr
+
   connections:
     - node-1
     - node-4
@@ -227,6 +270,10 @@
     mac: ""
     ip: 192.168.1.18
     vlan: 0
+
+  services:
+    - Ollama
+    - Open WebUI
 
   connections:
     - node-1
