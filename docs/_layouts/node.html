@@ -2,27 +2,42 @@
 layout: default
 ---
 
-{% assign node = site.data.nodes | where: "id", page.node_id | first %}
+{% assign node_id = page.id | split: "/" | last %}
+
+{% assign node = nil %}
+{% for n in site.data.nodes %}
+  {% if n.id == node_id %}
+    {% assign node = n %}
+  {% endif %}
+{% endfor %}
 
 <div class="node-page fade-in">
 
-    <header class="node-header-block">
-        {% include node-header.html node=node %}
-    </header>
+    {% if node %}
 
-    <section class="node-section">
-        {% include node-overview.html node=node %}
-    </section>
+        <header class="node-header-block">
+            {% include node-header.html node=node %}
+        </header>
 
-    <section class="node-section">
-        {% include spec-grid.html node=node %}
-    </section>
+        <section class="node-section">
+            {% include node-overview.html node=node %}
+        </section>
 
-<p>DATA SIZE: {{ site.data.nodes | size }}</p>
+        <section class="node-section">
+            {% include spec-grid.html node=node %}
+        </section>
 
-<pre>{{ site.data.nodes | jsonify }}</pre>
+    {% else %}
+        <p>❌ Node not found: {{ node_id }}</p>
+    {% endif %}
 
-<p>PAGE ID: {{ page.id }}</p>
+    <!-- DEBUG (keep for now) -->
+    <hr>
 
+    <p>DATA SIZE: {{ site.data.nodes | size }}</p>
+
+    <pre>{{ site.data.nodes | jsonify }}</pre>
+
+    <p>PAGE ID: {{ page.id }}</p>
 
 </div>
