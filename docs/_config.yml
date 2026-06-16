@@ -30,6 +30,7 @@ github_repo: "https://github.com/MrRowey/AstraCore"
 # 3. Compilation Render Core Engines
 markdown: kramdown
 permalink: pretty
+encoding: "utf-8" # Forces the system engine to parse assets using UTF-8 to prevent binary emoji conversion crashes
 
 # Explicitly signals custom handcrafted layout pipeline sheets over precompiled gem engines
 theme: null
