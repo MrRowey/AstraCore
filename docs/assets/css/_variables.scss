@@ -50,7 +50,7 @@
 /* ==========================================================================
    2. LIGHT THEME (Activated via JS data-theme="light")
    ========================================================================== */
-[data-theme="light"] {
+@mixin light-theme-tokens {
   /* Core Colors (Deepened slightly for text contrast against light backgrounds) */
   --cyan-hex: #0097a7;
   --cyan-rgb: 0, 151, 167; 
@@ -81,10 +81,14 @@
     0 4px 8px rgba(var(--cyan-rgb), 0.12);
 }
 
+[data-theme="light"] {
+  @include light-theme-tokens;
+}
+
 /* Optional: Automatically hook into the user's system preferences if they don't explicitly toggle */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     /* Merges light theme defaults automatically if the user has a OS light mode */
-    @extend [data-theme="light"];
+    @include light-theme-tokens;
   }
 }
