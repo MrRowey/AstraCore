@@ -63,3 +63,8 @@
   // Flex/Grid Gaps
   .gap-#{$level} { gap: $size; }
 }
+
+/* Inside your _utilities.scss file */
+.text-cyan {
+  color: var(--cyan-hex) !important; /* Forces font awesome icons to respect theme state */
+}

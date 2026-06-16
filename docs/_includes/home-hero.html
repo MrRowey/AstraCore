@@ -1,81 +1,37 @@
 {% comment %}
 =============================================================================
-AstraCore Core Component: Dynamic Landing Infrastructure Telemetry Hero
-Calculates real-time active service matrices natively out of configuration files.
+AstraCore Core Component: Dynamic Infrastructure Node Card
+Designed for flexible fluid matrix placement loops across grid modules.
 =============================================================================
 {% endcomment %}
 
-<section class="hero" aria-labelledby="home-hero">
-    <div class="hero-content main-content flex flex-column">
+{% capture node_target_url %}/nodes/{{ node.id }}/{% endcapture %}
 
-        <p class="eyebrow">PROXMOX • CONTAINERS • DISTRIBUTED SYSTEMS</p>
+<a href="{{ node_target_url | relative_url }}" 
+   class="node-card" 
+   aria-label="System Node Console for {{ node.name }} - Operational State: {{ node.status | upcase }}">
 
-        <h1 id="home-hero">{{ site.title | default: "AstraCore Infrastructure Cluster" }}</h1>
-
-        <p class="hero-text text-muted mb-4">
-            A consolidated homelab platform for virtualization, container workloads,
-            orchestration, and resilient services.
-        </p>
-
-        {% assign total_services = 0 %}
-        {% assign online_nodes = 0 %}
-
-        {% if site.data.nodes and site.data.nodes.size > 0 %}
-            {% for node in site.data.nodes %}
-                
-                {% if node.services %}
-                    {% assign total_services = total_services | plus: node.services.size %}
-                {% endif %}
-
-                {% assign normalized_status = node.status | downcase | strip %}
-                {% if normalized_status == "online" %}
-                    {% assign online_nodes = online_nodes | plus: 1 %}
-                {% endif %}
-
-            {% endfor %}
-            {% assign total_nodes = site.data.nodes | size %}
-        {% else %}
-            {% assign total_nodes = 0 %}
-        {% endif %}
-
-        <div class="hero-stats mb-5" role="region" aria-label="Cluster Vitals Telemetry">
-
-            <div class="stat">
-                <span>Nodes</span>
-                <strong>{{ total_nodes }}</strong>
-            </div>
-
-            <div class="stat">
-                <span>Services</span>
-                <strong>{{ total_services }}</strong>
-            </div>
-
-            <div class="stat">
-                <span>Status</span>
-                {% if total_nodes == 0 %}
-                    <strong class="text-muted">Unmapped</strong>
-                {% elsif online_nodes == 0 %}
-                    <strong style="color: var(--cyan);">Build Phase</strong>
-                {% elsif online_nodes == total_nodes %}
-                    <strong style="color: var(--green);">Active</strong>
-                {% else %}
-                    <strong style="color: var(--red);">{{ online_nodes }}/{{ total_nodes }} Online</strong>
-                {% endif %}
-            </div>
-
-        </div>
-
-        <div class="hero-buttons flex gap-3 flex-wrap" role="navigation" aria-label="Hero Actions">
-            {% if site.github_repo %}
-                <a href="{{ site.github_repo }}" 
-                   class="secondary-btn" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   aria-label="Access External AstraCore Source Repository (Opens in a new tab)">
-                   GitHub Codebase
-                </a>
-            {% endif %}
-        </div>
-
+  <div class="node-card-top flex justify-between align-start w-100 mb-2">
+    
+    <div class="node-card-title flex flex-column">
+      <h2 class="m-0" style="color: var(--text);">{{ node.name }}</h2>
+      
+      {% if node.network.vm and node.network.vm != "" %}
+        <span class="card-label text-muted mt-1">{{ node.network.vm }}</span>
+      {% endif %}
     </div>
-</section>
+
+    <span class="status-badge {{ node.status | downcase }}">
+      <span class="status-indicator"></span>
+      {{ node.status | upcase }}
+    </span>
+
+  </div>
+
+  {% if node.role and node.role.size > 0 %}
+    <p class="node-role m-0 text-muted">
+      {{ node.role | join: " • " }}
+    </p>
+  {% endif %}
+
+</a>
