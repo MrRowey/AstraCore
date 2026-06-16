@@ -4,29 +4,27 @@
 ----------------------------------------------------------------------------- */
 
 .node-page {
-  max-width: 1200px; // Standardized alignment track to match layout wrappers
+  max-width: 1200px; 
   margin: 0 auto;
   padding: $space-7 $space-4;
 
   /* ---------------------------------
      Dynamic System Console Header
   ---------------------------------- */
-
   .node-hero {
     padding: $space-5;
     border-radius: 16px;
-    background: rgba(var(--cyan-rgb), 0.02);
-    border: 1px solid rgba(var(--cyan-rgb), 0.05);
+    background: var(--panel);
+    border: 1px solid var(--border);
     margin-bottom: $space-7;
-    @include glow-soft;
+    box-shadow: var(--glow-soft);
     
-    // Explicit transition parameters to optimize rendering tracks
     transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
-      background: rgba(var(--cyan-rgb), 0.04);
-      border-color: rgba(var(--cyan-rgb), 0.15);
-      @include glow-medium;
+      background: var(--bg-secondary);
+      border-color: var(--cyan-hex);
+      box-shadow: var(--glow-medium);
     }
 
     .node-title-row {
@@ -40,16 +38,17 @@
         font-size: 2.4rem;
         margin: 0;
         letter-spacing: -0.02em;
+        color: var(--text);
       }
     }
 
     .node-role {
-      color: var(--cyan);
+      color: var(--cyan-hex);
       font-size: 1rem;
       margin-top: $space-2;
     }
 
-    /* Meta Info Strip (VM / IP / ROLES) */
+    /* Meta Info Strip */
     .node-meta {
       display: flex;
       flex-wrap: wrap;
@@ -63,10 +62,11 @@
         align-items: center;
         gap: $space-2;
         padding: 6px 14px;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: var(--bg-primary);
+        border: 1px solid var(--border);
         border-radius: 8px;
         font-size: 0.9rem;
+        transition: background 0.3s ease, border-color 0.3s ease;
 
         code {
           font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
@@ -80,7 +80,6 @@
   /* ---------------------------------
      Structural Sections
   ---------------------------------- */
-
   .node-section {
     margin-bottom: $space-7;
 
@@ -92,7 +91,6 @@
   /* ---------------------------------
      Hardware Specifications Grid
   ---------------------------------- */
-
   .spec-grid {
     @include grid-auto(220px, $space-4);
     margin-top: $space-3;
@@ -101,7 +99,6 @@
   /* ---------------------------------
      Microservices Workloads & Badges
   ---------------------------------- */
-
   .service-grid {
     display: flex;
     flex-wrap: wrap;
@@ -113,9 +110,9 @@
     position: relative;
     padding: 6px 12px 6px 24px;
     border-radius: 8px;
-    background: rgba(var(--cyan-rgb), 0.08);
-    border: 1px solid rgba(var(--cyan-rgb), 0.12);
-    color: var(--cyan);
+    background: var(--cyan-glow);
+    border: 1px solid var(--border);
+    color: var(--text);
     font-size: 0.85rem;
     letter-spacing: 0.03em;
     transition: background 0.22s ease, border-color 0.22s ease;
@@ -127,20 +124,19 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 6px var(--cyan);
+      background: var(--cyan-hex);
+      box-shadow: var(--glow-soft);
     }
 
     &:hover {
-      background: rgba(var(--cyan-rgb), 0.15);
-      border-color: rgba(var(--cyan-rgb), 0.3);
+      background: var(--cyan-glow);
+      border-color: var(--cyan-hex);
     }
   }
 
   /* ---------------------------------
      Network Topology Link Vectors
   ---------------------------------- */
-
   .connection-grid {
     display: flex;
     flex-wrap: wrap;
@@ -151,27 +147,26 @@
   .connection-card {
     padding: $space-2 $space-3;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--panel);
+    border: 1px solid var(--border);
     text-decoration: none;
     color: var(--text);
     outline: none;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    @include glow-soft;
+    box-shadow: var(--glow-soft);
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 
     &:hover,
     &:focus-visible {
       transform: translateY(-2px);
-      border-color: rgba(var(--cyan-rgb), 0.25);
-      color: var(--cyan);
-      @include glow-medium;
+      border-color: var(--cyan-hex);
+      color: var(--cyan-hex);
+      box-shadow: var(--glow-medium);
     }
   }
 
   /* ---------------------------------
      Status Tracking Alert Monitors
   ---------------------------------- */
-
   .node-status-alert {
     display: flex;
     align-items: flex-start;
@@ -180,8 +175,9 @@
     border-radius: 8px;
     font-size: 0.9rem;
     line-height: 1.5;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--panel);
     border-left: 3px solid var(--border);
+    transition: background 0.3s ease, border-color 0.3s ease;
 
     .alert-icon {
       font-size: 1.1rem;
@@ -191,9 +187,10 @@
     code {
       font-family: monospace;
       padding: 2px 6px;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-primary);
       border-radius: 4px;
       color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     &.alert-offline {
@@ -204,52 +201,9 @@
 
     &.alert-planned,
     &.alert-building {
-      border-left-color: var(--cyan);
-      background: rgba(var(--cyan-rgb), 0.05);
-      code { color: var(--cyan); }
+      border-left-color: var(--cyan-hex);
+      background: var(--cyan-glow);
+      code { color: var(--cyan-hex); }
     }
-  }
-
-  .node-overview-text {
-    line-height: 1.7;
-  }
-}
-
-/* ---------------------------------
-   5. Dynamic Global Pulse Animators
----------------------------------- */
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  .status-indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  &.online .status-indicator {
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
-    animation: pulse-glow 2s infinite ease-in-out;
-  }
-
-  &.offline .status-indicator {
-    background: var(--red);
-    box-shadow: 0 0 8px var(--red);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { 
-    opacity: 0.6; 
-    transform: scale(0.95); 
-  }
-  50% { 
-    opacity: 1; 
-    transform: scale(1.05); 
   }
 }

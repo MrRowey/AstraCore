@@ -1,17 +1,13 @@
 /* ---------------------------------
    Layout Containers
 ---------------------------------- */
-
-// It is highly recommended to merge this with your previously defined 
-// .main-content rule to avoid conflicting padding!
 .main-content,
 .nav-container {
   max-width: 1200px;
-  margin: 0 auto; // 0 auto is generally more predictable than just 'auto'
+  margin: 0 auto; 
 }
 
 .main-content {
-  // Replaced 4rem 2rem with assumed equivalent variables
   padding: $space-8 $space-5; 
 }
 
@@ -19,36 +15,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // Replaced 1rem 2rem with assumed equivalent variables
   padding: $space-4 $space-5; 
 }
 
 /* ---------------------------------
    404 Error Page (AstraCore UI)
 ---------------------------------- */
-
 .error-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 70dvh; // Upgraded to dynamic viewport units
+  min-height: 70dvh; 
   padding: $space-6 $space-4;
 
   /* Encapsulated Component Elements */
-  
   .error-card {
     text-align: center;
     max-width: 600px;
     padding: $space-6;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-
-    @include glow-soft;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    box-shadow: var(--glow-soft);
+    transition: background 0.3s ease, border-color 0.3s ease;
 
     h1 {
       font-size: 2rem;
       margin-bottom: $space-3;
+      color: var(--text);
     }
   }
 
@@ -56,8 +50,8 @@
     font-size: 6rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: var(--cyan);
-    text-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+    color: var(--cyan-hex);
+    text-shadow: var(--glow-medium);
     margin-bottom: $space-4;
   }
 
@@ -80,7 +74,7 @@
     color: var(--muted);
 
     code {
-      color: var(--cyan);
+      color: var(--cyan-hex);
     }
   }
 }

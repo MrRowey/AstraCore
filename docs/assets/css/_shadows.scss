@@ -1,32 +1,12 @@
 /* ---------------------------------
-   Global Design Tokens (Put this in your root/variables file)
+   Global Design Tokens Remapping File
 ---------------------------------- */
 
-:root {
-  // Base cyan color to make theming incredibly easy later
-  --glow-color: 0, 229, 255; 
-
-  // Layered shadows for a much more realistic, diffused light effect
-  --glow-soft: 
-    0 0 4px rgba(var(--glow-color), 0.05),
-    0 0 12px rgba(var(--glow-color), 0.08);
-
-  --glow-medium: 
-    0 0 8px rgba(var(--glow-color), 0.1),
-    0 0 20px rgba(var(--glow-color), 0.15);
-
-  --glow-strong: 
-    0 0 10px rgba(var(--glow-color), 0.15),
-    0 0 30px rgba(var(--glow-color), 0.25),
-    0 0 45px rgba(var(--glow-color), 0.1); // Extra wide spread for strong glows
-}
+// Removed hardcoded :root declaration array since scales are securely compiled within your master _variables.scss component!
 
 /* ---------------------------------
-   Mixins (Optional, but improved!)
+   Mixins (Improved Theme-Reactive Pipeline Hooks)
 ---------------------------------- */
-
-// If you keep the mixins, you can now easily pass an optional 
-// custom color override if a specific node needs to glow red or green!
 
 @mixin glow-soft($custom-glow: var(--glow-soft)) {
   box-shadow: $custom-glow;

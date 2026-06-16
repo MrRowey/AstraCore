@@ -5,13 +5,11 @@
 // Base shared styles
 .primary-btn,
 .secondary-btn {
-  // Layout & Alignment
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; // Adds perfect spacing if you ever add an icon
+  gap: 0.5rem; 
   
-  // Sizing & Typography
   padding: 0.95rem 1.5rem;
   border-radius: 12px;
   font-family: inherit;
@@ -19,17 +17,14 @@
   font-weight: 500;
   text-decoration: none;
   
-  // Interaction behaviors
   cursor: pointer;
   user-select: none;
   border: 1px solid var(--border);
   
-  // Explicit transitions for performance
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 
   @include focus-ring;
 
-  // Shared hover behavior
   &:hover {
     transform: translateY(-3px);
   }
@@ -37,12 +32,14 @@
 
 // Primary specific styles
 .primary-btn {
-  background: rgba(0, 229, 255, 0.08);
-  color: var(--cyan);
-  box-shadow: 0 0 18px rgba(0, 229, 255, 0.15);
+  background: var(--cyan-glow);
+  color: var(--cyan-hex);
+  box-shadow: var(--glow-soft);
 
   &:hover {
-    box-shadow: 0 0 25px rgba(0, 229, 255, 0.2);
+    background: var(--cyan-glow);
+    border-color: var(--cyan-hex);
+    box-shadow: var(--glow-medium);
   }
 }
 
@@ -52,9 +49,7 @@
   color: var(--text);
 
   &:hover {
-    // Replaced the cyan shadow with a subtle text-color-based shadow. 
-    // Change this back if the cyan glow was intentional!
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); 
+    box-shadow: var(--glow-soft); 
     border-color: var(--text);
   }
 }
