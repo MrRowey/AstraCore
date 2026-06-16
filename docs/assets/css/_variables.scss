@@ -1,38 +1,35 @@
 /* ---------------------------------
-   Design Tokens / CSS Variables
+    Design Tokens & Theme Scales
 ---------------------------------- */
 
+// ROOT contains tokens that stay the SAME across both light and dark modes
 :root {
-  /* ---------------------------------
-     Core Colors (Hex & RGB for Alpha Layers)
-  ---------------------------------- */
-  
-  --cyan-hex: #00e5ff;
-  --cyan-rgb: 0, 229, 255; // Used to dynamically generate rgba()
-  
+  /* Core Status Colors */
   --green: #32ff9c;
   --red: #ff5c7a;
+}
+
+/* ==========================================================================
+   1. DARK THEME (Default / Preferred)
+   ========================================================================== */
+:root, [data-theme="dark"] {
+  /* Core Colors */
+  --cyan-hex: #00e5ff;
+  --cyan-rgb: 0, 229, 255; 
   
   --text: #d7e7ff;
   --muted: #7f91b0;
 
-  /* ---------------------------------
-     Backgrounds & Surfaces
-  ---------------------------------- */
-  
+  /* Backgrounds & Surfaces */
   --bg-primary: #050816;
   --bg-secondary: #0b1120;
   --panel: rgba(12, 18, 38, 0.85);
   
-  /* Constructing colors dynamically using the RGB token */
+  /* Derived Dynamic Layout Colors */
   --border: rgba(var(--cyan-rgb), 0.15);
   --cyan-glow: rgba(var(--cyan-rgb), 0.35);
 
-  /* ---------------------------------
-     Glow & Shadow Scale
-  ---------------------------------- */
-  
-  /* Layered shadows for realistic neon light diffusion */
+  /* Glow & Shadow Scale (Neon Diffusion) */
   --glow-soft: 
     0 0 4px rgba(var(--cyan-rgb), 0.05),
     0 0 12px rgba(var(--cyan-rgb), 0.08);
@@ -45,4 +42,46 @@
     0 0 10px rgba(var(--cyan-rgb), 0.15),
     0 0 30px rgba(var(--cyan-rgb), 0.25),
     0 0 45px rgba(var(--cyan-rgb), 0.1);
+}
+
+/* ==========================================================================
+   2. LIGHT THEME (Activated via JS data-theme="light")
+   ========================================================================== */
+[data-theme="light"] {
+  /* Core Colors (Deepened slightly for text contrast against light backgrounds) */
+  --cyan-hex: #0097a7;
+  --cyan-rgb: 0, 151, 167; 
+  
+  --text: #1a2332;
+  --muted: #546582;
+
+  /* Backgrounds & Surfaces */
+  --bg-primary: #f4f7fc;
+  --bg-secondary: #ffffff;
+  --panel: rgba(255, 255, 255, 0.9);
+  
+  /* Derived Dynamic Layout Colors */
+  --border: rgba(var(--cyan-rgb), 0.2);
+  --cyan-glow: rgba(var(--cyan-rgb), 0.15);
+
+  /* Glow & Shadow Scale (Subtle, crisp UI shadows instead of heavy neon glow) */
+  --glow-soft: 
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 1px 2px rgba(var(--cyan-rgb), 0.05);
+
+  --glow-medium: 
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    0 2px 4px rgba(var(--cyan-rgb), 0.08);
+
+  --glow-strong: 
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 4px 8px rgba(var(--cyan-rgb), 0.12);
+}
+
+/* Optional: Automatically hook into the user's system preferences if they don't explicitly toggle */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    /* Merges light theme defaults automatically if the user has a OS light mode */
+    @extend [data-theme="light"];
+  }
 }

@@ -6,7 +6,7 @@ Renders dynamic server compilation datestamps and links securely.
 {% endcomment %}
 
 <footer class="footer" role="contentinfo">
-  <div class="main-content flex justify-between align-center flex-wrap gap-4 w-100">
+  <div class="footer-inner main-content flex justify-between align-center flex-wrap gap-4 w-100">
 
     <div class="footer-left flex flex-column gap-1">
       <div class="footer-title">
@@ -34,6 +34,11 @@ Renders dynamic server compilation datestamps and links securely.
       <a href="{{ '/' | relative_url }}" class="footer-link">
         Cluster Matrix
       </a>
+
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle system interface color scheme" title="Toggle Light/Dark Interface">
+        <span class="mode-icon light-icon">☀️</span>
+        <span class="mode-icon dark-icon">🌙</span>
+      </button>
       
     </div>
 
