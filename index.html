@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -61,32 +61,338 @@
       </div>
     </section>
 
-    <!-- 3. Phase 1: Distributed Cluster -->
-    <section id="hardware" class="section-padding">
-      <div class="container">
-        <h2>## Phase 1: Distributed Cluster</h2>
-        <p>The current hardware topology relies on low-power, high-efficiency nodes clustered via Proxmox VE.</p>
-        
-        <div class="grid-2">
-          <div class="card">
-            <h3>Hardware Nodes</h3>
-            <ul>
-              <li><strong>Node 01 (Compute):</strong> Mini PC, Intel i5 12th Gen, 64GB RAM, 2TB NVMe</li>
-              <li><strong>Node 02 (Storage):</strong> NAS, Intel Celeron, 16GB RAM, 32TB HDD Pool</li>
-              <li><strong>Node 03 (Edge):</strong> Raspberry Pi 4, 8GB RAM, PoE+</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Infrastructure Stack</h3>
-            <ul>
-              <li><strong>Virtualization:</strong> Proxmox VE (High Availability Cluster)</li>
-              <li><strong>Containerization:</strong> Docker / Docker Swarm</li>
-              <li><strong>Storage:</strong> TrueNAS SCALE, ZFS datasets, NFS/SMB shares</li>
-            </ul>
-          </div>
+  <!-- 3. Phase 1: Distributed Cluster -->
+  <section id="hardware" class="section-padding">
+  <div class="container">
+    <h2>## Phase 1: Distributed Cluster</h2>
+    <p class="section-desc">At-a-glance status of the Proxmox VE cluster infrastructure. Select a node to dial into detailed specifications and running workloads.</p>
+
+    <!-- Cluster At-A-Glance Overview Summary -->
+    <div class="cluster-summary-grid">
+      <div class="summary-card">
+        <span class="summary-label">TOTAL COMPUTE</span>
+        <span class="summary-val">16 Cores / 32 Threads</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-label">TOTAL RAM</span>
+        <span class="summary-val">88 GB DDR4</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-label">STORAGE POOL</span>
+        <span class="summary-val">34 TB (ZFS RAID-Z2)</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-label">CLUSTER STATUS</span>
+        <span class="summary-val status-online">● HEALTHY (3/3 Nodes)</span>
+      </div>
+    </div>
+
+    <!-- Interactive Node Selector Tabs -->
+    <div class="node-tabs" role="tablist" aria-label="Cluster Nodes">
+      <button class="node-tab active" role="tab" aria-selected="true" aria-controls="node-01" id="tab-node-01">
+        <span class="node-badge">NODE-01</span>
+        <span class="node-name">PVE-Net</span>
+      </button>
+      <button class="node-tab" role="tab" aria-selected="false" aria-controls="node-02" id="tab-node-02">
+        <span class="node-badge">NODE-02</span>
+        <span class="node-name">PVE-Backup</span>
+      </button>
+      <button class="node-tab" role="tab" aria-selected="false" aria-controls="node-03" id="tab-node-03">
+        <span class="node-badge">NODE-03</span>
+        <span class="node-name">PVE-Home</span>
+      </button>
+      <button class="node-tab active" role="tab" aria-selected="true" aria-controls="node-04" id="tab-node-04">
+        <span class="node-badge">NODE-04</span>
+        <span class="node-name">PVE-Media</span>
+      </button>
+      <button class="node-tab" role="tab" aria-selected="false" aria-controls="node-05" id="tab-node-05">
+        <span class="node-badge">NODE-05</span>
+        <span class="node-name">PVE-Photos</span>
+      </button>
+      <button class="node-tab" role="tab" aria-selected="false" aria-controls="node-06" id="tab-node-06">
+        <span class="node-badge">NODE-06</span>
+        <span class="node-name">PVE-Monitor</span>
+      </button>
+      <button class="node-tab active" role="tab" aria-selected="true" aria-controls="node-07" id="tab-node-07">
+        <span class="node-badge">NODE-07</span>
+        <span class="node-name">PVE-Web</span>
+      </button>
+      <button class="node-tab" role="tab" aria-selected="false" aria-controls="node-08" id="tab-node-08">
+        <span class="node-badge">NODE-08</span>
+        <span class="node-name">PVE-DL</span>
+      </button>
+      <button class="node-tab" role="tab" aria-selected="false" aria-controls="node-09" id="tab-node-09">
+        <span class="node-badge">NODE-09</span>
+        <span class="node-name">PVE-AI</span>
+      </button>
+    </div>
+
+    <!-- Node 01 Detail Panel -->
+    <div class="node-panel active" id="node-01" role="tabpanel" aria-labelledby="tab-node-01">
+      <div class="node-detail-header">
+        <h3>PVE-Net.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 10.1.1.20 | OS: Proxmox VE 8.1</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> Intel Core i3-4130T (2C / 4T)</li>
+            <li><strong>RAM:</strong> 8GB DDR3 1600MHz</li>
+            <li><strong>Storage:</strong> 120GB SSD</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (VMs & LXCs)</h4>
+          <ul class="spec-list">
+            - Adguard
+            - Traefik
+            - Authelia
+            - CloudFlared
+            - Wiregaurd
+
+            <li><span class="workload-tag vm">VM 100</span> <strong>Docker Swarm Manager:</strong> Core web apps & reverse proxy</li>
+            <li><span class="workload-tag lxc">LXC 101</span> <strong>Ollama LLM:</strong> Local AI inference endpoint</li>
+            <li><span class="workload-tag lxc">LXC 102</span> <strong>Jellyfin Transcoder:</strong> QuickSync hardware acceleration</li>
+            <li><span class="workload-tag lxc">LXC 103</span> <strong>Uptime Kuma & Grafana:</strong> Telemetry collection</li>
+          </ul>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Node 02 Detail Panel -->
+    <div class="node-panel" id="node-02" role="tabpanel" aria-labelledby="tab-node-02" hidden>
+      <div class="node-detail-header">
+        <h3>node-02.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.11 | OS: TrueNAS SCALE</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> Intel Celeron N5105 (4C / 4T)</li>
+            <li><strong>RAM:</strong> 16GB DDR4 ECC</li>
+            <li><strong>Storage:</strong> 4x 8TB NAS HDDs (RAID-Z2) + 500GB SSD Cache</li>
+            <li><strong>Network:</strong> Dual 1GbE (LACP Bonding)</li>
+            <li><strong>Role:</strong> Centralized ZFS storage pool & backup target</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads & Storage Shares</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag share">NFS</span> <strong>/mnt/pool/media:</strong> High-speed access for Jellyfin</li>
+            <li><span class="workload-tag share">SMB</span> <strong>/mnt/pool/backups:</strong> Proxmox PBS & Time Machine target</li>
+            <li><span class="workload-tag lxc">LXC 201</span> <strong>Nextcloud:</strong> Personal cloud storage & Sync</li>
+            <li><span class="workload-tag lxc">LXC 202</span> <strong>Immich:</strong> Photo backup database & assets</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Node 03 Detail Panel -->
+    <div class="node-panel" id="node-03" role="tabpanel" aria-labelledby="tab-node-03" hidden>
+      <div class="node-detail-header">
+        <h3>node-03.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.12 | OS: Debian 12 (Bare Metal)</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> ARM Cortex-A72 (4C @ 1.5GHz)</li>
+            <li><strong>RAM:</strong> 8GB LPDDR4</li>
+            <li><strong>Storage:</strong> 128GB High-Endurance microSD</li>
+            <li><strong>Network:</strong> 1GbE (PoE+ Powered via Managed Switch)</li>
+            <li><strong>Role:</strong> Low-power network edge & DNS gateway</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (Critical Infrastructure)</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag docker">Docker</span> <strong>Pi-hole (Primary):</strong> Network-wide ad blocking</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Tailscale Subnet Router:</strong> Secure remote mesh VPN</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Mosquitto MQTT:</strong> IoT message broker for Home Assistant</li>
+            <li><span class="workload-tag service">Native</span> <strong>Keepalived:</strong> Virtual IP failover guard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+        <!-- Node 04 Detail Panel -->
+    <div class="node-panel" id="node-04" role="tabpanel" aria-labelledby="tab-node-04" hidden>
+      <div class="node-detail-header">
+        <h3>node-04.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.13 | OS: Debian 12 (Bare Metal)</span>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> ARM Cortex-A72 (4C @ 1.5GHz)</li>
+            <li><strong>RAM:</strong> 8GB LPDDR4</li>
+            <li><strong>Storage:</strong> 128GB High-Endurance microSD</li>
+            <li><strong>Network:</strong> 1GbE (PoE+ Powered via Managed Switch)</li>
+            <li><strong>Role:</strong> Low-power network edge & DNS gateway</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (Critical Infrastructure)</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag docker">Docker</span> <strong>Pi-hole (Primary):</strong> Network-wide ad blocking</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Tailscale Subnet Router:</strong> Secure remote mesh VPN</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Mosquitto MQTT:</strong> IoT message broker for Home Assistant</li>
+            <li><span class="workload-tag service">Native</span> <strong>Keepalived:</strong> Virtual IP failover guard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+        <!-- Node 03 Detail Panel -->
+    <div class="node-panel" id="node-03" role="tabpanel" aria-labelledby="tab-node-03" hidden>
+      <div class="node-detail-header">
+        <h3>node-03.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.12 | OS: Debian 12 (Bare Metal)</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> ARM Cortex-A72 (4C @ 1.5GHz)</li>
+            <li><strong>RAM:</strong> 8GB LPDDR4</li>
+            <li><strong>Storage:</strong> 128GB High-Endurance microSD</li>
+            <li><strong>Network:</strong> 1GbE (PoE+ Powered via Managed Switch)</li>
+            <li><strong>Role:</strong> Low-power network edge & DNS gateway</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (Critical Infrastructure)</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag docker">Docker</span> <strong>Pi-hole (Primary):</strong> Network-wide ad blocking</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Tailscale Subnet Router:</strong> Secure remote mesh VPN</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Mosquitto MQTT:</strong> IoT message broker for Home Assistant</li>
+            <li><span class="workload-tag service">Native</span> <strong>Keepalived:</strong> Virtual IP failover guard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+        <!-- Node 03 Detail Panel -->
+    <div class="node-panel" id="node-03" role="tabpanel" aria-labelledby="tab-node-03" hidden>
+      <div class="node-detail-header">
+        <h3>node-03.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.12 | OS: Debian 12 (Bare Metal)</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> ARM Cortex-A72 (4C @ 1.5GHz)</li>
+            <li><strong>RAM:</strong> 8GB LPDDR4</li>
+            <li><strong>Storage:</strong> 128GB High-Endurance microSD</li>
+            <li><strong>Network:</strong> 1GbE (PoE+ Powered via Managed Switch)</li>
+            <li><strong>Role:</strong> Low-power network edge & DNS gateway</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (Critical Infrastructure)</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag docker">Docker</span> <strong>Pi-hole (Primary):</strong> Network-wide ad blocking</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Tailscale Subnet Router:</strong> Secure remote mesh VPN</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Mosquitto MQTT:</strong> IoT message broker for Home Assistant</li>
+            <li><span class="workload-tag service">Native</span> <strong>Keepalived:</strong> Virtual IP failover guard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+        <!-- Node 03 Detail Panel -->
+    <div class="node-panel" id="node-03" role="tabpanel" aria-labelledby="tab-node-03" hidden>
+      <div class="node-detail-header">
+        <h3>node-03.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.12 | OS: Debian 12 (Bare Metal)</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> ARM Cortex-A72 (4C @ 1.5GHz)</li>
+            <li><strong>RAM:</strong> 8GB LPDDR4</li>
+            <li><strong>Storage:</strong> 128GB High-Endurance microSD</li>
+            <li><strong>Network:</strong> 1GbE (PoE+ Powered via Managed Switch)</li>
+            <li><strong>Role:</strong> Low-power network edge & DNS gateway</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (Critical Infrastructure)</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag docker">Docker</span> <strong>Pi-hole (Primary):</strong> Network-wide ad blocking</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Tailscale Subnet Router:</strong> Secure remote mesh VPN</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Mosquitto MQTT:</strong> IoT message broker for Home Assistant</li>
+            <li><span class="workload-tag service">Native</span> <strong>Keepalived:</strong> Virtual IP failover guard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+        <!-- Node 03 Detail Panel -->
+    <div class="node-panel" id="node-03" role="tabpanel" aria-labelledby="tab-node-03" hidden>
+      <div class="node-detail-header">
+        <h3>node-03.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.12 | OS: Debian 12 (Bare Metal)</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> ARM Cortex-A72 (4C @ 1.5GHz)</li>
+            <li><strong>RAM:</strong> 8GB LPDDR4</li>
+            <li><strong>Storage:</strong> 128GB High-Endurance microSD</li>
+            <li><strong>Network:</strong> 1GbE (PoE+ Powered via Managed Switch)</li>
+            <li><strong>Role:</strong> Low-power network edge & DNS gateway</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (Critical Infrastructure)</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag docker">Docker</span> <strong>Pi-hole (Primary):</strong> Network-wide ad blocking</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Tailscale Subnet Router:</strong> Secure remote mesh VPN</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Mosquitto MQTT:</strong> IoT message broker for Home Assistant</li>
+            <li><span class="workload-tag service">Native</span> <strong>Keepalived:</strong> Virtual IP failover guard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+        <!-- Node 03 Detail Panel -->
+    <div class="node-panel" id="node-03" role="tabpanel" aria-labelledby="tab-node-03" hidden>
+      <div class="node-detail-header">
+        <h3>node-03.astracore.lan <span class="badge badge-online">ONLINE</span></h3>
+        <span class="node-ip">IP: 192.168.1.12 | OS: Debian 12 (Bare Metal)</span>
+      </div>
+      <div class="grid-2">
+        <div class="card spec-card">
+          <h4>// Hardware Specs</h4>
+          <ul class="spec-list">
+            <li><strong>CPU:</strong> ARM Cortex-A72 (4C @ 1.5GHz)</li>
+            <li><strong>RAM:</strong> 8GB LPDDR4</li>
+            <li><strong>Storage:</strong> 128GB High-Endurance microSD</li>
+            <li><strong>Network:</strong> 1GbE (PoE+ Powered via Managed Switch)</li>
+            <li><strong>Role:</strong> Low-power network edge & DNS gateway</li>
+          </ul>
+        </div>
+        <div class="card spec-card">
+          <h4>// Running Workloads (Critical Infrastructure)</h4>
+          <ul class="spec-list">
+            <li><span class="workload-tag docker">Docker</span> <strong>Pi-hole (Primary):</strong> Network-wide ad blocking</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Tailscale Subnet Router:</strong> Secure remote mesh VPN</li>
+            <li><span class="workload-tag docker">Docker</span> <strong>Mosquitto MQTT:</strong> IoT message broker for Home Assistant</li>
+            <li><span class="workload-tag service">Native</span> <strong>Keepalived:</strong> Virtual IP failover guard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <!-- 4. Hosted Services -->
     <section id="services" class="section-padding bg-alt">

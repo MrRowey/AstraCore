@@ -59,3 +59,33 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(section);
   });
 });
+
+// Interactive Node Tabs Switching Logic
+  const tabs = document.querySelectorAll('.node-tab');
+  const panels = document.querySelectorAll('.node-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Deactivate all tabs & hide all panels
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach(p => {
+        p.setAttribute('hidden', '');
+        p.classList.remove('active');
+      });
+
+      // Activate clicked tab
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // Show corresponding panel
+      const targetPanelId = tab.getAttribute('aria-controls');
+      const targetPanel = document.getElementById(targetPanelId);
+      if (targetPanel) {
+        targetPanel.removeAttribute('hidden');
+        targetPanel.classList.add('active');
+      }
+    });
+  });
