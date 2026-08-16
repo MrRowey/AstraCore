@@ -1,0 +1,339 @@
+/* ==========================================================================
+   CSS Custom Properties (Theme Variables)
+   Sci-fi / Terminal aesthetic with high contrast and dark mode basis
+   ========================================================================== */
+:root {
+  /* Colors */
+  --bg-main: #0a0e14;
+  --bg-alt: #11161d;
+  --bg-card: #1a212b;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --accent-blue: #38bdf8;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
+  --border-color: #2e3c4f;
+
+  /* Typography */
+  --font-heading: 'Fira Code', monospace;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  
+  /* Layout */
+  --container-width: 1000px;
+  --border-radius: 6px;
+  --transition: all 0.2s ease-in-out;
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  color: var(--text-main);
+}
+
+h2 {
+  color: var(--accent-blue);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent-green);
+}
+
+ul {
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+strong {
+  color: var(--accent-green);
+}
+
+/* ==========================================================================
+   Layout Classes
+   ========================================================================== */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+}
+
+.section-padding {
+  padding: var(--space-lg) 0;
+}
+
+.bg-alt {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.services-grid {
+  display: grid;
+  /* Auto-fill grid reflows beautifully on mobile */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(10, 14, 20, 0.95);
+  backdrop-filter: blur(5px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 100;
+  padding: var(--space-sm) 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo .prompt {
+  font-family: var(--font-heading);
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.nav-links a {
+  margin-left: var(--space-sm);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.nav-links a.active, .nav-links a:hover {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  text-align: left;
+  padding-top: calc(var(--space-lg) * 2);
+}
+
+.hero-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--space-sm);
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: var(--space-xs);
+}
+
+.hero-title .accent {
+  color: var(--accent-blue);
+}
+
+.hero-tagline {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.hero-terminal {
+  background-color: #000;
+  padding: var(--space-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--accent-green);
+  display: inline-block;
+  min-width: 300px;
+}
+
+.hero-terminal p {
+  margin: 0;
+}
+
+.blink {
+  animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  to { visibility: hidden; }
+}
+
+/* Cards */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  transition: var(--transition);
+}
+
+.card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+}
+
+.service-card {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.category-title {
+  font-size: 1rem;
+  color: var(--accent-blue);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: var(--space-xs);
+}
+
+.service-list {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 0.95rem;
+}
+
+.service-list li {
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid rgba(46, 60, 79, 0.3);
+}
+
+.service-list li:last-child {
+  border-bottom: none;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-family: var(--font-heading);
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+
+.badge-dev {
+  background-color: rgba(251, 146, 60, 0.15);
+  color: var(--accent-orange);
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.badge-planned {
+  background-color: rgba(56, 189, 248, 0.15);
+  color: var(--accent-blue);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Footer */
+.site-footer {
+  padding: var(--space-md) 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.last-updated {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  margin-top: var(--space-xs);
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   Media Queries (Responsive overrides)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none; /* Hidden by default on mobile */
+    width: 100%;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--bg-main);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--space-sm) 0;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links a {
+    margin: var(--space-xs) var(--space-sm);
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+}

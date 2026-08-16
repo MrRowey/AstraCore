@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AstraCore | Homelab Cluster</title>
+  <meta name="description" content="AstraCore: Distributed homelab cluster and hosted services infrastructure.">
+  
+  <!-- Preconnect and load fonts: Fira Code for terminal aesthetic, Inter for readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Sticky Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <span class="prompt">root@astracore:~#</span>
+      </div>
+      <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        ☰
+      </button>
+      <nav class="nav-links">
+        <a href="#home" class="active">Hero</a>
+        <a href="#overview">Overview</a>
+        <a href="#hardware">Cluster</a>
+        <a href="#services">Services</a>
+        <a href="#roadmap">V2 Roadmap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section id="home" class="hero section-padding">
+      <div class="container">
+        <img src="assets/icon.png" alt="AstraCore Logo" class="hero-icon" onerror="this.style.display='none'">
+        <h1 class="hero-title">Astra<span class="accent">Core</span></h1>
+        <p class="hero-tagline">Distributed homelab cluster for automation, media, and local AI.</p>
+        <div class="hero-terminal">
+          <p>> System initialized.</p>
+          <p>> All nodes operating within normal parameters.</p>
+          <p class="blink">_</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Overview Section -->
+    <section id="overview" class="section-padding bg-alt">
+      <div class="container">
+        <h2>## Overview</h2>
+        <p>
+          AstraCore is a highly available, self-hosted homelab infrastructure designed for learning, privacy, and automation. 
+          It provides a resilient foundation for running personal services, managing IoT devices, and experimenting with local LLMs, 
+          fully detached from public cloud dependencies.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. Phase 1: Distributed Cluster -->
+    <section id="hardware" class="section-padding">
+      <div class="container">
+        <h2>## Phase 1: Distributed Cluster</h2>
+        <p>The current hardware topology relies on low-power, high-efficiency nodes clustered via Proxmox VE.</p>
+        
+        <div class="grid-2">
+          <div class="card">
+            <h3>Hardware Nodes</h3>
+            <ul>
+              <li><strong>Node 01 (Compute):</strong> Mini PC, Intel i5 12th Gen, 64GB RAM, 2TB NVMe</li>
+              <li><strong>Node 02 (Storage):</strong> NAS, Intel Celeron, 16GB RAM, 32TB HDD Pool</li>
+              <li><strong>Node 03 (Edge):</strong> Raspberry Pi 4, 8GB RAM, PoE+</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Infrastructure Stack</h3>
+            <ul>
+              <li><strong>Virtualization:</strong> Proxmox VE (High Availability Cluster)</li>
+              <li><strong>Containerization:</strong> Docker / Docker Swarm</li>
+              <li><strong>Storage:</strong> TrueNAS SCALE, ZFS datasets, NFS/SMB shares</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Hosted Services -->
+    <section id="services" class="section-padding bg-alt">
+      <div class="container">
+        <h2>## Hosted Services</h2>
+        <p>Core applications managed via Docker and orchestrated across the cluster.</p>
+        
+        <div class="services-grid">
+          
+          <!-- Category 1 -->
+          <div class="card service-card">
+            <h3 class="category-title">[ Networking & Security ]</h3>
+            <ul class="service-list">
+              <li><strong>Pi-hole:</strong> Network-wide ad blocking and local DNS.</li>
+              <li><strong>Tailscale:</strong> Zero-trust mesh VPN for remote access.</li>
+              <li><strong>Nginx Proxy Manager:</strong> Reverse proxy with automated SSL.</li>
+            </ul>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="card service-card">
+            <h3 class="category-title">[ Automation & IoT ]</h3>
+            <ul class="service-list">
+              <li><strong>Home Assistant:</strong> Local smart home control and automations.</li>
+              <li><strong>Node-RED:</strong> Flow-based programming for complex logic.</li>
+              <li><strong>Mosquitto:</strong> MQTT broker for IoT device telemetry.</li>
+            </ul>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="card service-card">
+            <h3 class="category-title">[ Media & Storage ]</h3>
+            <ul class="service-list">
+              <li><strong>Jellyfin:</strong> Self-hosted media streaming server.</li>
+              <li><strong>Nextcloud:</strong> Personal file sync and share.</li>
+              <li><strong>Immich:</strong> <span class="badge badge-dev">🚧 Beta</span> AI-powered photo backup.</li>
+            </ul>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="card service-card">
+            <h3 class="category-title">[ Monitoring & Dev ]</h3>
+            <ul class="service-list">
+              <li><strong>Uptime Kuma:</strong> Uptime monitoring and alerting.</li>
+              <li><strong>Grafana:</strong> Infrastructure metric visualization.</li>
+              <li><strong>Gitea:</strong> Lightweight self-hosted git service.</li>
+            </ul>
+          </div>
+
+          <!-- Category 5 -->
+          <div class="card service-card">
+            <h3 class="category-title">[ AI & Local LLM ]</h3>
+            <ul class="service-list">
+              <li><strong>Ollama:</strong> Local model runner (Llama3, Mistral).</li>
+              <li><strong>Open WebUI:</strong> <span class="badge badge-dev">🚧 Setup</span> ChatGPT-like interface.</li>
+            </ul>
+          </div>
+
+          <!-- Category 6 -->
+          <div class="card service-card">
+            <h3 class="category-title">[ Infrastructure & Utils ]</h3>
+            <ul class="service-list">
+              <li><strong>Portainer:</strong> Container management UI.</li>
+              <li><strong>Watchtower:</strong> Automated Docker image updates.</li>
+              <li><strong>Vaultwarden:</strong> Bitwarden-compatible password manager.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Phase 2: AstraCore V2 -->
+    <section id="roadmap" class="section-padding">
+      <div class="container">
+        <h2>## Phase 2: AstraCore V2 <span class="badge badge-planned">⏳ Planned</span></h2>
+        <p>Future upgrades focusing on high-availability and dedicated AI acceleration.</p>
+        <ul>
+          <li>Migrate Docker Swarm workloads to a lightweight Kubernetes (K3s) cluster.</li>
+          <li>Integrate dedicated GPU node (Nvidia RTX A4000) for faster local LLM inference.</li>
+          <li>Implement strict VLAN isolation for IoT devices vs. trusted client network.</li>
+          <li>Automated off-site backups via Restic to Backblaze B2.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- 6. Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>AstraCore Architecture &copy; <span id="year"></span></p>
+      <p>
+        <a href="https://github.com/MrRowey/AstraCore" target="_blank" rel="noopener">View Source on GitHub</a>
+      </p>
+      <p class="last-updated">Last updated: <script>document.write(new Date().toLocaleDateString());</script></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
